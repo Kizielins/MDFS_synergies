@@ -1,6 +1,6 @@
 # Bacterial Feature Synergy Analysis
 
-Identifies synergistic pairs of bacterial (or functional) features using
+Identifies synergistic pairs of metagenomic features using
 **Multidimensional Feature Selection (MDFS)** information gain.
 
 For every feature pair returned by MDFS the tool reports:
