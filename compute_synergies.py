@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """
-Compute bacterial feature pairings and synergies via MDFS information gain.
+Compute metagenomic feature pairings and synergies via MDFS information gain.
 
-For every pair of features identified by MDFS, reports:
-  - 1D IG for each feature individually
-  - 2D IG for the pair jointly
-  - % synergy gain = (pair_ig - median(f1_ig, f2_ig)) / median(f1_ig, f2_ig) * 100
+For every pair of features identified by MDFS 2D, reports:
+  - base_IG_1D: the base feature's individual 1D information gain
+  - contributing_IG_1D: the contributing feature's individual 1D information gain
+  - IG_2D_added: additional IG from the contributing feature conditioned on the base
+  - total_IG: joint IG of the pair (base_IG_1D + IG_2D_added)
+  - ig_gain_pct: IG_2D_added / base_IG_1D * 100
 
 MDFS is run N_RUNS times with different seeds and IGs are averaged across runs for
-robustness.  The output table is sorted by % synergy gain (descending).
+robustness.  The output table is sorted by ig_gain_pct (descending).
 
 Usage:
     python compute_synergies.py --X samples_features.tsv --y labels.tsv
@@ -20,7 +22,7 @@ Input formats:
     y: tab-separated, first column = sample IDs, second column = labels (0=disease, 1=control)
 
 Output (tab-separated, stdout or --out file):
-    #  Feature_1  Feature_2  IG_F1  IG_F2  IG_Pair  Pct_Synergy_Gain
+    #  base  contributing  base_IG_1D  contributing_IG_1D  IG_2D_added  total_IG  ig_gain_pct
 """
 
 import argparse
@@ -64,7 +66,8 @@ def _run_mdfs_r(X_path, y_path, out_2d, out_unique, out_1d, seed):
 
 
 def _one_mdfs_run(X: pd.DataFrame, y: pd.Series, tmp_dir: str, seed: int):
-    """Run MDFS once; return (pairs_df, ig_1d_dict)."""
+    """Run MDFS once; return pairs_df with columns: base, contributing,
+    base_IG_1D, contributing_IG_1D, IG_2D_added, total_IG."""
     X_path    = os.path.join(tmp_dir, f"X_{seed}.tsv")
     y_path    = os.path.join(tmp_dir, f"y_{seed}.tsv")
     out_2d    = os.path.join(tmp_dir, f"2d_{seed}.tsv")
@@ -76,28 +79,19 @@ def _one_mdfs_run(X: pd.DataFrame, y: pd.Series, tmp_dir: str, seed: int):
 
     _run_mdfs_r(X_path, y_path, out_2d, out_uniq, out_1d, seed)
 
-    # --- 2D pairs ---
+    # --- 2D pairs (new format from run_mdfs.R) ---
     pairs = pd.read_csv(out_2d, sep="\t")
-    if "Feature1" not in pairs.columns and pairs.shape[1] >= 3:
-        pairs.columns = ["Feature1", "Feature2", "IG"] + list(pairs.columns[3:])
-    pairs["Feature1"] = pairs["Feature1"].astype(str).str.replace(" ", "_")
-    pairs["Feature2"] = pairs["Feature2"].astype(str).str.replace(" ", "_")
+    if pairs.empty:
+        return pd.DataFrame(columns=["base", "contributing", "base_IG_1D",
+                                      "contributing_IG_1D", "IG_2D_added", "total_IG"])
 
-    ig_col = "IG" if "IG" in pairs.columns else pairs.columns[2]
-    pairs[ig_col] = pairs[ig_col].astype(float)
-    # Keep best IG per pair (MDFS may return multiple discretisations)
-    pairs = pairs.groupby(["Feature1", "Feature2"], as_index=False)[ig_col].max()
-    if ig_col != "IG":
-        pairs = pairs.rename(columns={ig_col: "IG"})
+    pairs["base"] = pairs["base"].astype(str).str.replace(" ", "_")
+    pairs["contributing"] = pairs["contributing"].astype(str).str.replace(" ", "_")
+    for col in ["base_IG_1D", "contributing_IG_1D", "IG_2D_added", "total_IG"]:
+        pairs[col] = pairs[col].astype(float)
 
-    # --- 1D IGs ---
-    ig_1d = pd.read_csv(out_1d, sep="\t")
-    if "Feature" not in ig_1d.columns and ig_1d.shape[1] >= 2:
-        ig_1d.columns = ["Feature", "IG"] + list(ig_1d.columns[2:])
-    ig_1d["Feature"] = ig_1d["Feature"].astype(str).str.replace(" ", "_")
-    ig_1d_dict = dict(zip(ig_1d["Feature"], ig_1d["IG"].astype(float)))
-
-    return pairs, ig_1d_dict
+    return pairs[["base", "contributing", "base_IG_1D", "contributing_IG_1D",
+                   "IG_2D_added", "total_IG"]]
 
 
 def compute_synergies(X: pd.DataFrame, y: pd.Series, n_runs: int = N_RUNS_DEFAULT) -> pd.DataFrame:
@@ -105,8 +99,8 @@ def compute_synergies(X: pd.DataFrame, y: pd.Series, n_runs: int = N_RUNS_DEFAUL
     Run MDFS n_runs times (averaged) and compute synergy metrics for all feature pairs.
 
     Returns a DataFrame with columns:
-        feature1, feature2, f1_ig, f2_ig, pair_ig, pct_synergy_gain
-    sorted by pct_synergy_gain descending.
+        base, contributing, base_IG_1D, contributing_IG_1D, IG_2D_added, total_IG, ig_gain_pct
+    sorted by ig_gain_pct descending.
     """
     seeds = _SEEDS[:n_runs]
     all_rows = []
@@ -114,49 +108,44 @@ def compute_synergies(X: pd.DataFrame, y: pd.Series, n_runs: int = N_RUNS_DEFAUL
     with tempfile.TemporaryDirectory(prefix="mdfs_syn_") as tmp:
         for i, seed in enumerate(seeds):
             print(f"  Run {i + 1}/{n_runs} (seed={seed})...", file=sys.stderr)
-            pairs, ig_1d_dict = _one_mdfs_run(X, y, tmp, seed)
-            for _, row in pairs.iterrows():
-                f1, f2 = row["Feature1"], row["Feature2"]
-                all_rows.append({
-                    "feature1": f1,
-                    "feature2": f2,
-                    "pair_ig": float(row["IG"]),
-                    "f1_ig": ig_1d_dict.get(f1, float("nan")),
-                    "f2_ig": ig_1d_dict.get(f2, float("nan")),
-                })
+            pairs = _one_mdfs_run(X, y, tmp, seed)
+            if not pairs.empty:
+                pairs["_seed"] = seed
+                all_rows.append(pairs)
 
     if not all_rows:
-        return pd.DataFrame(columns=["feature1", "feature2", "f1_ig", "f2_ig", "pair_ig", "pct_synergy_gain"])
+        return pd.DataFrame(columns=["base", "contributing", "base_IG_1D",
+                                      "contributing_IG_1D", "IG_2D_added",
+                                      "total_IG", "ig_gain_pct"])
 
-    info = pd.DataFrame(all_rows)
+    info = pd.concat(all_rows, ignore_index=True)
 
     # Average across runs
-    stats = info.groupby(["feature1", "feature2"]).agg(
-        pair_ig=("pair_ig", "mean"),
-        f1_ig=("f1_ig", "mean"),
-        f2_ig=("f2_ig", "mean"),
+    stats = info.groupby(["base", "contributing"]).agg(
+        base_IG_1D=("base_IG_1D", "mean"),
+        contributing_IG_1D=("contributing_IG_1D", "mean"),
+        IG_2D_added=("IG_2D_added", "mean"),
+        total_IG=("total_IG", "mean"),
     ).reset_index()
 
-    # Median of the two individual IGs (= mean for 2 values)
-    stats["median_individual_ig"] = stats[["f1_ig", "f2_ig"]].median(axis=1)
+    # ig_gain_pct = IG_2D_added / base_IG_1D * 100
+    denom = stats["base_IG_1D"].replace(0.0, float("nan"))
+    stats["ig_gain_pct"] = (stats["IG_2D_added"] / denom) * 100
 
-    # % synergy gain relative to median individual IG
-    denom = stats["median_individual_ig"].replace(0.0, float("nan"))
-    stats["pct_synergy_gain"] = (stats["pair_ig"] - stats["median_individual_ig"]) / denom * 100
-
-    stats = stats.sort_values("pct_synergy_gain", ascending=False).reset_index(drop=True)
-    return stats[["feature1", "feature2", "f1_ig", "f2_ig", "pair_ig", "pct_synergy_gain"]]
+    stats = stats.sort_values("ig_gain_pct", ascending=False).reset_index(drop=True)
+    return stats
 
 
 def write_table(stats: pd.DataFrame, out_path: str = None) -> None:
     """Write tab-separated table with row numbers to out_path or stdout."""
-    header = "#\tFeature_1\tFeature_2\tIG_F1\tIG_F2\tIG_Pair\tPct_Synergy_Gain"
+    header = "#\tbase\tcontributing\tbase_IG_1D\tcontributing_IG_1D\tIG_2D_added\ttotal_IG\tig_gain_pct"
     lines = [header]
     for i, row in stats.iterrows():
         lines.append(
-            f"{i + 1}\t{row['feature1']}\t{row['feature2']}\t"
-            f"{row['f1_ig']:.6f}\t{row['f2_ig']:.6f}\t"
-            f"{row['pair_ig']:.6f}\t{row['pct_synergy_gain']:.2f}"
+            f"{i + 1}\t{row['base']}\t{row['contributing']}\t"
+            f"{row['base_IG_1D']:.6f}\t{row['contributing_IG_1D']:.6f}\t"
+            f"{row['IG_2D_added']:.6f}\t{row['total_IG']:.6f}\t"
+            f"{row['ig_gain_pct']:.2f}"
         )
     content = "\n".join(lines) + "\n"
     if out_path:
@@ -170,14 +159,14 @@ def write_table(stats: pd.DataFrame, out_path: str = None) -> None:
 def main():
     parser = argparse.ArgumentParser(
         description=(
-            "Compute bacterial feature pairings / synergies using MDFS information gain.\n"
-            "Outputs a tab-separated table sorted by % synergy gain (descending)."
+            "Compute metagenomic feature pairings / synergies using MDFS information gain.\n"
+            "Outputs a tab-separated table sorted by ig_gain_pct (descending)."
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
         "--X", required=True,
-        help="Feature matrix TSV (samples × features; first column = sample IDs)",
+        help="Feature matrix TSV (samples x features; first column = sample IDs)",
     )
     parser.add_argument(
         "--y", required=True,

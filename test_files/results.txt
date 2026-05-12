@@ -1,22 +1,88 @@
-#	Feature_1	Feature_2	IG_F1	IG_F2	IG_Pair	Pct_Synergy_Gain
-1	Clostridium_symbiosum	Ruminococcus_gnavus	2.373997	3.165169	18.077734	552.72
-2	Parvimonas_micra	Ruminococcus_gnavus	0.000000	2.834396	6.159466	334.62
-3	Parvimonas_micra	Akkermansia_muciniphila	0.284683	3.769096	8.567822	322.71
-4	Fusobacterium_nucleatum	Parvimonas_micra	5.727791	4.508488	18.845814	268.22
-5	Gemella_morbillorum	Bacteroides_fragilis	1.896339	0.371159	3.619099	219.22
-6	Bacteroides_fragilis	Prevotella_copri	0.637203	19.571580	29.243212	189.41
-7	Peptostreptococcus_anaerobius	Parvimonas_micra	17.096284	1.597724	26.933880	188.16
-8	Parvimonas_micra	Clostridium_symbiosum	4.508488	2.373997	9.169910	166.47
-9	Parvimonas_micra	Bifidobacterium_longum	2.254244	19.139485	23.667235	121.25
-10	Ruminococcus_gnavus	Akkermansia_muciniphila	2.999783	2.280333	5.773279	118.68
-11	Gemella_morbillorum	Akkermansia_muciniphila	5.640877	0.152206	5.988548	106.75
-12	Parvimonas_micra	Gemella_morbillorum	1.597724	5.115384	6.773039	101.79
-13	Parvimonas_micra	Faecalibacterium_prausnitzii	2.396585	23.415570	25.281898	95.89
-14	Fusobacterium_nucleatum	Gemella_morbillorum	22.824263	5.640877	26.790213	88.23
-15	Gemella_morbillorum	Prevotella_copri	1.896339	18.294130	17.688997	75.22
-16	Gemella_morbillorum	Faecalibacterium_prausnitzii	5.640877	14.492842	17.115030	70.01
-17	Parvimonas_micra	Roseburia_intestinalis	2.254244	4.303921	5.332315	62.62
-18	Gemella_morbillorum	Clostridium_symbiosum	5.640877	11.446520	13.330355	56.03
-19	Gemella_morbillorum	Roseburia_intestinalis	7.808937	0.791569	6.268826	45.78
-20	Fusobacterium_nucleatum	Bacteroides_fragilis	37.104294	0.637203	22.528109	19.38
-21	Bifidobacterium_longum	Akkermansia_muciniphila	32.189976	3.769096	19.804688	10.15
+#	base	contributing	base_IG_1D	contributing_IG_1D	IG_2D_added	total_IG	ig_gain_pct
+1	Gemella_morbillorum	Fusobacterium_nucleatum	0.070572	28.537010	32.120056	32.190628	45513.95
+2	Parvimonas_micra	Fusobacterium_nucleatum	0.284683	28.537010	31.075928	31.360611	10915.97
+3	Parvimonas_micra	Faecalibacterium_prausnitzii	0.732195	6.981602	23.818019	24.550214	3252.96
+4	Parvimonas_micra	Bifidobacterium_longum	0.881367	16.920293	26.315101	27.196468	2985.72
+5	Parvimonas_micra	Peptostreptococcus_anaerobius	0.881367	11.915048	25.822415	26.703782	2929.82
+6	Roseburia_intestinalis	Fusobacterium_nucleatum	1.346073	28.537010	29.689995	31.036068	2205.67
+7	Parvimonas_micra	Clostridium_symbiosum	0.732195	12.793823	13.602522	14.334717	1857.77
+8	Gemella_morbillorum	Faecalibacterium_prausnitzii	1.452484	6.981602	24.260861	25.713346	1670.30
+9	Parvimonas_micra	Prevotella_copri	1.179708	11.400431	19.690071	20.869780	1669.06
+10	Bacteroides_fragilis	Fusobacterium_nucleatum	1.818283	28.537010	29.011715	30.829998	1595.56
+11	Ruminococcus_gnavus	Faecalibacterium_prausnitzii	2.834393	6.981602	32.494785	35.329178	1146.45
+12	Gemella_morbillorum	Bifidobacterium_longum	2.318296	16.920293	25.000752	27.319048	1078.41
+13	Parvimonas_micra	Gemella_morbillorum	1.179708	3.442158	12.695477	13.875186	1076.15
+14	Gemella_morbillorum	Peptostreptococcus_anaerobius	2.318296	11.915048	24.829784	27.148080	1071.04
+15	Ruminococcus_gnavus	Fusobacterium_nucleatum	2.834393	28.537010	28.589199	31.423592	1008.65
+16	Roseburia_intestinalis	Peptostreptococcus_anaerobius	2.826232	11.915048	25.840375	28.666606	914.30
+17	Roseburia_intestinalis	Faecalibacterium_prausnitzii	2.826232	15.384393	25.643456	28.469687	907.34
+18	Gemella_morbillorum	Clostridium_symbiosum	1.452484	12.793823	13.140418	14.592902	904.69
+19	Bacteroides_fragilis	Faecalibacterium_prausnitzii	2.450991	6.981602	22.120502	24.571492	902.51
+20	Roseburia_intestinalis	Bifidobacterium_longum	2.826232	16.920293	24.986629	27.812860	884.10
+21	Bacteroides_fragilis	Bifidobacterium_longum	2.796078	16.920293	23.870927	26.667005	853.73
+22	Bacteroides_fragilis	Peptostreptococcus_anaerobius	2.796078	11.915048	23.742723	26.538801	849.14
+23	Akkermansia_muciniphila	Bifidobacterium_longum	3.108255	16.920293	25.996921	29.105176	836.38
+24	Akkermansia_muciniphila	Peptostreptococcus_anaerobius	3.108255	11.915048	24.947231	28.055485	802.61
+25	Akkermansia_muciniphila	Faecalibacterium_prausnitzii	2.898354	6.981602	22.553768	25.452122	778.16
+26	Akkermansia_muciniphila	Fusobacterium_nucleatum	3.769096	28.537010	28.469032	32.238129	755.33
+27	Ruminococcus_gnavus	Peptostreptococcus_anaerobius	3.361281	11.915048	24.644246	28.005527	733.18
+28	Ruminococcus_gnavus	Bifidobacterium_longum	3.361281	16.920293	23.646371	27.007652	703.49
+29	Akkermansia_muciniphila	Prevotella_copri	2.777834	11.400431	18.686312	21.464146	672.69
+30	Roseburia_intestinalis	Prevotella_copri	3.566311	11.400431	18.834511	22.400822	528.12
+31	Roseburia_intestinalis	Clostridium_symbiosum	2.826232	14.627259	14.367504	17.193736	508.36
+32	Ruminococcus_gnavus	Clostridium_symbiosum	2.834393	12.793823	14.277870	17.112263	503.74
+33	Bacteroides_fragilis	Prevotella_copri	3.284975	11.400431	16.024531	19.309506	487.81
+34	Akkermansia_muciniphila	Clostridium_symbiosum	2.898354	12.793823	14.095625	16.993979	486.33
+35	Gemella_morbillorum	Prevotella_copri	3.442158	11.400431	16.244241	19.686399	471.92
+36	Bacteroides_fragilis	Clostridium_symbiosum	2.450991	12.793823	11.187604	13.638595	456.45
+37	Ruminococcus_gnavus	Prevotella_copri	3.624725	11.400431	15.907688	19.532413	438.87
+38	Faecalibacterium_prausnitzii	Fusobacterium_nucleatum	6.981602	28.537010	29.665808	36.647409	424.91
+39	Faecalibacterium_prausnitzii	Bifidobacterium_longum	6.981602	16.233375	28.955350	35.936952	414.74
+40	Faecalibacterium_prausnitzii	Akkermansia_muciniphila	6.981602	3.769096	28.354094	35.335695	406.13
+41	Faecalibacterium_prausnitzii	Ruminococcus_gnavus	6.981602	2.834393	28.347576	35.329178	406.03
+42	Faecalibacterium_prausnitzii	Gemella_morbillorum	6.981602	0.070572	28.296041	35.277643	405.29
+43	Faecalibacterium_prausnitzii	Bacteroides_fragilis	6.981602	1.818283	28.262117	35.243719	404.81
+44	Faecalibacterium_prausnitzii	Parvimonas_micra	6.981602	0.284683	28.204063	35.185665	403.98
+45	Gemella_morbillorum	Parvimonas_micra	2.834396	1.179707	11.223579	14.057976	395.98
+46	Faecalibacterium_prausnitzii	Peptostreptococcus_anaerobius	6.981602	13.016010	27.432432	34.414034	392.92
+47	Faecalibacterium_prausnitzii	Prevotella_copri	6.981602	21.514925	24.572877	31.554479	351.97
+48	Faecalibacterium_prausnitzii	Clostridium_symbiosum	6.981602	12.793823	21.460214	28.441815	307.38
+49	Bifidobacterium_longum	Fusobacterium_nucleatum	6.981602	22.824263	19.924454	26.906055	285.39
+50	Faecalibacterium_prausnitzii	Roseburia_intestinalis	6.981602	2.437065	19.458477	26.440079	278.71
+51	Prevotella_copri	Roseburia_intestinalis	8.308022	3.604565	17.806108	26.114130	214.32
+52	Prevotella_copri	Parvimonas_micra	8.308022	1.179710	17.342361	25.650383	208.74
+53	Prevotella_copri	Akkermansia_muciniphila	8.308022	3.528057	16.542692	24.850714	199.12
+54	Prevotella_copri	Bifidobacterium_longum	11.400431	12.637866	21.812097	33.212527	191.33
+55	Peptostreptococcus_anaerobius	Faecalibacterium_prausnitzii	11.915048	15.384393	22.308997	34.224045	187.23
+56	Peptostreptococcus_anaerobius	Bifidobacterium_longum	11.915048	16.920293	21.981016	33.896063	184.48
+57	Prevotella_copri	Peptostreptococcus_anaerobius	11.400431	13.016010	20.339287	31.739717	178.41
+58	Clostridium_symbiosum	Faecalibacterium_prausnitzii	12.793823	6.981602	22.809593	35.603416	178.29
+59	Peptostreptococcus_anaerobius	Fusobacterium_nucleatum	13.016010	25.680636	22.802272	35.818282	175.19
+60	Bifidobacterium_longum	Peptostreptococcus_anaerobius	12.637866	13.016010	22.040783	34.678649	174.40
+61	Prevotella_copri	Bacteroides_fragilis	8.308022	3.486252	13.874302	22.182323	167.00
+62	Prevotella_copri	Ruminococcus_gnavus	8.308022	2.572311	13.695522	22.003544	164.85
+63	Prevotella_copri	Faecalibacterium_prausnitzii	11.400431	19.585789	18.758990	30.159420	164.55
+64	Prevotella_copri	Gemella_morbillorum	8.308022	4.049919	13.622726	21.930748	163.97
+65	Peptostreptococcus_anaerobius	Prevotella_copri	11.915048	17.112624	19.497500	31.412548	163.64
+66	Bifidobacterium_longum	Prevotella_copri	12.637866	11.400431	20.574661	33.212527	162.80
+67	Clostridium_symbiosum	Fusobacterium_nucleatum	12.793823	28.537010	20.715338	33.509161	161.92
+68	Peptostreptococcus_anaerobius	Clostridium_symbiosum	11.915048	14.627259	17.620667	29.535714	147.89
+69	Peptostreptococcus_anaerobius	Roseburia_intestinalis	11.915048	2.826232	16.751558	28.666606	140.59
+70	Prevotella_copri	Clostridium_symbiosum	11.400431	15.543977	15.601283	27.001714	136.85
+71	Peptostreptococcus_anaerobius	Akkermansia_muciniphila	11.915048	3.108255	16.140437	28.055485	135.46
+72	Bifidobacterium_longum	Clostridium_symbiosum	12.637866	15.543977	17.091681	29.729548	135.24
+73	Peptostreptococcus_anaerobius	Ruminococcus_gnavus	11.915048	3.361281	16.090479	28.005527	135.04
+74	Clostridium_symbiosum	Peptostreptococcus_anaerobius	12.793823	13.016010	17.245189	30.039012	134.79
+75	Peptostreptococcus_anaerobius	Gemella_morbillorum	11.915048	2.318296	15.233032	27.148080	127.85
+76	Bifidobacterium_longum	Akkermansia_muciniphila	12.637866	2.777834	16.106041	28.743907	127.44
+77	Peptostreptococcus_anaerobius	Parvimonas_micra	11.915048	0.881367	14.788734	26.703782	124.12
+78	Peptostreptococcus_anaerobius	Bacteroides_fragilis	11.915048	2.796078	14.623753	26.538801	122.73
+79	Bifidobacterium_longum	Gemella_morbillorum	12.637866	3.442158	14.075021	26.712887	111.37
+80	Bifidobacterium_longum	Faecalibacterium_prausnitzii	16.920293	15.384393	18.751205	35.671499	110.82
+81	Bifidobacterium_longum	Roseburia_intestinalis	12.637866	3.566311	13.968882	26.606748	110.53
+82	Bifidobacterium_longum	Parvimonas_micra	12.637866	1.179708	13.918997	26.556863	110.14
+83	Bifidobacterium_longum	Ruminococcus_gnavus	12.637866	3.624725	13.916136	26.554002	110.11
+84	Clostridium_symbiosum	Prevotella_copri	12.793823	14.492840	14.076492	26.870316	110.03
+85	Bifidobacterium_longum	Bacteroides_fragilis	12.637866	3.284975	13.690225	26.328091	108.33
+86	Clostridium_symbiosum	Bifidobacterium_longum	14.627259	16.920293	15.359941	29.987200	105.01
+87	Fusobacterium_nucleatum	Peptostreptococcus_anaerobius	22.824263	16.318897	12.903526	35.727789	56.53
