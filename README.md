@@ -1,15 +1,52 @@
-# Bacterial Feature Synergy Analysis
+# Metagenomic Feature Synergy Analysis
 
 Identifies synergistic pairs of metagenomic features using
-**Multidimensional Feature Selection (MDFS)** information gain.
+**Multidimensional Feature Selection (MDFS)** information gain in 1D and 2D.
 
-For every feature pair returned by MDFS the tool reports:
-- 1D information gain (IG) for each feature individually
-- 2D information gain for the pair jointly
-- **% synergy gain** = `(pair_IG − median(IG_f1, IG_f2)) / median(IG_f1, IG_f2) × 100`
+## How MDFS 2D information gain works
 
-MDFS is run multiple times with different random seeds; IGs are averaged across
-runs for robustness.  The output table is sorted by % synergy gain (descending).
+MDFS evaluates each feature's individual discriminative power (1D) and then
+tests whether pairing two features yields additional predictive information
+(2D). For a pair of features designated **base** and **contributing**:
+
+- **`base_IG_1D`** — the base feature's individual information gain about the
+  class label, i.e. I(X_base; Y).
+- **`IG_2D_added`** — the *additional* IG that the contributing feature brings
+  when combined with the base feature, i.e. I(X_contributing; Y | X_base).
+  This is the conditional mutual information of the contributing feature given
+  the base feature.
+- **`total_IG`** = `base_IG_1D + IG_2D_added` — the joint information gain of
+  the pair, i.e. I(X_base, X_contributing; Y).
+
+Each pair is reported in **both directions** (base/contributing roles are
+asymmetric: the decomposition changes, but `total_IG` remains the same).
+
+The **% synergy gain** (`ig_gain_pct`) measures how much the contributing
+feature amplifies the base feature's signal:
+
+```
+ig_gain_pct = IG_2D_added / base_IG_1D × 100
+```
+
+A value of 100% means the pair's joint IG is double the base feature's
+individual IG; values above 100% indicate that the contributing feature adds
+more information than the base carried alone.
+
+### Statistical thresholds
+
+Two filters ensure that reported pairs represent genuine synergies:
+
+1. **Bonferroni-corrected pair-level threshold** — `ComputeInterestingTuples`
+   in R uses an IG cutoff derived from a chi-squared quantile corrected for the
+   total number of feature pairs tested (~1.5 million for 1,738 features).
+   Only pairs exceeding this threshold are retained.
+
+2. **True-synergy filter** — the pair's `total_IG` must exceed the larger of
+   the two individual 1D IGs (`total_IG > max(base_IG_1D, contributing_IG_1D)`).
+   This removes artifacts where a strong feature is paired with noise.
+
+MDFS is run **3 times** with different random seeds per cohort; IGs are
+averaged across runs for robustness.
 
 ---
 
@@ -17,10 +54,10 @@ runs for robustness.  The output table is sorted by % synergy gain (descending).
 
 | Dependency | Version |
 |---|---|
-| R | ≥ 4.0 |
-| R package `MDFS` | ≥ 1.5 |
+| R | >= 4.0 |
+| R package `MDFS` | >= 1.5 |
 | R package `data.table` | any recent |
-| Python | ≥ 3.8 |
+| Python | >= 3.8 |
 | Python package `pandas` | any recent |
 
 ### Install R packages
@@ -32,36 +69,32 @@ install.packages("MDFS")
 
 ---
 
-## Files
+## Repository structure
 
 ```
-bacterial_synergy_analysis/
-├── run_mdfs.R              # R script: computes 1D and 2D MDFS information gains
-├── compute_synergies.py    # Python script: orchestrates runs, computes synergy metrics, writes output
-└── test_files/
-    ├── X_test.tsv          # 40-sample × 12-feature synthetic microbiome matrix
-    └── y_test.tsv          # Labels (0 = disease, 1 = control)
+MDFS_synergies/
+├── run_mdfs.R                  # R script: 1D and 2D MDFS, Bonferroni threshold,
+│                               #   synergy filter, ComputeInterestingTuples
+├── compute_synergies.py        # Python: orchestrates runs, computes synergy metrics
+├── run_taxa_analysis.py        # Python: CRC taxa-only analysis pipeline
+├── test_files/
+│   ├── X_test.tsv              # 40-sample × 12-feature synthetic dataset
+│   └── y_test.tsv              # Labels (0 = disease, 1 = control)
+├── apply_framework/            # Apply the framework to non-CRC cohorts
+│   ├── run_mdfs_1d_2d.py       # Run MDFS 1D+2D per cohort (3 runs, mean aggregation)
+│   ├── load_cohort_data.py     # Load cohort data, build synergy table
+│   ├── analyse_synergy_gains.ipynb  # Analysis notebook: figures, tables, markers
+│   └── results/                # Per-cohort MDFS outputs
+├── results_combined/           # CRC pipeline results (taxa + functions combined)
+├── results_functions/          # CRC pipeline results (functions only)
+└── results_taxa/               # CRC pipeline results (taxa only)
 ```
-
-Both scripts must reside in the **same directory** — `compute_synergies.py` locates
-`run_mdfs.R` relative to itself.
 
 ---
 
 ## Usage
 
-```
-python compute_synergies.py --X <features.tsv> --y <labels.tsv> [--out results.txt] [--n-runs N]
-```
-
-| Argument | Description | Default |
-|---|---|---|
-| `--X` | Feature matrix TSV (samples × features, first col = sample IDs) | required |
-| `--y` | Labels TSV (two cols: sample_id, label; `0`=disease, `1`=control/healthy) | required |
-| `--out` | Output file path | stdout |
-| `--n-runs` | Number of MDFS runs to average (uses seeds 12–16) | 3 |
-
-### Quick start
+### Quick start (test data)
 
 ```bash
 python compute_synergies.py \
@@ -70,7 +103,19 @@ python compute_synergies.py \
     --out test_files/results.txt
 ```
 
-Progress is printed to stderr; the table goes to stdout (or `--out`).
+### Apply framework to new cohorts
+
+See [`apply_framework/README.md`](apply_framework/README.md) for full details.
+
+```bash
+cd apply_framework
+
+# Run MDFS for all cohorts
+python run_mdfs_1d_2d.py --data-dir data --all-cohorts --out-dir results
+
+# Build synergy table
+python load_cohort_data.py --data-dir data --mdfs-results-dir results --out-table synergy_by_cohort.tsv
+```
 
 ---
 
@@ -103,62 +148,32 @@ S021        1
 
 ## Output format
 
-Tab-separated plain-text table, sorted by % synergy gain (highest first):
-
-```
-#   Feature_1               Feature_2           IG_F1       IG_F2       IG_Pair     Pct_Synergy_Gain
-1   Parvimonas_micra        Gemella_morbillorum  0.052341    0.049817    0.381204    668.12
-2   Fusobacterium_nucleatum Peptostrep_anaerobius 0.412300   0.183600    0.521400    65.30
-...
-```
+The per-cohort output (`ig_gain_summary_<cohort>.tsv`) is a tab-separated table
+with one row per (base, contributing) pair, averaged across 3 MDFS runs:
 
 | Column | Description |
 |---|---|
-| `#` | Row number |
-| `Feature_1` | First feature in the pair |
-| `Feature_2` | Second feature in the pair |
-| `IG_F1` | Mean 1D information gain for Feature_1 (averaged across runs) |
-| `IG_F2` | Mean 1D information gain for Feature_2 (averaged across runs) |
-| `IG_Pair` | Mean 2D information gain for the pair (averaged across runs) |
-| `Pct_Synergy_Gain` | `(IG_Pair − median(IG_F1, IG_F2)) / median(IG_F1, IG_F2) × 100` |
-
-A positive `Pct_Synergy_Gain` means the pair carries **more** discriminative
-information together than either feature does alone.
+| `base` | Base feature in the pair |
+| `contributing` | Contributing feature in the pair |
+| `base_IG_1D_mean` | Mean 1D IG of the base feature across runs |
+| `contributing_IG_1D_mean` | Mean 1D IG of the contributing feature across runs |
+| `IG_2D_added_mean` | Mean additional IG from the contributing feature (conditional on base) |
+| `IG_2D_added_std` | Std dev of `IG_2D_added` across runs |
+| `total_IG_mean` | Mean joint IG of the pair (`base_IG_1D + IG_2D_added`) |
+| `n_runs` | Number of runs in which this pair was significant |
+| `ig_gain` | Same as `IG_2D_added_mean` |
+| `ig_gain_pct` | `IG_2D_added_mean / base_IG_1D_mean × 100` |
 
 ---
 
 ## Test data
 
 `test_files/X_test.tsv` and `test_files/y_test.tsv` contain a synthetic CRC-like
-microbiome dataset (40 samples, 12 bacterial features).  The data is designed so
+microbiome dataset (40 samples, 12 bacterial features). The data is designed so
 that **Parvimonas_micra** and **Gemella_morbillorum** form a synergistic pair:
 in disease samples, one or the other is elevated (never both), while in controls
 both are low — so neither bacterium alone is strongly discriminative but the pair
 jointly is.
 
-Run the test:
-
-```bash
-python compute_synergies.py \
-    --X test_files/X_test.tsv \
-    --y test_files/y_test.tsv \
-    --out test_files/results.txt
-
-cat test_files/results.txt
-```
-
 Expected: `Parvimonas_micra / Gemella_morbillorum` appears near the top with the
 highest % synergy gain.
-
----
-
-## How it works
-
-1. **MDFS 2D** (`ComputeMaxInfoGains(..., dimensions=2)`) — identifies all feature
-   pairs and their joint information gain with the class label.
-2. **MDFS 1D** (`ComputeMaxInfoGains(..., dimensions=1)`) — computes per-feature
-   individual information gain.
-3. Steps 1–2 are repeated `--n-runs` times with different random seeds; IGs are
-   averaged across runs.
-4. For each pair the **% synergy gain** is computed and the table is sorted
-   accordingly.

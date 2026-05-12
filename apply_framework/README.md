@@ -1,6 +1,13 @@
 # Apply MDFS framework to other cohorts
 
-Apply the MDFS framework to new cohorts: run 1D/2D MDFS (3 runs per cohort, aggregate with mean) and report information gains; load cohort data (taxa + functions combined) and build tables of feature pairs showing 2D IG gain over the base feature's 1D IG.
+Apply the MDFS framework to new cohorts: run 1D/2D MDFS (3 runs per cohort,
+aggregate with mean) and report information gains. For each feature pair the
+pipeline reports the base feature's individual IG (`base_IG_1D`), the additional
+IG contributed by the partner feature when conditioned on the base
+(`IG_2D_added`), and the joint IG of the pair (`total_IG = base_IG_1D +
+IG_2D_added`). Only pairs passing both a Bonferroni-corrected pair-level IG
+threshold and a true-synergy filter (`total_IG > max(base_IG_1D,
+contributing_IG_1D)`) are retained.
 
 ## Labels
 
