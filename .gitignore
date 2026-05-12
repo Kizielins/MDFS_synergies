@@ -1,0 +1,6 @@
+.DS_Store
+__pycache__/
+*.pyc
+apply_framework/data/
+prepared_data/
+apply_framework/load_cohort.run.log
