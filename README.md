@@ -1,7 +1,17 @@
 # Metagenomic Feature Synergy Analysis
 
 Identifies synergistic pairs of metagenomic features using
-**Multidimensional Feature Selection (MDFS)** information gain in 1D and 2D.
+**Multidimensional Feature Selection (MDFS)** information gain in 1D and 2D,
+and turns them into synthetic features for classification.
+
+The tool works on a **single cohort**: one feature matrix and one set of
+binary labels.
+
+| Script | What it does |
+|---|---|
+| `compute_synergies.py` | Finds synergistic feature pairs and reports their information gains |
+| `synthetic_features.py` | Builds log-ratio / geometric-mean features from the top synergistic pairs and evaluates them with a Random Forest (cross-validation) |
+| `run_mdfs.R` | MDFS engine called by both scripts (not run directly) |
 
 ## How MDFS 2D information gain works
 
@@ -38,33 +48,44 @@ Two filters ensure that reported pairs represent genuine synergies:
 
 1. **Bonferroni-corrected pair-level threshold** — `ComputeInterestingTuples`
    in R uses an IG cutoff derived from a chi-squared quantile corrected for the
-   total number of feature pairs tested (~1.5 million for 1,738 features).
+   total number of feature pairs tested (n × (n − 1) / 2 for n features).
    Only pairs exceeding this threshold are retained.
 
 2. **True-synergy filter** — the pair's `total_IG` must exceed the larger of
    the two individual 1D IGs (`total_IG > max(base_IG_1D, contributing_IG_1D)`).
    This removes artifacts where a strong feature is paired with noise.
 
-MDFS is run **3 times** with different random seeds per cohort; IGs are
+MDFS is run **3 times** with different random seeds (`--n-runs`); IGs are
 averaged across runs for robustness.
 
 ---
 
 ## Requirements
 
-| Dependency | Version |
-|---|---|
-| R | >= 4.0 |
-| R package `MDFS` | >= 1.5 |
-| R package `data.table` | any recent |
-| Python | >= 3.8 |
-| Python package `pandas` | any recent |
+| Dependency | Version | Tested with |
+|---|---|---|
+| R | >= 4.0 | 4.5.1 |
+| R package `MDFS` | >= 1.5 | 1.5.5 |
+| R package `data.table` | any recent | 1.18.4 |
+| Python | >= 3.8 | 3.10.13 |
+| Python package `pandas` | >= 1.3 | 2.3.2 |
+| Python package `numpy` | >= 1.21 | 1.26.4 |
+| Python package `scikit-learn` | >= 1.0 (only for `synthetic_features.py`) | 1.7.2 |
 
-### Install R packages
+`Rscript` must be on your `PATH`.
+
+### Install
+
+R packages:
 
 ```r
-install.packages("data.table")
-install.packages("MDFS")
+install.packages(c("MDFS", "data.table"))
+```
+
+Python packages:
+
+```bash
+pip install -r requirements.txt
 ```
 
 ---
@@ -73,49 +94,107 @@ install.packages("MDFS")
 
 ```
 MDFS_synergies/
-├── run_mdfs.R                  # R script: 1D and 2D MDFS, Bonferroni threshold,
-│                               #   synergy filter, ComputeInterestingTuples
-├── compute_synergies.py        # Python: orchestrates runs, computes synergy metrics
-├── run_taxa_analysis.py        # Python: CRC taxa-only analysis pipeline
-├── test_files/
-│   ├── X_test.tsv              # 40-sample × 12-feature synthetic dataset
-│   └── y_test.tsv              # Labels (0 = disease, 1 = control)
-├── apply_framework/            # Apply the framework to non-CRC cohorts
-│   ├── run_mdfs_1d_2d.py       # Run MDFS 1D+2D per cohort (3 runs, mean aggregation)
-│   ├── load_cohort_data.py     # Load cohort data, build synergy table
-│   ├── analyse_synergy_gains.ipynb  # Analysis notebook: figures, tables, markers
-│   └── results/                # Per-cohort MDFS outputs
-├── results_combined/           # CRC pipeline results (taxa + functions combined)
-├── results_functions/          # CRC pipeline results (functions only)
-└── results_taxa/               # CRC pipeline results (taxa only)
+├── compute_synergies.py     # Synergistic pairs and their information gains
+├── synthetic_features.py    # Synthetic features from top pairs + Random Forest evaluation
+├── run_mdfs.R               # MDFS 1D/2D, Bonferroni threshold, true-synergy filter
+├── requirements.txt         # Python dependencies
+└── test_files/
+    ├── X_test.tsv           # 40-sample × 12-feature synthetic dataset
+    ├── y_test.tsv           # Labels (0 = disease, 1 = control)
+    └── expected/            # Expected outputs of the test commands below
+        ├── synergies.tsv
+        └── synthetic/
 ```
+
+Run all commands from the repository root. `compute_synergies.py` and
+`synthetic_features.py` must stay in the same directory as `run_mdfs.R`.
 
 ---
 
 ## Usage
 
-### Quick start (test data)
+### 1. Synergistic pairs — `compute_synergies.py`
 
 ```bash
-python compute_synergies.py \
-    --X test_files/X_test.tsv \
-    --y test_files/y_test.tsv \
-    --out test_files/results.txt
+python compute_synergies.py --X my_features.tsv --y my_labels.tsv --out synergies.tsv
 ```
 
-### Apply framework to new cohorts
+| Option | Default | Description |
+|---|---|---|
+| `--X` | required | Feature matrix (see [Input format](#input-format)) |
+| `--y` | required | Labels |
+| `--out` | stdout | Output file |
+| `--n-runs` | 3 | MDFS runs to average over (max 5) |
 
-See [`apply_framework/README.md`](apply_framework/README.md) for full details.
+Output: one row per (base, contributing) pair, sorted by `ig_gain_pct`
+(descending):
+
+| Column | Description |
+|---|---|
+| `#` | Rank |
+| `base` | Base feature in the pair |
+| `contributing` | Contributing feature in the pair |
+| `base_IG_1D` | Mean 1D IG of the base feature across runs |
+| `contributing_IG_1D` | Mean 1D IG of the contributing feature across runs |
+| `IG_2D_added` | Mean additional IG from the contributing feature (conditional on base) |
+| `total_IG` | Mean joint IG of the pair (`base_IG_1D + IG_2D_added`) |
+| `ig_gain_pct` | `IG_2D_added / base_IG_1D × 100` |
+
+A pair is averaged over the runs in which it passed both filters.
+
+### 2. Synthetic features — `synthetic_features.py`
 
 ```bash
-cd apply_framework
-
-# Run MDFS for all cohorts
-python run_mdfs_1d_2d.py --data-dir data --all-cohorts --out-dir results
-
-# Build synergy table
-python load_cohort_data.py --data-dir data --mdfs-results-dir results --out-table synergy_by_cohort.tsv
+python synthetic_features.py --X my_features.tsv --y my_labels.tsv --out-dir out
 ```
+
+For each selected pair (f1, f2) two synthetic features are created:
+
+- `LR_f1__f2` — log-ratio, `log((f1 + ε) / (f2 + ε))`
+- `GM_f1__f2` — geometric mean, `sqrt((f1 + ε) × (f2 + ε))`
+
+**Pair selection.** MDFS is run `--n-runs` times. In each run, unordered pairs
+are scored by `total_IG` and the top `--top-fraction` are kept (at least one).
+Pairs kept in **every** run form the consensus set.
+
+**Evaluation.** Stratified k-fold cross-validation (`--n-folds`). Pair
+selection is repeated inside each training fold, so the test fold never
+informs which pairs are used. Three feature sets are compared:
+
+- `All Features` — original features
+- `Synthetic Only` — `LR_` / `GM_` features
+- `All Features + Synthetic` — both
+
+For each feature set, the number of features *k* (50–500, or all if fewer) is
+tuned on an internal 75/25 split of the training fold, the top-*k* features by
+Random Forest importance are selected, and a final Random Forest (1000 trees,
+balanced class weights) is scored on the test fold. Feature sets with fewer
+than 10 features are not evaluated (reported as empty).
+
+| Option | Default | Description |
+|---|---|---|
+| `--X` | required | Feature matrix |
+| `--y` | required | Labels |
+| `--out-dir` | required | Output directory |
+| `--n-runs` | 3 | MDFS runs per pair selection (max 5) |
+| `--top-fraction` | 0.01 | Fraction of pairs kept per MDFS run |
+| `--n-folds` | 5 | Cross-validation folds |
+| `--no-cv` | off | Skip evaluation; only select pairs and write synthetic features |
+
+Outputs in `--out-dir`:
+
+| File | Content |
+|---|---|
+| `synergy_pairs.tsv` | Consensus pairs selected on the full dataset: `feature_1`, `feature_2`, `total_IG_mean` |
+| `synthetic_features.tsv` | Original features plus `LR_` / `GM_` features for those pairs (samples × features), ready for your own models |
+| `cv_performance.tsv` | Per fold and feature set: `n_test`, `n_pairs`, `n_features`, `best_k`, `auc`, `accuracy` |
+| `selected_features.tsv` | For `All Features + Synthetic`: how many folds selected each feature, and whether it is synthetic |
+
+A summary (mean ± sd AUC and accuracy per feature set) is printed at the end.
+
+The default `--top-fraction 0.01` suits datasets with hundreds or thousands of
+features. With few features (few pairs) raise it, otherwise the consensus set
+may be empty.
 
 ---
 
@@ -123,7 +202,8 @@ python load_cohort_data.py --data-dir data --mdfs-results-dir results --out-tabl
 
 **Feature matrix (`--X`)**
 
-Tab-separated, first column is the sample ID:
+Tab-separated, samples in rows, first column is the sample ID. Values are
+typically relative abundances (taxa, pathways, or both combined):
 
 ```
 sample_id   Fusobacterium_nucleatum   Peptostreptococcus_anaerobius   ...
@@ -133,7 +213,7 @@ S002        0.01823940                0.03941200                      ...
 
 **Labels (`--y`)**
 
-Tab-separated, two columns:
+Tab-separated, two columns with a header row:
 
 ```
 sample_id   label
@@ -142,27 +222,8 @@ S002        0
 S021        1
 ```
 
-`0` = disease / case, `1` = control / healthy.
-
----
-
-## Output format
-
-The per-cohort output (`ig_gain_summary_<cohort>.tsv`) is a tab-separated table
-with one row per (base, contributing) pair, averaged across 3 MDFS runs:
-
-| Column | Description |
-|---|---|
-| `base` | Base feature in the pair |
-| `contributing` | Contributing feature in the pair |
-| `base_IG_1D_mean` | Mean 1D IG of the base feature across runs |
-| `contributing_IG_1D_mean` | Mean 1D IG of the contributing feature across runs |
-| `IG_2D_added_mean` | Mean additional IG from the contributing feature (conditional on base) |
-| `IG_2D_added_std` | Std dev of `IG_2D_added` across runs |
-| `total_IG_mean` | Mean joint IG of the pair (`base_IG_1D + IG_2D_added`) |
-| `n_runs` | Number of runs in which this pair was significant |
-| `ig_gain` | Same as `IG_2D_added_mean` |
-| `ig_gain_pct` | `IG_2D_added_mean / base_IG_1D_mean × 100` |
+`0` = disease / case, `1` = control / healthy. Only samples present in both
+files are used. Spaces in feature names are replaced by underscores.
 
 ---
 
@@ -175,5 +236,21 @@ in disease samples, one or the other is elevated (never both), while in controls
 both are low — so neither bacterium alone is strongly discriminative but the pair
 jointly is.
 
-Expected: `Parvimonas_micra / Gemella_morbillorum` appears near the top with the
-highest % synergy gain.
+```bash
+python compute_synergies.py --X test_files/X_test.tsv --y test_files/y_test.tsv --out out/synergies.tsv
+python synthetic_features.py --X test_files/X_test.tsv --y test_files/y_test.tsv --out-dir out/synthetic --top-fraction 0.2
+```
+
+Compare with the expected results:
+
+```bash
+diff out/synergies.tsv test_files/expected/synergies.tsv
+diff -r out/synthetic test_files/expected/synthetic
+```
+
+Expected: both `Parvimonas_micra / Gemella_morbillorum` and
+`Gemella_morbillorum / Parvimonas_micra` pass both synergy filters, with
+`ig_gain_pct` ≈ 1076% and ≈ 396%. The small dataset is a check that the tools
+run: several features separate the classes on their own, so the
+cross-validated AUC is 1.0 for every evaluated feature set and
+`Synthetic Only` has too few features to be evaluated.

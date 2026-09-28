@@ -149,6 +149,8 @@ def write_table(stats: pd.DataFrame, out_path: str = None) -> None:
         )
     content = "\n".join(lines) + "\n"
     if out_path:
+        if os.path.dirname(out_path):
+            os.makedirs(os.path.dirname(out_path), exist_ok=True)
         with open(out_path, "w") as fh:
             fh.write(content)
         print(f"Wrote {len(stats)} pairs to {out_path}", file=sys.stderr)
@@ -178,9 +180,12 @@ def main():
     )
     parser.add_argument(
         "--n-runs", type=int, default=N_RUNS_DEFAULT,
-        help=f"Number of MDFS runs to average over (default: {N_RUNS_DEFAULT})",
+        help=f"Number of MDFS runs to average over (default: {N_RUNS_DEFAULT}, max: {len(_SEEDS)})",
     )
     args = parser.parse_args()
+
+    if not 1 <= args.n_runs <= len(_SEEDS):
+        parser.error(f"--n-runs must be between 1 and {len(_SEEDS)}")
 
     X = pd.read_csv(args.X, sep="\t", index_col=0)
     y = pd.read_csv(args.y, sep="\t", index_col=0).squeeze()

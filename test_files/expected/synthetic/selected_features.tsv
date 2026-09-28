@@ -1,0 +1,15 @@
+feature	n_folds_selected	synthetic
+Akkermansia_muciniphila	5	False
+Bacteroides_fragilis	5	False
+Bifidobacterium_longum	5	False
+Clostridium_symbiosum	5	False
+Faecalibacterium_prausnitzii	5	False
+Fusobacterium_nucleatum	5	False
+Gemella_morbillorum	5	False
+Parvimonas_micra	5	False
+Peptostreptococcus_anaerobius	5	False
+Prevotella_copri	5	False
+Roseburia_intestinalis	5	False
+Ruminococcus_gnavus	5	False
+GM_Clostridium_symbiosum__Prevotella_copri	1	True
+LR_Clostridium_symbiosum__Prevotella_copri	1	True

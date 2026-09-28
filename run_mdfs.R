@@ -6,7 +6,7 @@ library(MDFS)
 # Usage: Rscript script.R Train_set.txt Train_y.txt Train_mdfs_2d.csv Train_mdfs_1d_2d_unique.txt Train_mdfs_1d_ig.csv [seed] [no_bonferroni]
 # Optional 6th argument: random seed (integer). If omitted, uses 12 (original behaviour).
 # Optional 7th argument: "no_bonferroni" to skip the strict pair-level IG threshold
-#   (used by apply_framework for exploratory synergy enumeration).
+#   (exploratory synergy enumeration).
 args <- commandArgs(trailingOnly = TRUE)
 
 if (length(args) < 5) {
@@ -69,8 +69,8 @@ cat("2D significant features:", length(relevant_2d_features), "\n")
 # dimensions=2) give df = response.divisions * divisions * (divisions+1)^(dim-1) = 2.
 #
 # Optional 7th argument: "no_bonferroni" — skip the Bonferroni ig.thr and use
-# default (0) instead. Used by apply_framework for exploratory synergy enumeration,
-# while the CRC pipeline (framework.ipynb) keeps the strict threshold.
+# default (0) instead, for exploratory synergy enumeration. compute_synergies.py
+# and synthetic_features.py always use the strict threshold.
 use_bonferroni <- TRUE
 if (length(args) >= 7 && tolower(args[7]) == "no_bonferroni") {
   use_bonferroni <- FALSE

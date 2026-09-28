@@ -1,0 +1,16 @@
+fold	n_test	n_pairs	feature_set	n_features	best_k	auc	accuracy
+1	8	1	All Features	12	12	1.000000	1.000000
+1	8	1	Synthetic Only	2	0		
+1	8	1	All Features + Synthetic	14	14	1.000000	1.000000
+2	8	0	All Features	12	12	1.000000	1.000000
+2	8	0	Synthetic Only	0	0		
+2	8	0	All Features + Synthetic	12	12	1.000000	1.000000
+3	8	0	All Features	12	12	1.000000	1.000000
+3	8	0	Synthetic Only	0	0		
+3	8	0	All Features + Synthetic	12	12	1.000000	1.000000
+4	8	0	All Features	12	12	1.000000	1.000000
+4	8	0	Synthetic Only	0	0		
+4	8	0	All Features + Synthetic	12	12	1.000000	1.000000
+5	8	0	All Features	12	12	1.000000	1.000000
+5	8	0	Synthetic Only	0	0		
+5	8	0	All Features + Synthetic	12	12	1.000000	1.000000

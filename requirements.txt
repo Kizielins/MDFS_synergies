@@ -1,0 +1,5 @@
+# Python dependencies. R >= 4.0 with the MDFS and data.table packages is also
+# required; see README.md.
+pandas>=1.3
+numpy>=1.21
+scikit-learn>=1.0
