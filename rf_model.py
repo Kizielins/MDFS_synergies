@@ -1,5 +1,5 @@
 """
-Synthetic features and the Random Forest procedure used in the manuscript.
+Synthetic features and the Random Forest procedure.
 
 For each pair (f1, f2) two synthetic features are created:
   LR_f1__f2  log-ratio        log((f1 + eps) / (f2 + eps))
@@ -37,13 +37,13 @@ def generate_synthetic_features(X, feature_pairs, epsilon=1e-9):
     return pd.DataFrame(synthetic, index=X.index)
 
 
-def find_best_k(X_train, y_train, k_values, model_params):
+def find_best_k(X_train, y_train, k_values, model_params, seed=42):
     """Choose the number of top-importance features k using an internal 75/25 split."""
     if X_train.shape[1] < min(k_values):
         return X_train.shape[1]
 
     X_int, X_val, y_int, y_val = train_test_split(
-        X_train, y_train, test_size=0.25, random_state=42, stratify=y_train)
+        X_train, y_train, test_size=0.25, random_state=seed, stratify=y_train)
 
     ranking_model = RandomForestClassifier(**model_params).fit(X_int, y_int)
     sorted_features = pd.Series(ranking_model.feature_importances_,
@@ -59,15 +59,16 @@ def find_best_k(X_train, y_train, k_values, model_params):
     return best_k
 
 
-def train_and_evaluate(X_train, y_train, X_test, y_test, k_values=None, model_params=None):
+def train_and_evaluate(X_train, y_train, X_test, y_test, k_values=None, model_params=None, seed=42):
     """
     Tune k, select the top-k features by RF importance, train a final RF and score it.
+    `seed` sets the random state of the Random Forests and of the internal split.
     Returns auc, accuracy, best_k, selected_features and y_score (P(label = 1) on X_test).
     """
     k_values = k_values or TOP_K_VALUES
-    model_params = model_params or MODEL_PARAMS
+    model_params = {**(model_params or MODEL_PARAMS), 'random_state': seed}
 
-    best_k = find_best_k(X_train, y_train, k_values, model_params)
+    best_k = find_best_k(X_train, y_train, k_values, model_params, seed)
 
     ranking_model = RandomForestClassifier(**model_params).fit(X_train, y_train)
     importances = pd.Series(ranking_model.feature_importances_, index=X_train.columns)

@@ -2,3 +2,6 @@
 __pycache__/
 *.pyc
 results/
+.ipynb_checkpoints/
+.Rhistory
+.venv/

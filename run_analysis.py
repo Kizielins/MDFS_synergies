@@ -18,6 +18,7 @@ Steps
        MDFS RF      original features + LR_/GM_ features of the consensus pairs
      Both are scored (AUC, accuracy) on the held-out test part.
   3. ROC curves of the two models and summary tables.
+With --no-evaluation only step 1 is run.
 
 Input formats
   X: tab-separated, first column = sample IDs, other columns = feature values
@@ -39,7 +40,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
-from mdfs_pairs import consensus_pairs, run_mdfs_repeated, synergy_table  # noqa: E402
+from mdfs_pairs import check_r_dependencies, consensus_pairs, run_mdfs_repeated, synergy_table  # noqa: E402
 from rf_model import SYNTHETIC_PREFIXES, generate_synthetic_features, train_and_evaluate  # noqa: E402
 
 warnings.filterwarnings("ignore", category=FutureWarning)
@@ -127,7 +128,7 @@ def evaluate_split(X, y, train_idx, test_idx, args, split):
     }
     results = {}
     for model, (a, b) in feature_sets.items():
-        res = train_and_evaluate(a, y_tr, b, y_te)
+        res = train_and_evaluate(a, y_tr, b, y_te, seed=args.seed)
         res["n_features"] = a.shape[1]
         results[model] = res
     return pairs, results, y_te.to_numpy()
@@ -176,6 +177,13 @@ def plot_roc(roc_data, auc_table, out_base):
     plt.close(fig)
 
 
+def write_summary(lines, out_dir):
+    summary = "\n".join(lines) + "\n"
+    with open(os.path.join(out_dir, "summary.txt"), "w") as fh:
+        fh.write(summary)
+    print("\n" + summary + f"Results written to {out_dir}/", file=sys.stderr)
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="MDFS synergy analysis of a single cohort: synergy table, consensus pairs, "
@@ -197,7 +205,10 @@ def main():
     parser.add_argument("--n-splits", type=int, default=10, help="Stratified train/test splits (default: 10)")
     parser.add_argument("--test-size", type=float, default=0.3, help="Test fraction per split (default: 0.3)")
     parser.add_argument("--seed", type=int, default=42,
-                        help="Seed of the train/test splits; MDFS run i uses seed + i (default: 42)")
+                        help="Seed of the train/test splits and Random Forests; MDFS run i uses seed + i "
+                             "(default: 42)")
+    parser.add_argument("--no-evaluation", action="store_true",
+                        help="Only find synergies on the full dataset (step 1); skip the Random Forest comparison")
     args = parser.parse_args()
 
     if not 1 <= args.min_runs <= args.n_mdfs_runs:
@@ -212,14 +223,19 @@ def main():
         parser.error("--n-mdfs-runs must be at least 1")
 
     X, y = load_data(args.X, args.y)
+    check_r_dependencies()
     counts = y.value_counts()
     print(f"Loaded {len(X)} samples ({counts.get(0, 0)} disease, {counts.get(1, 0)} control), "
           f"{X.shape[1]} features from {display_path(args.X)}", file=sys.stderr)
+    if os.path.isdir(args.out_dir) and os.listdir(args.out_dir):
+        print(f"Note: output directory {args.out_dir}/ already exists; its files will be overwritten.",
+              file=sys.stderr)
     os.makedirs(args.out_dir, exist_ok=True)
     out = lambda name: os.path.join(args.out_dir, name)  # noqa: E731
 
     # ---- 1. MDFS on the full dataset ----
-    print("\n[1/3] MDFS on the full dataset", file=sys.stderr)
+    n_steps = 1 if args.no_evaluation else 3
+    print(f"\n[1/{n_steps}] MDFS on the full dataset", file=sys.stderr)
     runs = run_mdfs_repeated(X, y, args.n_mdfs_runs, args.seed, label="full data: ")
     table = synergy_table(runs, args.top_fraction, args.min_runs)
     table.to_csv(out("mdfs_synergies.tsv"), sep="\t", index=False, float_format="%.6f")
@@ -229,6 +245,17 @@ def main():
     pd.concat([X, generate_synthetic_features(X, pairs)], axis=1).to_csv(out("synthetic_features.tsv"), sep="\t")
     print(f"  {len(table)} significant synergistic pair directions; {len(full_pairs)} consensus pairs",
           file=sys.stderr)
+
+    settings = [
+        f"Input: {display_path(args.X)} ({len(X)} samples, {X.shape[1]} features); "
+        f"labels: {display_path(args.y)}",
+        f"MDFS: {args.n_mdfs_runs} runs (seeds {args.seed}-{args.seed + args.n_mdfs_runs - 1}), "
+        f"top {args.top_fraction * 100:g}% of pairs per run, consensus = selected in >= {args.min_runs} runs",
+        f"Full dataset: {len(table)} significant pair directions, {len(full_pairs)} consensus pairs",
+    ]
+    if args.no_evaluation:
+        write_summary(settings, args.out_dir)
+        return
 
     # ---- 2. Baseline vs MDFS RF on stratified splits ----
     print(f"\n[2/3] Baseline vs MDFS RF on {args.n_splits} stratified train/test splits", file=sys.stderr)
@@ -269,12 +296,7 @@ def main():
 
     wide = auc_table.pivot(index="split", columns="model", values="auc")[MODELS]
     diff = wide["MDFS RF"] - wide["Baseline RF"]
-    lines = [
-        f"Input: {display_path(args.X)} ({len(X)} samples, {X.shape[1]} features); "
-        f"labels: {display_path(args.y)}",
-        f"MDFS: {args.n_mdfs_runs} runs (seeds {args.seed}-{args.seed + args.n_mdfs_runs - 1}), "
-        f"top {args.top_fraction * 100:g}% of pairs per run, consensus = selected in >= {args.min_runs} runs",
-        f"Full dataset: {len(table)} significant pair directions, {len(full_pairs)} consensus pairs",
+    lines = settings + [
         f"Evaluation: {args.n_splits} stratified splits, test size {args.test_size}",
         "",
     ]
@@ -284,10 +306,7 @@ def main():
                      f"accuracy {m['accuracy'].mean():.3f} ± {m['accuracy'].std():.3f}")
     lines.append(f"AUC difference (MDFS - baseline): {diff.mean():+.3f} ± {diff.std():.3f}; "
                  f"MDFS RF higher in {(diff > 0).sum()}/{len(diff)} splits")
-    summary = "\n".join(lines) + "\n"
-    with open(out("summary.txt"), "w") as fh:
-        fh.write(summary)
-    print("\n" + summary + f"Results written to {args.out_dir}/", file=sys.stderr)
+    write_summary(lines, args.out_dir)
 
 
 if __name__ == "__main__":

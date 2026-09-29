@@ -1,6 +1,6 @@
 Input: test_files/X_test.tsv (300 samples, 30 features); labels: test_files/y_test.tsv
 MDFS: 10 runs (seeds 42-51), top 2% of pairs per run, consensus = selected in >= 6 runs
-Full dataset: 114 significant pair directions, 1 consensus pairs
+Full dataset: 59 significant pair directions, 1 consensus pairs
 Evaluation: 10 stratified splits, test size 0.3
 
 Baseline RF  AUC 0.863 ± 0.025   accuracy 0.786 ± 0.039

@@ -13,6 +13,7 @@ Consensus pairs are those selected in at least `min_runs` runs.
 """
 
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -25,14 +26,29 @@ RUN_MDFS_R = os.path.join(SCRIPT_DIR, "run_mdfs.R")
 
 PAIR_COLUMNS = ["base", "contributing", "base_IG_1D", "contributing_IG_1D", "IG_2D_added", "total_IG"]
 
+R_INSTALL_HELP = ("Install R (https://cran.r-project.org), make sure `Rscript` is on your PATH, "
+                  "then in R run: install.packages(c(\"MDFS\", \"data.table\"))")
+
+
+def check_r_dependencies():
+    """Exit with installation instructions if Rscript, MDFS (>= 1.5) or data.table is missing."""
+    if shutil.which("Rscript") is None:
+        sys.exit(f"Error: `Rscript` not found on PATH. {R_INSTALL_HELP}")
+    check = ("for (p in c('MDFS', 'data.table')) if (!requireNamespace(p, quietly = TRUE)) "
+             "stop('R package ', p, ' is not installed'); "
+             "if (packageVersion('MDFS') < '1.5') stop('MDFS >= 1.5 is required, found ', packageVersion('MDFS'))")
+    result = subprocess.run(["Rscript", "-e", check], capture_output=True, text=True)
+    if result.returncode != 0:
+        sys.exit(f"Error: {result.stderr.strip()}\n{R_INSTALL_HELP}")
+
 
 def run_mdfs_once(X: pd.DataFrame, y: pd.Series, seed: int, tmp_dir: str) -> pd.DataFrame:
     """Run run_mdfs.R once and return its pairs (columns PAIR_COLUMNS; may be empty)."""
-    paths = {k: os.path.join(tmp_dir, f"{k}_{seed}.tsv") for k in ("X", "y", "2d", "unique", "1d")}
+    paths = {k: os.path.join(tmp_dir, f"{k}_{seed}.tsv") for k in ("X", "y", "pairs")}
     X.to_csv(paths["X"], sep="\t")
     y.rename("label").to_csv(paths["y"], sep="\t", header=True)
 
-    cmd = ["Rscript", RUN_MDFS_R, paths["X"], paths["y"], paths["2d"], paths["unique"], paths["1d"], str(seed)]
+    cmd = ["Rscript", RUN_MDFS_R, paths["X"], paths["y"], paths["pairs"], str(seed)]
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
         raise RuntimeError(f"run_mdfs.R failed (exit {result.returncode}).\n"
@@ -40,7 +56,7 @@ def run_mdfs_once(X: pd.DataFrame, y: pd.Series, seed: int, tmp_dir: str) -> pd.
 
     try:
         # feature names as strings, also when they look like numbers (e.g. OTU IDs)
-        pairs = pd.read_csv(paths["2d"], sep="\t", dtype={"base": str, "contributing": str})
+        pairs = pd.read_csv(paths["pairs"], sep="\t", dtype={"base": str, "contributing": str})
     except pd.errors.EmptyDataError:
         pairs = pd.DataFrame()
     if pairs.empty or "base" not in pairs.columns:
@@ -102,8 +118,8 @@ def synergy_table(runs: pd.DataFrame, top_fraction: float, min_runs: int) -> pd.
     """
     One row per (base, contributing) direction, averaged over the runs in which the
     pair passed the MDFS filters, with:
-      n_runs_significant  runs in which the pair passed both filters
-      n_runs_top          runs in which the (unordered) pair was in the top fraction
+      n_runs_significant  runs in which this direction passed both filters
+      n_runs_top          runs in which the unordered pair (either direction) was in the top fraction
       consensus           n_runs_top >= min_runs
     Sorted by total_IG_mean (descending).
     """

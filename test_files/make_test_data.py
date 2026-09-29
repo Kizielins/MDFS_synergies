@@ -7,10 +7,11 @@ relative abundances (each sample sums to 1).
 
 Planted signal:
   - Synergistic pair: Parvimonas_micra and Gemella_morbillorum share a strongly
-    varying sample-specific load, so neither is informative on its own, but
-    their ratio is: P. micra / G. morbillorum is high in disease and low in
-    controls. MDFS should report this pair and its log-ratio (LR_) feature
-    should improve the Random Forest.
+    varying sample-specific load, which blurs each one's individual signal,
+    while their ratio P. micra / G. morbillorum is high in disease and low in
+    controls. Each is somewhat informative alone, the pair much more so. MDFS
+    should report this pair and its log-ratio (LR_) feature should improve the
+    Random Forest.
   - Weak individual markers: Fusobacterium_nucleatum and
     Peptostreptococcus_anaerobius are slightly higher in disease,
     Faecalibacterium_prausnitzii and Roseburia_intestinalis slightly lower.
@@ -49,7 +50,7 @@ MARKER_SHIFTS = {
     "Roseburia_intestinalis": -0.35,
 }
 PAIR = ("Parvimonas_micra", "Gemella_morbillorum")
-PAIR_LOAD_SD = 3.0     # shared load: hides each pair member's individual signal
+PAIR_LOAD_SD = 3.0     # shared load: blurs each pair member's individual signal
 PAIR_RATIO_SHIFT = 0.9  # +/- shift of each member's log-abundance, opposite directions
 
 
