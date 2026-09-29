@@ -69,8 +69,8 @@ cat("2D significant features:", length(relevant_2d_features), "\n")
 # dimensions=2) give df = response.divisions * divisions * (divisions+1)^(dim-1) = 2.
 #
 # Optional 7th argument: "no_bonferroni" — skip the Bonferroni ig.thr and use
-# default (0) instead, for exploratory synergy enumeration. compute_synergies.py
-# and synthetic_features.py always use the strict threshold.
+# default (0) instead, for exploratory synergy enumeration. The Python tool
+# (mdfs_pairs.py) always uses the strict threshold.
 use_bonferroni <- TRUE
 if (length(args) >= 7 && tolower(args[7]) == "no_bonferroni") {
   use_bonferroni <- FALSE

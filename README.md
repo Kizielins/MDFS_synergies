@@ -1,62 +1,105 @@
 # Metagenomic Feature Synergy Analysis
 
-Identifies synergistic pairs of metagenomic features using
-**Multidimensional Feature Selection (MDFS)** information gain in 1D and 2D,
-and turns them into synthetic features for classification.
+Finds synergistic pairs of metagenomic features (taxa, pathways, or both) with
+**Multidimensional Feature Selection (MDFS)**, turns the most robust pairs into
+synthetic features, and tests whether they improve a Random Forest classifier.
 
-The tool works on a **single cohort**: one feature matrix and one set of
-binary labels.
+The tool analyses a **single cohort**: one feature matrix and one set of
+binary labels (disease vs control).
 
-| Script | What it does |
+```bash
+python run_analysis.py                                   # bundled test data
+python run_analysis.py --X my_features.tsv --y my_labels.tsv --out-dir my_results
+```
+
+---
+
+## What the tool does
+
+```
+                 ┌─────────────────────────────────────────────┐
+ X, y ──────────►│ 1. MDFS on the full dataset (10 runs)       │──► mdfs_synergies.tsv
+                 │    consensus pairs → LR_/GM_ features       │──► consensus_pairs.tsv
+                 └─────────────────────────────────────────────┘──► synthetic_features.tsv
+                 ┌─────────────────────────────────────────────┐
+                 │ 2. 10 stratified train/test splits (70/30)  │
+                 │    on each training part:                   │
+                 │      MDFS 10 runs → consensus pairs         │
+                 │      Baseline RF: original features         │──► auc_per_split.tsv
+                 │      MDFS RF: original + LR_/GM_ features   │──► split_consensus_pairs.tsv
+                 │    both scored on the test part             │──► selected_features.tsv
+                 └─────────────────────────────────────────────┘
+                 ┌─────────────────────────────────────────────┐
+                 │ 3. ROC curves and summary                   │──► roc_comparison.png/.pdf
+                 └─────────────────────────────────────────────┘──► summary.txt
+```
+
+### 1. MDFS pair detection (one run, `run_mdfs.R`)
+
+1. **1D MDFS**: information gain (IG) of each feature about the label.
+2. **2D MDFS**: features that carry significant information jointly with at
+   least one partner.
+3. **Pair enumeration** (`ComputeInterestingTuples`): for each pair
+   (base, contributing) the IG the contributing feature adds on top of the
+   base feature.
+4. **Bonferroni-corrected pair-level threshold**: the added IG must exceed a
+   chi-squared cutoff corrected for all n × (n − 1) / 2 feature pairs.
+5. **True-synergy filter**: the pair must carry more information than either
+   feature alone, `total_IG > max(base_IG_1D, contributing_IG_1D)`.
+
+For a pair of features:
+
+| Quantity | Meaning |
 |---|---|
-| `compute_synergies.py` | Finds synergistic feature pairs and reports their information gains |
-| `synthetic_features.py` | Builds log-ratio / geometric-mean features from the top synergistic pairs and evaluates them with a Random Forest (cross-validation) |
-| `run_mdfs.R` | MDFS engine called by both scripts (not run directly) |
+| `base_IG_1D` | IG of the base feature alone, I(X_base; Y) |
+| `IG_2D_added` | IG the contributing feature adds given the base, I(X_contributing; Y \| X_base) |
+| `total_IG` | joint IG of the pair, `base_IG_1D + IG_2D_added` |
+| `ig_gain_pct` | `IG_2D_added / base_IG_1D × 100` |
 
-## How MDFS 2D information gain works
+Each pair is reported in both directions (base and contributing swapped).
+IG values are as reported by the MDFS package; they are comparable within a
+dataset, not across datasets of different size. `ig_gain_pct` becomes very
+large when `base_IG_1D` is close to zero, so the table is sorted by
+`total_IG` instead.
 
-MDFS evaluates each feature's individual discriminative power (1D) and then
-tests whether pairing two features yields additional predictive information
-(2D). For a pair of features designated **base** and **contributing**:
+### 2. Consensus pairs (10 runs)
 
-- **`base_IG_1D`** — the base feature's individual information gain about the
-  class label, i.e. I(X_base; Y).
-- **`IG_2D_added`** — the *additional* IG that the contributing feature brings
-  when combined with the base feature, i.e. I(X_contributing; Y | X_base).
-  This is the conditional mutual information of the contributing feature given
-  the base feature.
-- **`total_IG`** = `base_IG_1D + IG_2D_added` — the joint information gain of
-  the pair, i.e. I(X_base, X_contributing; Y).
+MDFS discretises features with a random component, so results vary between
+runs. MDFS is therefore run **10 times** (seeds 42–51). In each run, unordered
+pairs are scored by the larger `total_IG` of their two directions and the
+**top 2 %** are selected (at least one pair). A pair selected in **at least 6
+of 10 runs** is a **consensus pair**.
 
-Each pair is reported in **both directions** (base/contributing roles are
-asymmetric: the decomposition changes, but `total_IG` remains the same).
+### 3. Synthetic features
 
-The **% synergy gain** (`ig_gain_pct`) measures how much the contributing
-feature amplifies the base feature's signal:
+For each consensus pair (f1, f2):
 
-```
-ig_gain_pct = IG_2D_added / base_IG_1D × 100
-```
+- `LR_f1__f2`: log-ratio, `log((f1 + ε) / (f2 + ε))`
+- `GM_f1__f2`: geometric mean, `sqrt((f1 + ε) × (f2 + ε))`
 
-A value of 100% means the pair's joint IG is double the base feature's
-individual IG; values above 100% indicate that the contributing feature adds
-more information than the base carried alone.
+with ε = 1e-9.
 
-### Statistical thresholds
+### 4. Model comparison
 
-Two filters ensure that reported pairs represent genuine synergies:
+The data are split **10 times** into stratified 70 % training / 30 % test
+parts. In each split, MDFS consensus pairs are found **on the training part
+only** (10 MDFS runs, ≥ 6 occurrences), so the test samples never influence
+pair selection. Two Random Forests are then trained on the same training part:
 
-1. **Bonferroni-corrected pair-level threshold** — `ComputeInterestingTuples`
-   in R uses an IG cutoff derived from a chi-squared quantile corrected for the
-   total number of feature pairs tested (n × (n − 1) / 2 for n features).
-   Only pairs exceeding this threshold are retained.
+- **Baseline RF**: the original features
+- **MDFS RF**: the original features plus the `LR_` / `GM_` features of the
+  consensus pairs
 
-2. **True-synergy filter** — the pair's `total_IG` must exceed the larger of
-   the two individual 1D IGs (`total_IG > max(base_IG_1D, contributing_IG_1D)`).
-   This removes artifacts where a strong feature is paired with noise.
+Both use the same procedure. The number of features k (50, 100, …, 500, or
+all features if there are fewer than 50) is tuned on an internal 75/25 split
+of the training part. The top-k features by RF importance are selected, and a
+final RF (1000 trees, `max_features = sqrt`, balanced class weights) is scored
+on the test part. If a split has no consensus pairs, both models use the same
+features and give the same result.
 
-MDFS is run **3 times** with different random seeds (`--n-runs`); IGs are
-averaged across runs for robustness.
+This is the procedure used in the manuscript's leave-one-cohort-out analysis
+(10 MDFS runs, top 2 %, ≥ 6/10 consensus, same RF), applied to train/test
+splits of a single cohort.
 
 ---
 
@@ -67,22 +110,17 @@ averaged across runs for robustness.
 | R | >= 4.0 | 4.5.1 |
 | R package `MDFS` | >= 1.5 | 1.5.5 |
 | R package `data.table` | any recent | 1.18.4 |
-| Python | >= 3.8 | 3.10.13 |
-| Python package `pandas` | >= 1.3 | 2.3.2 |
-| Python package `numpy` | >= 1.21 | 1.26.4 |
-| Python package `scikit-learn` | >= 1.0 (only for `synthetic_features.py`) | 1.7.2 |
+| Python | >= 3.8 | 3.9.6 |
+| `pandas` | >= 1.3 | 2.3.1 |
+| `numpy` | >= 1.21 | 2.0.2 |
+| `scikit-learn` | >= 1.0 | 1.6.1 |
+| `matplotlib` | >= 3.5 | 3.9.4 |
 
 `Rscript` must be on your `PATH`.
-
-### Install
-
-R packages:
 
 ```r
 install.packages(c("MDFS", "data.table"))
 ```
-
-Python packages:
 
 ```bash
 pip install -r requirements.txt
@@ -90,167 +128,116 @@ pip install -r requirements.txt
 
 ---
 
-## Repository structure
-
-```
-MDFS_synergies/
-├── compute_synergies.py     # Synergistic pairs and their information gains
-├── synthetic_features.py    # Synthetic features from top pairs + Random Forest evaluation
-├── run_mdfs.R               # MDFS 1D/2D, Bonferroni threshold, true-synergy filter
-├── requirements.txt         # Python dependencies
-└── test_files/
-    ├── X_test.tsv           # 40-sample × 12-feature synthetic dataset
-    ├── y_test.tsv           # Labels (0 = disease, 1 = control)
-    └── expected/            # Expected outputs of the test commands below
-        ├── synergies.tsv
-        └── synthetic/
-```
-
-Run all commands from the repository root. `compute_synergies.py` and
-`synthetic_features.py` must stay in the same directory as `run_mdfs.R`.
-
----
-
 ## Usage
 
-### 1. Synergistic pairs — `compute_synergies.py`
-
 ```bash
-python compute_synergies.py --X my_features.tsv --y my_labels.tsv --out synergies.tsv
+python run_analysis.py [--X FILE] [--y FILE] [--out-dir DIR] [options]
 ```
 
 | Option | Default | Description |
 |---|---|---|
-| `--X` | required | Feature matrix (see [Input format](#input-format)) |
-| `--y` | required | Labels |
-| `--out` | stdout | Output file |
-| `--n-runs` | 3 | MDFS runs to average over (max 5) |
+| `--X` | `test_files/X_test.tsv` | Feature matrix |
+| `--y` | `test_files/y_test.tsv` | Labels |
+| `--out-dir` | `results` | Output directory |
+| `--n-mdfs-runs` | 10 | MDFS runs per pair selection |
+| `--min-runs` | 6 | Minimum runs in which a pair must be selected to be a consensus pair |
+| `--top-fraction` | 0.02 | Fraction of pairs selected per MDFS run (at least one) |
+| `--n-splits` | 10 | Stratified train/test splits |
+| `--test-size` | 0.3 | Test fraction of each split |
+| `--seed` | 42 | Seed of the splits; MDFS run *i* uses seed + *i* |
 
-Output: one row per (base, contributing) pair, sorted by `ig_gain_pct`
-(descending):
+**Runtime.** MDFS runs 10 × (1 + number of splits) times, so 110 times with the
+defaults, and 24 Random Forests of 1000 trees are trained per split. The test
+data take under a minute. For a cohort with a few hundred samples and a
+few thousand features, expect tens of minutes to a few hours.
 
-| Column | Description |
-|---|---|
-| `#` | Rank |
-| `base` | Base feature in the pair |
-| `contributing` | Contributing feature in the pair |
-| `base_IG_1D` | Mean 1D IG of the base feature across runs |
-| `contributing_IG_1D` | Mean 1D IG of the contributing feature across runs |
-| `IG_2D_added` | Mean additional IG from the contributing feature (conditional on base) |
-| `total_IG` | Mean joint IG of the pair (`base_IG_1D + IG_2D_added`) |
-| `ig_gain_pct` | `IG_2D_added / base_IG_1D × 100` |
+With few features there are few pairs, so the top 2 % may be a single pair.
+Raise `--top-fraction` if no consensus pairs are found.
 
-A pair is averaged over the runs in which it passed both filters.
+### Input format
 
-### 2. Synthetic features — `synthetic_features.py`
-
-```bash
-python synthetic_features.py --X my_features.tsv --y my_labels.tsv --out-dir out
-```
-
-For each selected pair (f1, f2) two synthetic features are created:
-
-- `LR_f1__f2` — log-ratio, `log((f1 + ε) / (f2 + ε))`
-- `GM_f1__f2` — geometric mean, `sqrt((f1 + ε) × (f2 + ε))`
-
-**Pair selection.** MDFS is run `--n-runs` times. In each run, unordered pairs
-are scored by `total_IG` and the top `--top-fraction` are kept (at least one).
-Pairs kept in **every** run form the consensus set.
-
-**Evaluation.** Stratified k-fold cross-validation (`--n-folds`). Pair
-selection is repeated inside each training fold, so the test fold never
-informs which pairs are used. Three feature sets are compared:
-
-- `All Features` — original features
-- `Synthetic Only` — `LR_` / `GM_` features
-- `All Features + Synthetic` — both
-
-For each feature set, the number of features *k* (50–500, or all if fewer) is
-tuned on an internal 75/25 split of the training fold, the top-*k* features by
-Random Forest importance are selected, and a final Random Forest (1000 trees,
-balanced class weights) is scored on the test fold. Feature sets with fewer
-than 10 features are not evaluated (reported as empty).
-
-| Option | Default | Description |
-|---|---|---|
-| `--X` | required | Feature matrix |
-| `--y` | required | Labels |
-| `--out-dir` | required | Output directory |
-| `--n-runs` | 3 | MDFS runs per pair selection (max 5) |
-| `--top-fraction` | 0.01 | Fraction of pairs kept per MDFS run |
-| `--n-folds` | 5 | Cross-validation folds |
-| `--no-cv` | off | Skip evaluation; only select pairs and write synthetic features |
-
-Outputs in `--out-dir`:
-
-| File | Content |
-|---|---|
-| `synergy_pairs.tsv` | Consensus pairs selected on the full dataset: `feature_1`, `feature_2`, `total_IG_mean` |
-| `synthetic_features.tsv` | Original features plus `LR_` / `GM_` features for those pairs (samples × features), ready for your own models |
-| `cv_performance.tsv` | Per fold and feature set: `n_test`, `n_pairs`, `n_features`, `best_k`, `auc`, `accuracy` |
-| `selected_features.tsv` | For `All Features + Synthetic`: how many folds selected each feature, and whether it is synthetic |
-
-A summary (mean ± sd AUC and accuracy per feature set) is printed at the end.
-
-The default `--top-fraction 0.01` suits datasets with hundreds or thousands of
-features. With few features (few pairs) raise it, otherwise the consensus set
-may be empty.
-
----
-
-## Input format
-
-**Feature matrix (`--X`)**
-
-Tab-separated, samples in rows, first column is the sample ID. Values are
-typically relative abundances (taxa, pathways, or both combined):
+**Feature matrix (`--X`)**: tab-separated, samples in rows, first column is
+the sample ID. Values are typically relative abundances. Missing values are
+not allowed. Spaces in feature names are replaced by underscores.
 
 ```
-sample_id   Fusobacterium_nucleatum   Peptostreptococcus_anaerobius   ...
-S001        0.28310452                0.11203471                      ...
-S002        0.01823940                0.03941200                      ...
+sample_id   Fusobacterium_nucleatum   Parvimonas_micra   ...
+S001        0.02831045                0.00112034         ...
 ```
 
-**Labels (`--y`)**
-
-Tab-separated, two columns with a header row:
+**Labels (`--y`)**: tab-separated, with a header, two columns:
 
 ```
 sample_id   label
 S001        0
-S002        0
-S021        1
+S151        1
 ```
 
 `0` = disease / case, `1` = control / healthy. Only samples present in both
-files are used. Spaces in feature names are replaced by underscores.
+files are used.
+
+### Outputs
+
+| File | Content |
+|---|---|
+| `mdfs_synergies.tsv` | Full dataset: every (base, contributing) direction that passed both MDFS filters in at least one run, averaged over those runs. Columns: `base`, `contributing`, `base_IG_1D_mean`, `contributing_IG_1D_mean`, `IG_2D_added_mean`, `IG_2D_added_sd`, `total_IG_mean`, `ig_gain_pct`, `n_runs_significant` (runs in which the direction passed the filters), `n_runs_top` (runs in which the pair was in the top 2 %), `consensus` (`n_runs_top` ≥ 6). Sorted by `total_IG_mean`. |
+| `consensus_pairs.tsv` | Full dataset: consensus pairs (`feature_1`, `feature_2`, `n_runs_top`, `total_IG_mean`) |
+| `synthetic_features.tsv` | Full dataset: original features plus `LR_` / `GM_` features of the consensus pairs, ready for your own models |
+| `auc_per_split.tsv` | Per split and model: `n_train`, `n_test`, `n_consensus_pairs`, `n_features`, `best_k`, `auc`, `accuracy` |
+| `split_consensus_pairs.tsv` | Number of splits in which each pair was a consensus pair |
+| `selected_features.tsv` | MDFS RF: number of splits in which each feature was among the top-k, and whether it is synthetic |
+| `roc_comparison.png` / `.pdf` | Left: mean ROC curve ± sd of both models over the test splits, with individual splits faint. Right: test AUC of both models in each split. |
+| `summary.txt` | Settings, number of pairs, mean ± sd AUC and accuracy of both models, and the per-split AUC difference |
+
+The AUCs come from the held-out test parts. The consensus pairs in
+`mdfs_synergies.tsv` / `consensus_pairs.tsv` come from the full dataset, so
+use them to describe the cohort, not to estimate performance. The 10 test
+parts overlap, so the per-split AUCs are not independent.
 
 ---
 
 ## Test data
 
-`test_files/X_test.tsv` and `test_files/y_test.tsv` contain a synthetic CRC-like
-microbiome dataset (40 samples, 12 bacterial features). The data is designed so
-that **Parvimonas_micra** and **Gemella_morbillorum** form a synergistic pair:
-in disease samples, one or the other is elevated (never both), while in controls
-both are low — so neither bacterium alone is strongly discriminative but the pair
-jointly is.
+`test_files/X_test.tsv` and `test_files/y_test.tsv` are a synthetic
+CRC-like dataset (300 samples: 150 disease, 150 control; 30 species as
+relative abundances), generated by `test_files/make_test_data.py`:
+
+- **Synergistic pair**: *Parvimonas micra* and *Gemella morbillorum* share a
+  strongly varying sample-specific abundance, so each is only weakly
+  informative alone, but their ratio is high in disease and low in controls.
+- **Weak individual markers**: *Fusobacterium nucleatum* and
+  *Peptostreptococcus anaerobius* slightly higher in disease,
+  *Faecalibacterium prausnitzii* and *Roseburia intestinalis* slightly lower.
+- The other 24 species are noise.
 
 ```bash
-python compute_synergies.py --X test_files/X_test.tsv --y test_files/y_test.tsv --out out/synergies.tsv
-python synthetic_features.py --X test_files/X_test.tsv --y test_files/y_test.tsv --out-dir out/synthetic --top-fraction 0.2
+python run_analysis.py
 ```
 
-Compare with the expected results:
+Expected result (`test_files/expected/`):
 
-```bash
-diff out/synergies.tsv test_files/expected/synergies.tsv
-diff -r out/synthetic test_files/expected/synthetic
+- `Gemella_morbillorum` / `Parvimonas_micra` has the highest `total_IG` and
+  is the only consensus pair, both on the full dataset and in all 10 splits.
+- Its `LR_` and `GM_` features are selected by the MDFS RF in every split.
+- Test AUC: Baseline RF 0.863 ± 0.025, MDFS RF 0.933 ± 0.026; MDFS RF is
+  higher in 10/10 splits.
+
+Exact AUCs can differ slightly between scikit-learn versions.
+
+---
+
+## Repository structure
+
+```
+├── run_analysis.py          # Runner: the whole analysis, outputs and figure
+├── mdfs_pairs.py            # Runs run_mdfs.R repeatedly; synergy table and consensus pairs
+├── rf_model.py              # LR_/GM_ synthetic features; Random Forest with top-k selection
+├── run_mdfs.R               # One MDFS run: 1D/2D MDFS, Bonferroni threshold, synergy filter
+├── requirements.txt
+└── test_files/
+    ├── X_test.tsv, y_test.tsv   # Synthetic test data
+    ├── make_test_data.py        # Generates the test data
+    └── expected/                # summary.txt and roc_comparison.png of the test run
 ```
 
-Expected: both `Parvimonas_micra / Gemella_morbillorum` and
-`Gemella_morbillorum / Parvimonas_micra` pass both synergy filters, with
-`ig_gain_pct` ≈ 1076% and ≈ 396%. The small dataset is a check that the tools
-run: several features separate the classes on their own, so the
-cross-validated AUC is 1.0 for every evaluated feature set and
-`Synthetic Only` has too few features to be evaluated.
+`run_mdfs.R` must stay in the same directory as the Python scripts.
