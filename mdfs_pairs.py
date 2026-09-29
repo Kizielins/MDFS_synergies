@@ -39,7 +39,8 @@ def run_mdfs_once(X: pd.DataFrame, y: pd.Series, seed: int, tmp_dir: str) -> pd.
                            f"STDERR:\n{result.stderr}\nSTDOUT:\n{result.stdout}")
 
     try:
-        pairs = pd.read_csv(paths["2d"], sep="\t")
+        # feature names as strings, also when they look like numbers (e.g. OTU IDs)
+        pairs = pd.read_csv(paths["2d"], sep="\t", dtype={"base": str, "contributing": str})
     except pd.errors.EmptyDataError:
         pairs = pd.DataFrame()
     if pairs.empty or "base" not in pairs.columns:

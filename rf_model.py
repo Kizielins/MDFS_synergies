@@ -29,9 +29,11 @@ def generate_synthetic_features(X, feature_pairs, epsilon=1e-9):
     synthetic = {}
     for pair in feature_pairs:
         f1, f2 = sorted(pair)
-        if f1 in X.columns and f2 in X.columns:
-            synthetic[f"LR_{f1}__{f2}"] = np.log((X[f1] + epsilon) / (X[f2] + epsilon))
-            synthetic[f"GM_{f1}__{f2}"] = np.sqrt((X[f1] + epsilon) * (X[f2] + epsilon))
+        missing = [f for f in (f1, f2) if f not in X.columns]
+        if missing:
+            raise KeyError(f"MDFS pair feature(s) not found in the feature matrix: {missing}")
+        synthetic[f"LR_{f1}__{f2}"] = np.log((X[f1] + epsilon) / (X[f2] + epsilon))
+        synthetic[f"GM_{f1}__{f2}"] = np.sqrt((X[f1] + epsilon) * (X[f2] + epsilon))
     return pd.DataFrame(synthetic, index=X.index)
 
 

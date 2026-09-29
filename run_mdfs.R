@@ -23,10 +23,10 @@ output_unique <- args[4]  # Train_mdfs_1d_2d_unique.txt
 output_1d_ig  <- args[5]  # Train_mdfs_1d_ig.csv
 
 # === STEP 1: Read the features (X) and labels (y) files ===
-X <- fread(input_X_file, sep = "\t")
+X <- fread(input_X_file, sep = "\t", header = TRUE)
 X <- X[, -1, with = FALSE]  # drop first column if it's ID
 
-y_dt <- fread(input_y_file, sep = "\t")
+y_dt <- fread(input_y_file, sep = "\t", header = TRUE)
 if (ncol(y_dt) >= 2) {
   y <- y_dt[[2]]
 } else {

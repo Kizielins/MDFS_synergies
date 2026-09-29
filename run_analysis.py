@@ -53,22 +53,63 @@ MODELS = ["Baseline RF", "MDFS RF"]
 MODEL_COLORS = {"Baseline RF": "#eb6834", "MDFS RF": "#2a78d6"}
 
 
+def read_tsv(path, what):
+    if not os.path.isfile(path):
+        sys.exit(f"Error: {what} file not found: {path}")
+    df = pd.read_csv(path, sep="\t", index_col=0)
+    if df.shape[1] == 0:
+        sys.exit(f"Error: {what} file {path} has a single column. Is it tab-separated?")
+    df.index = df.index.astype(str)
+    if df.index.duplicated().any():
+        sys.exit(f"Error: {what} file has duplicate sample IDs, e.g. {df.index[df.index.duplicated()][0]}.")
+    return df
+
+
 def load_data(x_path, y_path):
-    X = pd.read_csv(x_path, sep="\t", index_col=0)
-    y = pd.read_csv(y_path, sep="\t", index_col=0).squeeze("columns")
+    X = read_tsv(x_path, "feature matrix (--X)")
+    y_df = read_tsv(y_path, "labels (--y)")
+    if y_df.shape[1] != 1:
+        sys.exit(f"Error: the labels file must have two columns (sample_id, label); found {y_df.shape[1] + 1}.")
+    if str(y_df.columns[0]).strip() in ("0", "1", "0.0", "1.0"):
+        sys.exit("Error: the labels file seems to have no header row; the first line must be 'sample_id<TAB>label'.")
+
     # MDFS pair names use underscores; keep X column names consistent with them
     X.columns = X.columns.astype(str).str.replace(" ", "_")
-    X.index, y.index = X.index.astype(str), y.index.astype(str)
+    if X.columns.duplicated().any():
+        sys.exit(f"Error: duplicate feature names (after replacing spaces with underscores), "
+                 f"e.g. {X.columns[X.columns.duplicated()][0]}.")
+    non_numeric = [c for c in X.columns if not pd.api.types.is_numeric_dtype(X[c])]
+    if non_numeric:
+        sys.exit(f"Error: non-numeric values in feature(s) {non_numeric[:3]}.")
+    if X.isna().any().any():
+        sys.exit("Error: the feature matrix contains missing values.")
+    if (X < 0).any().any():
+        sys.exit("Error: the feature matrix contains negative values. Log-ratio and geometric-mean features "
+                 "need non-negative data such as (relative) abundances, not CLR- or log-transformed values.")
+
+    labels = pd.to_numeric(y_df.iloc[:, 0], errors="coerce")
+    bad = labels.isna() | ~labels.isin([0, 1])
+    if bad.any():
+        examples = sorted(set(y_df.iloc[:, 0][bad].astype(str)))[:5]
+        sys.exit(f"Error: labels must be 0 (disease) or 1 (control); found {examples}.")
+    y = labels.astype(int)
 
     common = X.index.intersection(y.index)
     if len(common) == 0:
         sys.exit("Error: no shared sample IDs between X and y.")
-    X, y = X.loc[common], y.loc[common].astype(int)
-    if set(y.unique()) != {0, 1}:
-        sys.exit(f"Error: labels must be 0 (disease) and 1 (control); found {sorted(y.unique())}.")
-    if X.isna().any().any():
-        sys.exit("Error: the feature matrix contains missing values.")
+    only_x, only_y = len(X.index.difference(y.index)), len(y.index.difference(X.index))
+    if only_x or only_y:
+        print(f"Note: {only_x} samples only in X and {only_y} only in y are ignored.", file=sys.stderr)
+    X, y = X.loc[common], y.loc[common]
+    if y.nunique() < 2:
+        sys.exit("Error: both classes (0 and 1) must be present.")
     return X, y
+
+
+def display_path(path):
+    """Path for messages: relative to the repository for bundled files, as given otherwise."""
+    full = os.path.abspath(path)
+    return os.path.relpath(full, SCRIPT_DIR) if full.startswith(SCRIPT_DIR + os.sep) else path
 
 
 def evaluate_split(X, y, train_idx, test_idx, args, split):
@@ -165,11 +206,15 @@ def main():
         parser.error("--top-fraction must be in (0, 1]")
     if not 0 < args.test_size < 1:
         parser.error("--test-size must be in (0, 1)")
+    if args.n_splits < 2:
+        parser.error("--n-splits must be at least 2")
+    if args.n_mdfs_runs < 1:
+        parser.error("--n-mdfs-runs must be at least 1")
 
     X, y = load_data(args.X, args.y)
     counts = y.value_counts()
     print(f"Loaded {len(X)} samples ({counts.get(0, 0)} disease, {counts.get(1, 0)} control), "
-          f"{X.shape[1]} features from {os.path.relpath(args.X)}", file=sys.stderr)
+          f"{X.shape[1]} features from {display_path(args.X)}", file=sys.stderr)
     os.makedirs(args.out_dir, exist_ok=True)
     out = lambda name: os.path.join(args.out_dir, name)  # noqa: E731
 
@@ -225,10 +270,10 @@ def main():
     wide = auc_table.pivot(index="split", columns="model", values="auc")[MODELS]
     diff = wide["MDFS RF"] - wide["Baseline RF"]
     lines = [
-        f"Input: {os.path.relpath(args.X)} ({len(X)} samples, {X.shape[1]} features); "
-        f"labels: {os.path.relpath(args.y)}",
+        f"Input: {display_path(args.X)} ({len(X)} samples, {X.shape[1]} features); "
+        f"labels: {display_path(args.y)}",
         f"MDFS: {args.n_mdfs_runs} runs (seeds {args.seed}-{args.seed + args.n_mdfs_runs - 1}), "
-        f"top {args.top_fraction:.0%} of pairs per run, consensus = selected in >= {args.min_runs} runs",
+        f"top {args.top_fraction * 100:g}% of pairs per run, consensus = selected in >= {args.min_runs} runs",
         f"Full dataset: {len(table)} significant pair directions, {len(full_pairs)} consensus pairs",
         f"Evaluation: {args.n_splits} stratified splits, test size {args.test_size}",
         "",

@@ -147,18 +147,23 @@ python run_analysis.py [--X FILE] [--y FILE] [--out-dir DIR] [options]
 | `--seed` | 42 | Seed of the splits; MDFS run *i* uses seed + *i* |
 
 **Runtime.** MDFS runs 10 × (1 + number of splits) times, so 110 times with the
-defaults, and 24 Random Forests of 1000 trees are trained per split. The test
-data take under a minute. For a cohort with a few hundred samples and a
-few thousand features, expect tens of minutes to a few hours.
+defaults. Per split and model, up to 13 Random Forests of 1000 trees are
+trained (11 to tune k, 2 for the final model; 4 in total when there are fewer
+than 50 features). The test data take about a minute. For a cohort with a few
+hundred samples and a few thousand features, expect tens of minutes to a few
+hours.
 
-With few features there are few pairs, so the top 2 % may be a single pair.
-Raise `--top-fraction` if no consensus pairs are found.
+With few features there are few pairs, so the top 2 % may be a single pair
+(ties at the cutoff are broken by feature name). Raise `--top-fraction` if no
+consensus pairs are found.
 
 ### Input format
 
 **Feature matrix (`--X`)**: tab-separated, samples in rows, first column is
-the sample ID. Values are typically relative abundances. Missing values are
-not allowed. Spaces in feature names are replaced by underscores.
+the sample ID. Values must be numeric and non-negative, typically (relative)
+abundances; log-ratio and geometric-mean features cannot be computed from
+CLR- or log-transformed data. Missing values are not allowed. Spaces in feature
+names are replaced by underscores.
 
 ```
 sample_id   Fusobacterium_nucleatum   Parvimonas_micra   ...
@@ -174,25 +179,29 @@ S151        1
 ```
 
 `0` = disease / case, `1` = control / healthy. Only samples present in both
-files are used.
+files are used; the number of samples found in only one file is reported.
+Sample IDs must be unique. The runner stops with an explanatory message when
+an input does not follow this format (e.g. a comma-separated file, a labels
+file without header, labels other than 0/1).
 
 ### Outputs
 
 | File | Content |
 |---|---|
 | `mdfs_synergies.tsv` | Full dataset: every (base, contributing) direction that passed both MDFS filters in at least one run, averaged over those runs. Columns: `base`, `contributing`, `base_IG_1D_mean`, `contributing_IG_1D_mean`, `IG_2D_added_mean`, `IG_2D_added_sd`, `total_IG_mean`, `ig_gain_pct`, `n_runs_significant` (runs in which the direction passed the filters), `n_runs_top` (runs in which the pair was in the top 2 %), `consensus` (`n_runs_top` ≥ 6). Sorted by `total_IG_mean`. |
-| `consensus_pairs.tsv` | Full dataset: consensus pairs (`feature_1`, `feature_2`, `n_runs_top`, `total_IG_mean`) |
+| `consensus_pairs.tsv` | Full dataset: consensus pairs (`feature_1`, `feature_2`, `n_runs_top`, `total_IG_mean`). Here `total_IG_mean` is the pair's score (larger `total_IG` of its two directions) averaged over the runs in which it was in the top 2 %. |
 | `synthetic_features.tsv` | Full dataset: original features plus `LR_` / `GM_` features of the consensus pairs, ready for your own models |
 | `auc_per_split.tsv` | Per split and model: `n_train`, `n_test`, `n_consensus_pairs`, `n_features`, `best_k`, `auc`, `accuracy` |
-| `split_consensus_pairs.tsv` | Number of splits in which each pair was a consensus pair |
-| `selected_features.tsv` | MDFS RF: number of splits in which each feature was among the top-k, and whether it is synthetic |
+| `split_consensus_pairs.tsv` | `feature_1`, `feature_2`, `n_splits`: number of splits in which each pair was a consensus pair |
+| `selected_features.tsv` | `feature`, `n_splits_selected`, `synthetic`: MDFS RF, number of splits in which each feature was among the top-k |
 | `roc_comparison.png` / `.pdf` | Left: mean ROC curve ± sd of both models over the test splits, with individual splits faint. Right: test AUC of both models in each split. |
 | `summary.txt` | Settings, number of pairs, mean ± sd AUC and accuracy of both models, and the per-split AUC difference |
 
 The AUCs come from the held-out test parts. The consensus pairs in
 `mdfs_synergies.tsv` / `consensus_pairs.tsv` come from the full dataset, so
 use them to describe the cohort, not to estimate performance. The 10 test
-parts overlap, so the per-split AUCs are not independent.
+parts overlap, so the per-split AUCs are not independent. AUC and ROC curves
+use label 1 (control) as the positive class; AUC is the same either way.
 
 ---
 
@@ -218,7 +227,8 @@ Expected result (`test_files/expected/`):
 
 - `Gemella_morbillorum` / `Parvimonas_micra` has the highest `total_IG` and
   is the only consensus pair, both on the full dataset and in all 10 splits.
-- Its `LR_` and `GM_` features are selected by the MDFS RF in every split.
+- Its `LR_` and `GM_` features are included in the MDFS RF in every split
+  (with 30 features, k-tuning keeps all features, so this is expected).
 - Test AUC: Baseline RF 0.863 ± 0.025, MDFS RF 0.933 ± 0.026; MDFS RF is
   higher in 10/10 splits.
 
