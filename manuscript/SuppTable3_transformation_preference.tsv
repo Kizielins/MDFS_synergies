@@ -1,0 +1,747 @@
+Data Type	Feature1	Feature2	Types_Present	Num_Types	Max_Selection_Pct
+combined	Anaerococcus_obesiensis	Dialister_pneumosintes	['GM', 'LR']	2	100.0
+combined	Anaerococcus_obesiensis	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+combined	Anaerococcus_obesiensis	Gemella_morbillorum	['GM', 'LR']	2	100.0
+combined	Anaerococcus_obesiensis	Parvimonas_micra	['GM', 'LR']	2	100.0
+combined	Anaerococcus_obesiensis	Peptostreptococcus_stomatis	['GM', 'LR']	2	100.0
+combined	Anaerotignum_faecicola	Peptostreptococcus_stomatis	['GM', 'LR']	2	100.0
+combined	BIOTIN-BIOSYNTHESIS-PWY:_biotin_biosynthesis_I	Fusobacterium_nucleatum	['GM']	1	100.0
+combined	COA-PWY:_coenzyme_A_biosynthesis_I_(prokaryotic)	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+combined	Campylobacter_ureolyticus	Fusobacterium_nucleatum	['GM']	1	100.0
+combined	Candidatus_Saccharibacteria_unclassified_SGB19850	Parvimonas_micra	['LR']	1	100.0
+combined	Collinsella_aerofaciens	Peptostreptococcus_stomatis	['GM']	1	100.0
+combined	DENITRIFICATION-PWY:_nitrate_reduction_I_(denitrification)	Fusobacterium_nucleatum	['LR']	1	100.0
+combined	Dialister_pneumosintes	Fusobacterium_nucleatum	['GM']	1	100.0
+combined	Dialister_pneumosintes	Parvimonas_micra	['GM']	1	100.0
+combined	Dialister_pneumosintes	Peptostreptococcus_stomatis	['GM']	1	100.0
+combined	Dialister_pneumosintes	Roseburia_hominis	['GM', 'LR']	2	100.0
+combined	Eikenella_corrodens	Fusobacterium_nucleatum	['GM']	1	100.0
+combined	Fusobacterium_nucleatum	GLUTORN-PWY:_L-ornithine_biosynthesis_I	['GM', 'LR']	2	100.0
+combined	Fusobacterium_nucleatum	Gemella_morbillorum	['GM']	1	100.0
+combined	Fusobacterium_nucleatum	Haemophilus_sputorum	['LR']	1	100.0
+combined	Fusobacterium_nucleatum	Morganella_morganii	['GM']	1	100.0
+combined	Fusobacterium_nucleatum	NONMEVIPP-PWY:_methylerythritol_phosphate_pathway_I	['GM', 'LR']	2	100.0
+combined	Fusobacterium_nucleatum	PWY-1042:_glycolysis_IV	['LR']	1	100.0
+combined	Fusobacterium_nucleatum	PWY-2941:_L-lysine_biosynthesis_II	['GM']	1	100.0
+combined	Fusobacterium_nucleatum	PWY-5505:_L-glutamate_and_L-glutamine_biosynthesis	['GM', 'LR']	2	100.0
+combined	Fusobacterium_nucleatum	PWY-5941:_glycogen_degradation_II	['LR']	1	100.0
+combined	Fusobacterium_nucleatum	PWY-6122:_5-aminoimidazole_ribonucleotide_biosynthesis_II	['GM', 'LR']	2	100.0
+combined	Fusobacterium_nucleatum	PWY-6277:_superpathway_of_5-aminoimidazole_ribonucleotide_biosynthesis	['GM', 'LR']	2	100.0
+combined	Fusobacterium_nucleatum	PWY-6292:_superpathway_of_L-cysteine_biosynthesis_(mammalian)	['LR']	1	100.0
+combined	Fusobacterium_nucleatum	PWY-6387:_UDP-N-acetylmuramoyl-pentapeptide_biosynthesis_I_(meso-diaminopimelate_containing)	['GM', 'LR']	2	100.0
+combined	Fusobacterium_nucleatum	PWY-6609:_adenine_and_adenosine_salvage_III	['GM', 'LR']	2	100.0
+combined	Fusobacterium_nucleatum	PWY-6731:_starch_degradation_III	['GM']	1	100.0
+combined	Fusobacterium_nucleatum	PWY-6936:_seleno-amino_acid_biosynthesis_(plants)	['LR']	1	100.0
+combined	Fusobacterium_nucleatum	PWY-6969:_TCA_cycle_V_(2-oxoglutarate_synthase)	['GM', 'LR']	2	100.0
+combined	Fusobacterium_nucleatum	PWY-702:_L-methionine_biosynthesis_II	['GM', 'LR']	2	100.0
+combined	Fusobacterium_nucleatum	PWY-7220:_adenosine_deoxyribonucleotides_de_novo_biosynthesis_II	['GM', 'LR']	2	100.0
+combined	Fusobacterium_nucleatum	PWY-7237:_myo-,_chiro-_and_scyllo-inositol_degradation	['GM', 'LR']	2	100.0
+combined	Fusobacterium_nucleatum	PWY-7238:_sucrose_biosynthesis_II	['LR']	1	100.0
+combined	Fusobacterium_nucleatum	PWY-7456:_&beta;-(1,4)-mannan_degradation	['GM', 'LR']	2	100.0
+combined	Fusobacterium_nucleatum	PWY-7953:_UDP-N-acetylmuramoyl-pentapeptide_biosynthesis_III_(meso-diaminopimelate_containing)	['GM', 'LR']	2	100.0
+combined	Fusobacterium_nucleatum	PWY0-1477:_ethanolamine_utilization	['GM']	1	100.0
+combined	Fusobacterium_nucleatum	PWY0-162:_superpathway_of_pyrimidine_ribonucleotides_de_novo_biosynthesis	['GM', 'LR']	2	100.0
+combined	Fusobacterium_nucleatum	PWY0-845:_superpathway_of_pyridoxal_5'-phosphate_biosynthesis_and_salvage	['GM']	1	100.0
+combined	Fusobacterium_nucleatum	Parvimonas_micra	['GM']	1	100.0
+combined	Fusobacterium_nucleatum	Peptostreptococcus_anaerobius	['GM']	1	100.0
+combined	Fusobacterium_nucleatum	Peptostreptococcus_stomatis	['GM']	1	100.0
+combined	Fusobacterium_nucleatum	Porphyromonas_SGB1980	['GM']	1	100.0
+combined	Fusobacterium_nucleatum	Roseburia_hominis	['GM', 'LR']	2	100.0
+combined	Fusobacterium_nucleatum	Ruthenibacterium_lactatiformans	['GM']	1	100.0
+combined	Fusobacterium_nucleatum	Streptococcus_gallolyticus	['GM']	1	100.0
+combined	Fusobacterium_nucleatum	Streptococcus_salivarius	['GM', 'LR']	2	100.0
+combined	Fusobacterium_nucleatum	VALSYN-PWY:_L-valine_biosynthesis	['GM', 'LR']	2	100.0
+combined	Lachnospiraceae_bacterium	Peptostreptococcus_stomatis	['LR']	1	100.0
+combined	PWY-7286:_7-(3-amino-3-carboxypropyl)-wyosine_biosynthesis	Parvimonas_micra	['GM']	1	100.0
+combined	Parvimonas_micra	Peptostreptococcus_stomatis	['GM']	1	100.0
+combined	Parvimonas_micra	Roseburia_hominis	['GM', 'LR']	2	100.0
+combined	Parvimonas_micra	Ruminococcus_torques	['GM']	1	100.0
+combined	Parvimonas_micra	Streptococcus_gallolyticus	['GM']	1	100.0
+combined	Parvimonas_micra	Streptococcus_salivarius	['LR']	1	100.0
+combined	Peptostreptococcus_anaerobius	Peptostreptococcus_stomatis	['GM']	1	100.0
+combined	Peptostreptococcus_stomatis	Roseburia_intestinalis	['LR']	1	100.0
+combined	Peptostreptococcus_stomatis	Streptococcus_infantis	['LR']	1	100.0
+combined	Peptostreptococcus_stomatis	Streptococcus_mitis	['LR']	1	100.0
+combined	Peptostreptococcus_stomatis	Streptococcus_sp_263_SSPC	['LR']	1	100.0
+combined	ARGSYNBSUB-PWY:_L-arginine_biosynthesis_II_(acetyl_cycle)	Fusobacterium_nucleatum	['LR']	1	92.85714285714286
+combined	Allisonella_histaminiformans	Dialister_pneumosintes	['GM', 'LR']	2	92.85714285714286
+combined	Allisonella_histaminiformans	Parvimonas_micra	['GM']	1	92.85714285714286
+combined	Anaerotignum_faecicola	Dialister_pneumosintes	['GM', 'LR']	2	92.85714285714286
+combined	Anaerotignum_faecicola	Fusobacterium_nucleatum	['GM', 'LR']	2	92.85714285714286
+combined	BRANCHED-CHAIN-AA-SYN-PWY:_superpathway_of_branched_chain_amino_acid_biosynthesis	Fusobacterium_nucleatum	['GM', 'LR']	2	92.85714285714286
+combined	Bilophila_wadsworthia	Peptostreptococcus_stomatis	['GM']	1	92.85714285714286
+combined	CALVIN-PWY:_Calvin-Benson-Bassham_cycle	Fusobacterium_nucleatum	['GM', 'LR']	2	92.85714285714286
+combined	COMPLETE-ARO-PWY:_superpathway_of_aromatic_amino_acid_biosynthesis	Fusobacterium_nucleatum	['LR']	1	92.85714285714286
+combined	Dialister_pneumosintes	Roseburia_intestinalis	['LR']	1	92.85714285714286
+combined	Eikenella_corrodens	Peptostreptococcus_stomatis	['GM']	1	92.85714285714286
+combined	FASYN-ELONG-PWY:_fatty_acid_elongation_--_saturated	Fusobacterium_nucleatum	['GM']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	GLYCOCAT-PWY:_glycogen_degradation_I	['GM']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	HISTSYN-PWY:_L-histidine_biosynthesis	['GM', 'LR']	2	92.85714285714286
+combined	Fusobacterium_nucleatum	HSERMETANA-PWY:_L-methionine_biosynthesis_III	['LR']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	ILEUSYN-PWY:_L-isoleucine_biosynthesis_I_(from_threonine)	['GM', 'LR']	2	92.85714285714286
+combined	Fusobacterium_nucleatum	LACTOSECAT-PWY:_lactose_and_galactose_degradation_I	['GM']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	Lachnospiraceae_bacterium	['LR']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	Lactobacillus_crispatus	['GM']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	Lactobacillus_vaginalis	['GM']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	P164-PWY:_purine_nucleobases_degradation_I_(anaerobic)	['GM']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	P441-PWY:_superpathway_of_N-acetylneuraminate_degradation	['GM']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	PEPTIDOGLYCANSYN-PWY:_peptidoglycan_biosynthesis_I_(meso-diaminopimelate_containing)	['GM', 'LR']	2	92.85714285714286
+combined	Fusobacterium_nucleatum	PWY-4041:_&gamma;-glutamyl_cycle	['GM', 'LR']	2	92.85714285714286
+combined	Fusobacterium_nucleatum	PWY-6163:_chorismate_biosynthesis_from_3-dehydroquinate	['LR']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	PWY-6317:_D-galactose_degradation_I_(Leloir_pathway)	['LR']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	PWY-6385:_peptidoglycan_biosynthesis_III_(mycobacteria)	['LR']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	PWY-6386:_UDP-N-acetylmuramoyl-pentapeptide_biosynthesis_II_(lysine-containing)	['LR']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	PWY-6628:_superpathway_of_L-phenylalanine_biosynthesis	['LR']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	PWY-6630:_superpathway_of_L-tyrosine_biosynthesis	['LR']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	PWY-7197:_pyrimidine_deoxyribonucleotide_phosphorylation	['GM', 'LR']	2	92.85714285714286
+combined	Fusobacterium_nucleatum	PWY-7198:_pyrimidine_deoxyribonucleotides_de_novo_biosynthesis_IV	['GM']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	PWY-7222:_guanosine_deoxyribonucleotides_de_novo_biosynthesis_II	['GM']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	PWY-7328:_superpathway_of_UDP-glucose-derived_O-antigen_building_blocks_biosynthesis	['GM', 'LR']	2	92.85714285714286
+combined	Fusobacterium_nucleatum	PWY-7357:_thiamine_phosphate_formation_from_pyrithiamine_and_oxythiamine_(yeast)	['GM', 'LR']	2	92.85714285714286
+combined	Fusobacterium_nucleatum	PWY-7791:_UMP_biosynthesis_III	['GM', 'LR']	2	92.85714285714286
+combined	Fusobacterium_nucleatum	PWY0-862:_(5Z)-dodecenoate_biosynthesis_I	['GM']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	PWY4LZ-257:_superpathway_of_fermentation_(Chlamydomonas_reinhardtii)	['GM']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	PWY66-399:_gluconeogenesis_III	['GM']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	PYRIDNUCSYN-PWY:_NAD_de_novo_biosynthesis_I_(from_aspartate)	['GM', 'LR']	2	92.85714285714286
+combined	Fusobacterium_nucleatum	Peptostreptococcus_SGB749	['GM']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	Porphyromonas_asaccharolytica	['GM']	1	92.85714285714286
+combined	Fusobacterium_nucleatum	THISYNARA-PWY:_superpathway_of_thiamine_diphosphate_biosynthesis_III_(eukaryotes)	['GM', 'LR']	2	92.85714285714286
+combined	Fusobacterium_nucleatum	UDPNAGSYN-PWY:_UDP-N-acetyl-D-glucosamine_biosynthesis_I	['GM', 'LR']	2	92.85714285714286
+combined	Lachnospiraceae_bacterium	Parvimonas_micra	['LR']	1	92.85714285714286
+combined	Mogibacterium_diversum	Peptostreptococcus_stomatis	['LR']	1	92.85714285714286
+combined	ORNDEG-PWY:_superpathway_of_ornithine_degradation	Peptostreptococcus_stomatis	['GM']	1	92.85714285714286
+combined	PWY-6167:_flavin_biosynthesis_II_(archaea)	Parvimonas_micra	['GM', 'LR']	2	92.85714285714286
+combined	Parvimonas_micra	Roseburia_intestinalis	['LR']	1	92.85714285714286
+combined	Parvimonas_micra	Streptococcus_sp_263_SSPC	['LR']	1	92.85714285714286
+combined	Parvimonas_micra	Streptococcus_sp_A12	['LR']	1	92.85714285714286
+combined	Peptostreptococcus_stomatis	Roseburia_hominis	['GM', 'LR']	2	92.85714285714286
+combined	Peptostreptococcus_stomatis	Ruminococcus_torques	['GM']	1	92.85714285714286
+combined	Peptostreptococcus_stomatis	Streptococcus_salivarius	['LR']	1	92.85714285714286
+combined	Peptostreptococcus_stomatis	Streptococcus_sp_A12	['LR']	1	92.85714285714286
+combined	1CMET2-PWY:_folate_transformations_III_(E._coli)	Fusobacterium_nucleatum	['GM', 'LR']	2	85.71428571428571
+combined	Blautia_faecis	Peptostreptococcus_stomatis	['LR']	1	85.71428571428571
+combined	COA-PWY-1:_superpathway_of_coenzyme_A_biosynthesis_III_(mammals)	Fusobacterium_nucleatum	['LR']	1	85.71428571428571
+combined	Clostridiaceae_bacterium	Fusobacterium_nucleatum	['LR']	1	85.71428571428571
+combined	Clostridiaceae_bacterium	Parvimonas_micra	['LR']	1	85.71428571428571
+combined	Clostridiaceae_bacterium	Peptostreptococcus_stomatis	['LR']	1	85.71428571428571
+combined	DTDPRHAMSYN-PWY:_dTDP-&beta;-L-rhamnose_biosynthesis	Fusobacterium_nucleatum	['GM', 'LR']	2	85.71428571428571
+combined	Dialister_pneumosintes	Lachnospiraceae_bacterium	['LR']	1	85.71428571428571
+combined	Dialister_pneumosintes	PWY0-162:_superpathway_of_pyrimidine_ribonucleotides_de_novo_biosynthesis	['GM']	1	85.71428571428571
+combined	Dialister_pneumosintes	Phascolarctobacterium_succinatutens	['GM', 'LR']	2	85.71428571428571
+combined	Dialister_pneumosintes	Ruminococcus_torques	['GM']	1	85.71428571428571
+combined	Eikenella_corrodens	Parvimonas_micra	['GM']	1	85.71428571428571
+combined	FERMENTATION-PWY:_mixed_acid_fermentation	Fusobacterium_nucleatum	['GM', 'LR']	2	85.71428571428571
+combined	Fusobacterium_nucleatum	GGB3637_SGB4930	['LR']	1	85.71428571428571
+combined	Fusobacterium_nucleatum	GLUCUROCAT-PWY:_superpathway_of_&beta;-D-glucuronosides_degradation	['GM', 'LR']	2	85.71428571428571
+combined	Fusobacterium_nucleatum	GLYCOGENSYNTH-PWY:_glycogen_biosynthesis_I_(from_ADP-D-Glucose)	['LR']	1	85.71428571428571
+combined	Fusobacterium_nucleatum	HEMESYN2-PWY:_heme_b_biosynthesis_II_(oxygen-independent)	['GM']	1	85.71428571428571
+combined	Fusobacterium_nucleatum	OANTIGEN-PWY:_O-antigen_building_blocks_biosynthesis_(E._coli)	['GM', 'LR']	2	85.71428571428571
+combined	Fusobacterium_nucleatum	P461-PWY:_hexitol_fermentation_to_lactate,_formate,_ethanol_and_acetate	['GM']	1	85.71428571428571
+combined	Fusobacterium_nucleatum	POLYISOPRENSYN-PWY:_polyisoprenoid_biosynthesis_(E._coli)	['GM']	1	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-3841:_folate_transformations_II_(plants)	['GM', 'LR']	2	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-4984:_urea_cycle	['GM']	1	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-5097:_L-lysine_biosynthesis_VI	['LR']	1	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-5103:_L-isoleucine_biosynthesis_III	['GM', 'LR']	2	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-5654:_2-amino-3-carboxymuconate_semialdehyde_degradation_to_2-hydroxypentadienoate	['LR']	1	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-5973:_cis-vaccenate_biosynthesis	['LR']	1	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-6125:_superpathway_of_guanosine_nucleotides_de_novo_biosynthesis_II	['GM', 'LR']	2	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-6151:_S-adenosyl-L-methionine_salvage_I	['GM', 'LR']	2	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-6282:_palmitoleate_biosynthesis_I_(from_(5Z)-dodec-5-enoate)	['GM']	1	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-6897:_thiamine_diphosphate_salvage_II	['GM', 'LR']	2	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-6902:_chitin_degradation_II_(Vibrio)	['GM']	1	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-7208:_superpathway_of_pyrimidine_nucleobases_salvage	['GM', 'LR']	2	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-7234:_inosine-5'-phosphate_biosynthesis_III	['GM', 'LR']	2	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-7282:_4-amino-2-methyl-5-diphosphomethylpyrimidine_biosynthesis_II	['GM']	1	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-7323:_superpathway_of_GDP-mannose-derived_O-antigen_building_blocks_biosynthesis	['GM', 'LR']	2	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-7560:_methylerythritol_phosphate_pathway_II	['GM', 'LR']	2	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-7664:_oleate_biosynthesis_IV_(anaerobic)	['GM']	1	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-7790:_UMP_biosynthesis_II	['GM', 'LR']	2	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-7851:_coenzyme_A_biosynthesis_II_(eukaryotic)	['GM', 'LR']	2	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-8187:_L-arginine_degradation_XIII_(reductive_Stickland_reaction)	['GM']	1	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY-I9:_L-cysteine_biosynthesis_VI_(from_L-methionine)	['GM', 'LR']	2	85.71428571428571
+combined	Fusobacterium_nucleatum	PWY0-1479:_tRNA_processing	['GM']	1	85.71428571428571
+combined	Fusobacterium_nucleatum	PYRIDOXSYN-PWY:_pyridoxal_5'-phosphate_biosynthesis_I	['GM']	1	85.71428571428571
+combined	Fusobacterium_nucleatum	THRESYN-PWY:_superpathway_of_L-threonine_biosynthesis	['GM', 'LR']	2	85.71428571428571
+combined	Mogibacterium_diversum	Parvimonas_micra	['LR']	1	85.71428571428571
+combined	PWY-5130:_2-oxobutanoate_degradation_I	Peptostreptococcus_stomatis	['GM']	1	85.71428571428571
+combined	PWY-6350:_archaetidylinositol_biosynthesis	Parvimonas_micra	['GM']	1	85.71428571428571
+combined	Peptostreptococcus_stomatis	Phascolarctobacterium_succinatutens	['GM', 'LR']	2	85.71428571428571
+combined	Peptostreptococcus_stomatis	Streptococcus_gallolyticus	['GM']	1	85.71428571428571
+combined	ANAGLYCOLYSIS-PWY:_glycolysis_III_(from_glucose)	Fusobacterium_nucleatum	['LR']	1	78.57142857142857
+combined	ARO-PWY:_chorismate_biosynthesis_I	Fusobacterium_nucleatum	['LR']	1	78.57142857142857
+combined	Allisonella_histaminiformans	Peptostreptococcus_stomatis	['GM', 'LR']	2	78.57142857142857
+combined	Anaerotignum_faecicola	Parvimonas_micra	['GM', 'LR']	2	78.57142857142857
+combined	Blautia_faecis	Parvimonas_micra	['LR']	1	78.57142857142857
+combined	Blautia_wexlerae	Fusobacterium_nucleatum	['LR']	1	78.57142857142857
+combined	CITRULBIO-PWY:_L-citrulline_biosynthesis	Fusobacterium_nucleatum	['GM', 'LR']	2	78.57142857142857
+combined	Candidatus_Saccharibacteria_unclassified_SGB19850	Peptostreptococcus_stomatis	['LR']	1	78.57142857142857
+combined	Dialister_pneumosintes	ORNDEG-PWY:_superpathway_of_ornithine_degradation	['GM']	1	78.57142857142857
+combined	Dialister_pneumosintes	Peptostreptococcus_anaerobius	['GM']	1	78.57142857142857
+combined	Dialister_pneumosintes	Streptococcus_salivarius	['LR']	1	78.57142857142857
+combined	Fusobacterium_naviforme	Fusobacterium_nucleatum	['GM']	1	78.57142857142857
+combined	Fusobacterium_nucleatum	HISDEG-PWY:_L-histidine_degradation_I	['GM']	1	78.57142857142857
+combined	Fusobacterium_nucleatum	P161-PWY:_acetylene_degradation_(anaerobic)	['GM']	1	78.57142857142857
+combined	Fusobacterium_nucleatum	PANTO-PWY:_phosphopantothenate_biosynthesis_I	['GM', 'LR']	2	78.57142857142857
+combined	Fusobacterium_nucleatum	PANTOSYN-PWY:_superpathway_of_coenzyme_A_biosynthesis_I_(bacteria)	['GM', 'LR']	2	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY-5667:_CDP-diacylglycerol_biosynthesis_I	['LR']	1	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY-5676:_acetyl-CoA_fermentation_to_butanoate_II	['GM']	1	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY-5686:_UMP_biosynthesis_I	['GM', 'LR']	2	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY-5989:_stearate_biosynthesis_II_(bacteria_and_plants)	['GM']	1	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY-6121:_5-aminoimidazole_ribonucleotide_biosynthesis_I	['GM', 'LR']	2	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY-6123:_inosine-5'-phosphate_biosynthesis_I	['GM', 'LR']	2	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY-6124:_inosine-5'-phosphate_biosynthesis_II	['GM', 'LR']	2	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY-621:_sucrose_degradation_III_(sucrose_invertase)	['LR']	1	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY-6270:_isoprene_biosynthesis_I	['GM']	1	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY-6519:_8-amino-7-oxononanoate_biosynthesis_I	['GM']	1	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY-6527:_stachyose_degradation	['LR']	1	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY-6608:_guanosine_nucleotides_degradation_III	['GM']	1	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY-6700:_queuosine_biosynthesis_I_(de_novo)	['LR']	1	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY-7221:_guanosine_ribonucleotides_de_novo_biosynthesis	['GM', 'LR']	2	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY-7356:_thiamine_diphosphate_salvage_IV_(yeast)	['LR']	1	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY-7392:_taxadiene_biosynthesis_(engineered)	['GM']	1	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY-7663:_gondoate_biosynthesis_(anaerobic)	['GM', 'LR']	2	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY-8178:_pentose_phosphate_pathway_(non-oxidative_branch)_II	['GM', 'LR']	2	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY0-1241:_ADP-L-glycero-&beta;-D-manno-heptose_biosynthesis	['GM', 'LR']	2	78.57142857142857
+combined	Fusobacterium_nucleatum	PWY0-1319:_CDP-diacylglycerol_biosynthesis_II	['GM', 'LR']	2	78.57142857142857
+combined	Fusobacterium_nucleatum	Phascolarctobacterium_succinatutens	['GM', 'LR']	2	78.57142857142857
+combined	Fusobacterium_nucleatum	RHAMCAT-PWY:_L-rhamnose_degradation_I	['GM', 'LR']	2	78.57142857142857
+combined	Fusobacterium_nucleatum	Ruminococcus_torques	['GM']	1	78.57142857142857
+combined	Fusobacterium_nucleatum	Streptococcus_sp_A12	['LR']	1	78.57142857142857
+combined	Fusobacterium_nucleatum	UDPNACETYLGALSYN-PWY:_UDP-N-acetyl-D-glucosamine_biosynthesis_II	['LR']	1	78.57142857142857
+combined	GGB2977_SGB3959	Parvimonas_micra	['GM']	1	78.57142857142857
+combined	PWY-6167:_flavin_biosynthesis_II_(archaea)	Peptostreptococcus_stomatis	['GM']	1	78.57142857142857
+combined	PWY-6350:_archaetidylinositol_biosynthesis	Peptostreptococcus_stomatis	['GM']	1	78.57142857142857
+combined	PWY-7357:_thiamine_phosphate_formation_from_pyrithiamine_and_oxythiamine_(yeast)	Peptostreptococcus_stomatis	['LR']	1	78.57142857142857
+combined	Parvimonas_micra	Phascolarctobacterium_succinatutens	['GM', 'LR']	2	78.57142857142857
+combined	Parvimonas_micra	Streptococcus_infantis	['LR']	1	78.57142857142857
+combined	Parvimonas_micra	Streptococcus_mitis	['LR']	1	78.57142857142857
+combined	Peptostreptococcus_SGB749	Peptostreptococcus_stomatis	['GM']	1	78.57142857142857
+combined	ARG+POLYAMINE-SYN:_superpathway_of_arginine_and_polyamine_biosynthesis	Fusobacterium_nucleatum	['GM']	1	71.42857142857143
+combined	ARGSYN-PWY:_L-arginine_biosynthesis_I_(via_L-ornithine)	Fusobacterium_nucleatum	['LR']	1	71.42857142857143
+combined	Allisonella_histaminiformans	Fusobacterium_nucleatum	['GM', 'LR']	2	71.42857142857143
+combined	COBALSYN-PWY:_superpathway_of_adenosylcobalamin_salvage_from_cobinamide_I	Fusobacterium_nucleatum	['GM', 'LR']	2	71.42857142857143
+combined	Candidatus_Saccharibacteria_unclassified_SGB19850	Dialister_pneumosintes	['LR']	1	71.42857142857143
+combined	Dialister_pneumosintes	Morganella_morganii	['GM']	1	71.42857142857143
+combined	Dialister_pneumosintes	Streptococcus_gallolyticus	['GM']	1	71.42857142857143
+combined	Dialister_pneumosintes	Streptococcus_mitis	['LR']	1	71.42857142857143
+combined	Fusobacterium_nucleatum	GALACTUROCAT-PWY:_D-galacturonate_degradation_I	['GM', 'LR']	2	71.42857142857143
+combined	Fusobacterium_nucleatum	Haemophilus_parainfluenzae	['LR']	1	71.42857142857143
+combined	Fusobacterium_nucleatum	Megasphaera_micronuciformis	['LR']	1	71.42857142857143
+combined	Fusobacterium_nucleatum	NONOXIPENT-PWY:_pentose_phosphate_pathway_(non-oxidative_branch)_I	['GM', 'LR']	2	71.42857142857143
+combined	Fusobacterium_nucleatum	P41-PWY:_pyruvate_fermentation_to_acetate_and_(S)-lactate_I	['LR']	1	71.42857142857143
+combined	Fusobacterium_nucleatum	PENTOSE-P-PWY:_pentose_phosphate_pathway	['GM']	1	71.42857142857143
+combined	Fusobacterium_nucleatum	PWY-2942:_L-lysine_biosynthesis_III	['GM', 'LR']	2	71.42857142857143
+combined	Fusobacterium_nucleatum	PWY-5100:_pyruvate_fermentation_to_acetate_and_lactate_II	['LR']	1	71.42857142857143
+combined	Fusobacterium_nucleatum	PWY-5695:_inosine_5'-phosphate_degradation	['LR']	1	71.42857142857143
+combined	Fusobacterium_nucleatum	PWY-6167:_flavin_biosynthesis_II_(archaea)	['LR']	1	71.42857142857143
+combined	Fusobacterium_nucleatum	PWY-6353:_purine_nucleotides_degradation_II_(aerobic)	['GM']	1	71.42857142857143
+combined	Fusobacterium_nucleatum	PWY-6507:_4-deoxy-L-threo-hex-4-enopyranuronate_degradation	['GM', 'LR']	2	71.42857142857143
+combined	Fusobacterium_nucleatum	PWY-6703:_preQ0_biosynthesis	['LR']	1	71.42857142857143
+combined	Fusobacterium_nucleatum	PWY-6859:_all-trans-farnesol_biosynthesis	['GM']	1	71.42857142857143
+combined	Fusobacterium_nucleatum	PWY-7111:_pyruvate_fermentation_to_isobutanol_(engineered)	['GM', 'LR']	2	71.42857142857143
+combined	Fusobacterium_nucleatum	PWY-7383:_anaerobic_energy_metabolism_(invertebrates,_cytosol)	['GM']	1	71.42857142857143
+combined	Fusobacterium_nucleatum	PWY-7977:_L-methionine_biosynthesis_IV	['GM', 'LR']	2	71.42857142857143
+combined	Fusobacterium_nucleatum	PWY-8131:_5'-deoxyadenosine_degradation_II	['GM']	1	71.42857142857143
+combined	Fusobacterium_nucleatum	PWY0-1296:_purine_ribonucleosides_degradation	['LR']	1	71.42857142857143
+combined	Fusobacterium_nucleatum	PWY66-429:_fatty_acid_biosynthesis_initiation_(mitochondria)	['GM', 'LR']	2	71.42857142857143
+combined	Fusobacterium_nucleatum	RIBOSYN2-PWY:_flavin_biosynthesis_I_(bacteria_and_plants)	['GM', 'LR']	2	71.42857142857143
+combined	Fusobacterium_nucleatum	Roseburia_intestinalis	['LR']	1	71.42857142857143
+combined	Fusobacterium_nucleatum	TRNA-CHARGING-PWY:_tRNA_charging	['GM', 'LR']	2	71.42857142857143
+combined	Fusobacterium_nucleatum	Veillonella_atypica	['LR']	1	71.42857142857143
+combined	HEME-BIOSYNTHESIS-II:_heme_b_biosynthesis_I_(aerobic)	Peptostreptococcus_stomatis	['GM']	1	71.42857142857143
+combined	Haemophilus_parainfluenzae	Parvimonas_micra	['LR']	1	71.42857142857143
+combined	Morganella_morganii	Parvimonas_micra	['GM']	1	71.42857142857143
+combined	Morganella_morganii	Peptostreptococcus_stomatis	['GM']	1	71.42857142857143
+combined	PWY-5505:_L-glutamate_and_L-glutamine_biosynthesis	Peptostreptococcus_stomatis	['LR']	1	71.42857142857143
+combined	PWY-6292:_superpathway_of_L-cysteine_biosynthesis_(mammalian)	Peptostreptococcus_stomatis	['LR']	1	71.42857142857143
+combined	PWY-7286:_7-(3-amino-3-carboxypropyl)-wyosine_biosynthesis	Peptostreptococcus_stomatis	['GM']	1	71.42857142857143
+combined	Peptostreptococcus_stomatis	Streptococcus_sanguinis	['LR']	1	71.42857142857143
+combined	ANAEROFRUCAT-PWY:_homolactic_fermentation	Fusobacterium_nucleatum	['LR']	1	64.28571428571429
+combined	ARGININE-SYN4-PWY:_L-ornithine_biosynthesis_II	Fusobacterium_nucleatum	['GM']	1	64.28571428571429
+combined	ASPASN-PWY:_superpathway_of_L-aspartate_and_L-asparagine_biosynthesis	Fusobacterium_nucleatum	['GM', 'LR']	2	64.28571428571429
+combined	Bacteroides_uniformis	Fusobacterium_nucleatum	['GM']	1	64.28571428571429
+combined	Blautia_faecis	Fusobacterium_nucleatum	['LR']	1	64.28571428571429
+combined	COLANSYN-PWY:_colanic_acid_building_blocks_biosynthesis	Fusobacterium_nucleatum	['GM', 'LR']	2	64.28571428571429
+combined	Candidatus_Nanosynsacchari_sp_TM7_ANC_38_39_G1_1	Peptostreptococcus_stomatis	['LR']	1	64.28571428571429
+combined	Clostridiaceae_bacterium	Dialister_pneumosintes	['LR']	1	64.28571428571429
+combined	Collinsella_aerofaciens	Parvimonas_micra	['GM']	1	64.28571428571429
+combined	Dialister_pneumosintes	PWY-7286:_7-(3-amino-3-carboxypropyl)-wyosine_biosynthesis	['GM']	1	64.28571428571429
+combined	Enterobacter_hormaechei	Fusobacterium_nucleatum	['LR']	1	64.28571428571429
+combined	Enterococcus_gallinarum	Fusobacterium_nucleatum	['GM']	1	64.28571428571429
+combined	Fusobacterium_nucleatum	GLCMANNANAUT-PWY:_superpathway_of_N-acetylglucosamine,_N-acetylmannosamine_and_N-acetylneuraminate_degradation	['GM', 'LR']	2	64.28571428571429
+combined	Fusobacterium_nucleatum	GLYCOLYSIS:_glycolysis_I_(from_glucose_6-phosphate)	['GM']	1	64.28571428571429
+combined	Fusobacterium_nucleatum	Oribacterium_parvum	['LR']	1	64.28571428571429
+combined	Fusobacterium_nucleatum	PPGPPMET-PWY:_ppGpp_metabolism	['GM']	1	64.28571428571429
+combined	Fusobacterium_nucleatum	PWY-3001:_superpathway_of_L-isoleucine_biosynthesis_I	['GM']	1	64.28571428571429
+combined	Fusobacterium_nucleatum	PWY-5030:_L-histidine_degradation_III	['GM']	1	64.28571428571429
+combined	Fusobacterium_nucleatum	PWY-5130:_2-oxobutanoate_degradation_I	['GM']	1	64.28571428571429
+combined	Fusobacterium_nucleatum	PWY-5154:_L-arginine_biosynthesis_III_(via_N-acetyl-L-citrulline)	['LR']	1	64.28571428571429
+combined	Fusobacterium_nucleatum	PWY-5384:_sucrose_degradation_IV_(sucrose_phosphorylase)	['LR']	1	64.28571428571429
+combined	Fusobacterium_nucleatum	PWY-5484:_glycolysis_II_(from_fructose_6-phosphate)	['GM', 'LR']	2	64.28571428571429
+combined	Fusobacterium_nucleatum	PWY-5659:_GDP-mannose_biosynthesis	['GM', 'LR']	2	64.28571428571429
+combined	Fusobacterium_nucleatum	PWY-6126:_superpathway_of_adenosine_nucleotides_de_novo_biosynthesis_II	['GM', 'LR']	2	64.28571428571429
+combined	Fusobacterium_nucleatum	PWY-6823:_molybdopterin_biosynthesis	['LR']	1	64.28571428571429
+combined	Fusobacterium_nucleatum	PWY-7228:_superpathway_of_guanosine_nucleotides_de_novo_biosynthesis_I	['GM', 'LR']	2	64.28571428571429
+combined	Fusobacterium_nucleatum	PWY-7229:_superpathway_of_adenosine_nucleotides_de_novo_biosynthesis_I	['GM']	1	64.28571428571429
+combined	Fusobacterium_nucleatum	PWY-724:_superpathway_of_L-lysine,_L-threonine_and_L-methionine_biosynthesis_II	['LR']	1	64.28571428571429
+combined	Fusobacterium_nucleatum	PWY-7761:_NAD_salvage_pathway_II_(PNC_IV_cycle)	['GM', 'LR']	2	64.28571428571429
+combined	Fusobacterium_nucleatum	Streptococcus_mitis	['LR']	1	64.28571428571429
+combined	Fusobacterium_nucleatum	Veillonella_rogosae	['LR']	1	64.28571428571429
+combined	GLYCOGENSYNTH-PWY:_glycogen_biosynthesis_I_(from_ADP-D-Glucose)	Peptostreptococcus_stomatis	['LR']	1	64.28571428571429
+combined	PWY-5198:_factor_420_biosynthesis_II_(mycobacteria)	Parvimonas_micra	['GM']	1	64.28571428571429
+combined	PWY-7357:_thiamine_phosphate_formation_from_pyrithiamine_and_oxythiamine_(yeast)	Parvimonas_micra	['LR']	1	64.28571428571429
+combined	PWY-8113:_3PG-factor_420_biosynthesis	Parvimonas_micra	['GM']	1	64.28571428571429
+combined	Parvimonas_micra	Peptostreptococcus_anaerobius	['GM']	1	64.28571428571429
+combined	Parvimonas_micra	Rothia_mucilaginosa	['LR']	1	64.28571428571429
+combined	Parvimonas_micra	Streptococcus_sanguinis	['LR']	1	64.28571428571429
+combined	Dialister_pneumosintes	Eikenella_corrodens	['GM']	1	57.14285714285714
+combined	Dialister_pneumosintes	Gemella_morbillorum	['GM']	1	57.14285714285714
+combined	Dialister_pneumosintes	Lancefieldella_parvula	['GM']	1	57.14285714285714
+combined	Dialister_pneumosintes	PWY-2941:_L-lysine_biosynthesis_II	['GM']	1	57.14285714285714
+combined	Dialister_pneumosintes	PWY-5505:_L-glutamate_and_L-glutamine_biosynthesis	['LR']	1	57.14285714285714
+combined	Dialister_pneumosintes	PWY-6167:_flavin_biosynthesis_II_(archaea)	['GM']	1	57.14285714285714
+combined	Dialister_pneumosintes	PWY-7198:_pyrimidine_deoxyribonucleotides_de_novo_biosynthesis_IV	['GM']	1	57.14285714285714
+combined	Dialister_pneumosintes	Streptococcus_sp_A12	['LR']	1	57.14285714285714
+combined	Fusobacterium_nucleatum	HEME-BIOSYNTHESIS-II:_heme_b_biosynthesis_I_(aerobic)	['GM']	1	57.14285714285714
+combined	Fusobacterium_nucleatum	POLYAMSYN-PWY:_superpathway_of_polyamine_biosynthesis_I	['GM']	1	57.14285714285714
+combined	Fusobacterium_nucleatum	PWY-5188:_tetrapyrrole_biosynthesis_I_(from_glutamate)	['GM']	1	57.14285714285714
+combined	Fusobacterium_nucleatum	PWY-6549:_L-glutamine_biosynthesis_III	['GM', 'LR']	2	57.14285714285714
+combined	Fusobacterium_nucleatum	PWY-6588:_pyruvate_fermentation_to_acetone	['GM']	1	57.14285714285714
+combined	Fusobacterium_nucleatum	PWY-7199:_pyrimidine_deoxyribonucleosides_salvage	['GM', 'LR']	2	57.14285714285714
+combined	Fusobacterium_nucleatum	PWY-7345:_superpathway_of_anaerobic_sucrose_degradation	['GM']	1	57.14285714285714
+combined	Fusobacterium_nucleatum	PWY-841:_superpathway_of_purine_nucleotides_de_novo_biosynthesis_I	['GM', 'LR']	2	57.14285714285714
+combined	Fusobacterium_nucleatum	PWY0-1297:_superpathway_of_purine_deoxyribonucleosides_degradation	['GM']	1	57.14285714285714
+combined	Fusobacterium_nucleatum	PWY4FS-8:_phosphatidylglycerol_biosynthesis_II_(non-plastidic)	['LR']	1	57.14285714285714
+combined	Fusobacterium_nucleatum	SER-GLYSYN-PWY:_superpathway_of_L-serine_and_glycine_biosynthesis_I	['GM']	1	57.14285714285714
+combined	Fusobacterium_nucleatum	Veillonella_parvula	['LR']	1	57.14285714285714
+combined	Gemella_morbillorum	Parvimonas_micra	['GM']	1	57.14285714285714
+combined	Haemophilus_parainfluenzae	Peptostreptococcus_stomatis	['LR']	1	57.14285714285714
+combined	Lactobacillus_crispatus	Parvimonas_micra	['GM']	1	57.14285714285714
+combined	Lancefieldella_parvula	Peptostreptococcus_stomatis	['LR']	1	57.14285714285714
+combined	Megasphaera_micronuciformis	Parvimonas_micra	['GM']	1	57.14285714285714
+combined	PWY-2941:_L-lysine_biosynthesis_II	Peptostreptococcus_stomatis	['GM']	1	57.14285714285714
+combined	PWY-5505:_L-glutamate_and_L-glutamine_biosynthesis	Parvimonas_micra	['LR']	1	57.14285714285714
+combined	PWY-6151:_S-adenosyl-L-methionine_salvage_I	Parvimonas_micra	['LR']	1	57.14285714285714
+combined	PWY-6282:_palmitoleate_biosynthesis_I_(from_(5Z)-dodec-5-enoate)	Peptostreptococcus_stomatis	['GM']	1	57.14285714285714
+combined	PWY-6317:_D-galactose_degradation_I_(Leloir_pathway)	Parvimonas_micra	['LR']	1	57.14285714285714
+combined	PWY-6349:_CDP-archaeol_biosynthesis	Parvimonas_micra	['GM']	1	57.14285714285714
+combined	PWY1ZNC-1:_assimilatory_sulfate_reduction_IV	Parvimonas_micra	['LR']	1	57.14285714285714
+combined	Peptostreptococcus_stomatis	Veillonella_atypica	['LR']	1	57.14285714285714
+combined	Blautia_faecis	Dialister_pneumosintes	['LR']	1	50.0
+combined	Clostridium_sp_AF34_10BH	Parvimonas_micra	['LR']	1	50.0
+combined	Dialister_pneumosintes	PWY-6350:_archaetidylinositol_biosynthesis	['GM']	1	50.0
+combined	Dialister_pneumosintes	PWY0-862:_(5Z)-dodecenoate_biosynthesis_I	['GM']	1	50.0
+combined	FUCCAT-PWY:_fucose_degradation	Fusobacterium_nucleatum	['GM']	1	50.0
+combined	Fusobacterium_nucleatum	GLUCONEO-PWY:_gluconeogenesis_I	['LR']	1	50.0
+combined	Fusobacterium_nucleatum	GOLPDLCAT-PWY:_superpathway_of_glycerol_degradation_to_1,3-propanediol	['GM', 'LR']	2	50.0
+combined	Fusobacterium_nucleatum	ORNDEG-PWY:_superpathway_of_ornithine_degradation	['GM']	1	50.0
+combined	Fusobacterium_nucleatum	P42-PWY:_incomplete_reductive_TCA_cycle	['GM']	1	50.0
+combined	Fusobacterium_nucleatum	PWY-1269:_CMP-3-deoxy-D-manno-octulosonate_biosynthesis	['GM']	1	50.0
+combined	Fusobacterium_nucleatum	PWY-6147:_6-hydroxymethyl-dihydropterin_diphosphate_biosynthesis_I	['GM', 'LR']	2	50.0
+combined	Fusobacterium_nucleatum	PWY-6595:_superpathway_of_guanosine_nucleotides_degradation_(plants)	['GM']	1	50.0
+combined	Fusobacterium_nucleatum	PWY-6612:_superpathway_of_tetrahydrofolate_biosynthesis	['GM']	1	50.0
+combined	Fusobacterium_nucleatum	PWY-6901:_superpathway_of_glucose_and_xylose_degradation	['GM']	1	50.0
+combined	Fusobacterium_nucleatum	PWY-7242:_D-fructuronate_degradation	['GM']	1	50.0
+combined	Fusobacterium_nucleatum	PWY-8004:_Entner-Doudoroff_pathway_I	['GM']	1	50.0
+combined	Fusobacterium_nucleatum	PWY0-1261:_anhydromuropeptides_recycling_I	['GM']	1	50.0
+combined	Fusobacterium_nucleatum	PWY0-1298:_superpathway_of_pyrimidine_deoxyribonucleosides_degradation	['GM']	1	50.0
+combined	Fusobacterium_nucleatum	PWY4FS-7:_phosphatidylglycerol_biosynthesis_I_(plastidic)	['LR']	1	50.0
+combined	Fusobacterium_nucleatum	Streptococcus_sp_263_SSPC	['LR']	1	50.0
+combined	Fusobacterium_nucleatum	Veillonella_dispar	['LR']	1	50.0
+combined	ORNDEG-PWY:_superpathway_of_ornithine_degradation	Parvimonas_micra	['GM']	1	50.0
+combined	PWY-1042:_glycolysis_IV	Parvimonas_micra	['LR']	1	50.0
+combined	PWY-2941:_L-lysine_biosynthesis_II	Parvimonas_micra	['GM']	1	50.0
+combined	PWY-6151:_S-adenosyl-L-methionine_salvage_I	Peptostreptococcus_stomatis	['LR']	1	50.0
+combined	PWY-7039:_phosphatidate_metabolism,_as_a_signaling_molecule	Parvimonas_micra	['GM']	1	50.0
+combined	PWY-7237:_myo-,_chiro-_and_scyllo-inositol_degradation	Peptostreptococcus_stomatis	['LR']	1	50.0
+combined	PWY-7238:_sucrose_biosynthesis_II	Parvimonas_micra	['LR']	1	50.0
+combined	PWY-7664:_oleate_biosynthesis_IV_(anaerobic)	Parvimonas_micra	['GM']	1	50.0
+combined	PWY-7953:_UDP-N-acetylmuramoyl-pentapeptide_biosynthesis_III_(meso-diaminopimelate_containing)	Peptostreptococcus_stomatis	['LR']	1	50.0
+combined	PWY-8112:_factor_420_biosynthesis_I_(archaea)	Parvimonas_micra	['GM']	1	50.0
+combined	Peptostreptococcus_stomatis	VALSYN-PWY:_L-valine_biosynthesis	['LR']	1	50.0
+functions	HEME-BIOSYNTHESIS-II-1:_heme_b_biosynthesis_V_(aerobic)	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	['GM']	1	100.0
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	P161-PWY:_acetylene_degradation_(anaerobic)	['GM']	1	100.0
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	['GM']	1	100.0
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-2941:_L-lysine_biosynthesis_II	['GM']	1	100.0
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-6167:_flavin_biosynthesis_II_(archaea)	['GM']	1	100.0
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-6350:_archaetidylinositol_biosynthesis	['GM']	1	100.0
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-6588:_pyruvate_fermentation_to_acetone	['GM']	1	100.0
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-7198:_pyrimidine_deoxyribonucleotides_de_novo_biosynthesis_IV	['GM']	1	100.0
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY4LZ-257:_superpathway_of_fermentation_(Chlamydomonas_reinhardtii)	['GM']	1	100.0
+functions	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	PWY0-166:_superpathway_of_pyrimidine_deoxyribonucleotides_de_novo_biosynthesis_(E._coli)	['GM']	1	100.0
+functions	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	REDCITCYC:_TCA_cycle_VI_(Helicobacter)	['GM']	1	100.0
+functions	PWY-2941:_L-lysine_biosynthesis_II	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	['GM']	1	100.0
+functions	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	PWY-7198:_pyrimidine_deoxyribonucleotides_de_novo_biosynthesis_IV	['GM']	1	100.0
+functions	PWY-6588:_pyruvate_fermentation_to_acetone	PWY-8190:_L-glutamate_degradation_XI_(reductive_Stickland_reaction)	['GM', 'LR']	2	100.0
+functions	FOLSYN-PWY:_superpathway_of_tetrahydrofolate_biosynthesis_and_salvage	ORNDEG-PWY:_superpathway_of_ornithine_degradation	['GM']	1	92.85714285714286
+functions	LACTOSECAT-PWY:_lactose_and_galactose_degradation_I	ORNDEG-PWY:_superpathway_of_ornithine_degradation	['GM']	1	92.85714285714286
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	P441-PWY:_superpathway_of_N-acetylneuraminate_degradation	['GM']	1	92.85714285714286
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-6349:_CDP-archaeol_biosynthesis	['GM']	1	92.85714285714286
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-7242:_D-fructuronate_degradation	['LR']	1	92.85714285714286
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY0-162:_superpathway_of_pyrimidine_ribonucleotides_de_novo_biosynthesis	['GM']	1	92.85714285714286
+functions	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	PWY-8190:_L-glutamate_degradation_XI_(reductive_Stickland_reaction)	['GM']	1	92.85714285714286
+functions	PWY-2941:_L-lysine_biosynthesis_II	PWY0-42:_2-methylcitrate_cycle_I	['GM']	1	92.85714285714286
+functions	PWY-5189:_tetrapyrrole_biosynthesis_II_(from_glycine)	PWY-6588:_pyruvate_fermentation_to_acetone	['GM']	1	92.85714285714286
+functions	PWY-8190:_L-glutamate_degradation_XI_(reductive_Stickland_reaction)	VALSYN-PWY:_L-valine_biosynthesis	['GM', 'LR']	2	92.85714285714286
+functions	GLUCUROCAT-PWY:_superpathway_of_&beta;-D-glucuronosides_degradation	ORNDEG-PWY:_superpathway_of_ornithine_degradation	['LR']	1	85.71428571428571
+functions	KETOGLUCONMET-PWY:_ketogluconate_metabolism	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	['GM']	1	85.71428571428571
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	POLYAMINSYN3-PWY:_superpathway_of_polyamine_biosynthesis_II	['LR']	1	85.71428571428571
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-6270:_isoprene_biosynthesis_I	['GM']	1	85.71428571428571
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-6507:_4-deoxy-L-threo-hex-4-enopyranuronate_degradation	['LR']	1	85.71428571428571
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY0-1297:_superpathway_of_purine_deoxyribonucleosides_degradation	['GM']	1	85.71428571428571
+functions	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	PWY-5723:_Rubisco_shunt	['GM', 'LR']	2	85.71428571428571
+functions	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	VALSYN-PWY:_L-valine_biosynthesis	['GM', 'LR']	2	85.71428571428571
+functions	PWY-2941:_L-lysine_biosynthesis_II	PWY-5189:_tetrapyrrole_biosynthesis_II_(from_glycine)	['GM']	1	85.71428571428571
+functions	PWY-2941:_L-lysine_biosynthesis_II	REDCITCYC:_TCA_cycle_VI_(Helicobacter)	['GM', 'LR']	2	85.71428571428571
+functions	PWY-5189:_tetrapyrrole_biosynthesis_II_(from_glycine)	PWY-7198:_pyrimidine_deoxyribonucleotides_de_novo_biosynthesis_IV	['GM']	1	85.71428571428571
+functions	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	PWY-6588:_pyruvate_fermentation_to_acetone	['GM']	1	85.71428571428571
+functions	PWY-6588:_pyruvate_fermentation_to_acetone	VALSYN-PWY:_L-valine_biosynthesis	['GM', 'LR']	2	85.71428571428571
+functions	GALACTUROCAT-PWY:_D-galacturonate_degradation_I	ORNDEG-PWY:_superpathway_of_ornithine_degradation	['LR']	1	78.57142857142857
+functions	GLUCUROCAT-PWY:_superpathway_of_&beta;-D-glucuronosides_degradation	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	['LR']	1	78.57142857142857
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PPGPPMET-PWY:_ppGpp_metabolism	['GM', 'LR']	2	78.57142857142857
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-7237:_myo-,_chiro-_and_scyllo-inositol_degradation	['LR']	1	78.57142857142857
+functions	P161-PWY:_acetylene_degradation_(anaerobic)	PWY-6588:_pyruvate_fermentation_to_acetone	['GM']	1	78.57142857142857
+functions	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	P441-PWY:_superpathway_of_N-acetylneuraminate_degradation	['GM']	1	78.57142857142857
+functions	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	PWY-5855:_ubiquinol-7_biosynthesis_(early_decarboxylation)	['GM']	1	78.57142857142857
+functions	P441-PWY:_superpathway_of_N-acetylneuraminate_degradation	PWY-6167:_flavin_biosynthesis_II_(archaea)	['GM']	1	78.57142857142857
+functions	P441-PWY:_superpathway_of_N-acetylneuraminate_degradation	PWY-7198:_pyrimidine_deoxyribonucleotides_de_novo_biosynthesis_IV	['GM', 'LR']	2	78.57142857142857
+functions	P441-PWY:_superpathway_of_N-acetylneuraminate_degradation	VALSYN-PWY:_L-valine_biosynthesis	['LR']	1	78.57142857142857
+functions	PWY-241:_C4_photosynthetic_carbon_assimilation_cycle,_NADP-ME_type	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	['GM']	1	78.57142857142857
+functions	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	PWY-6167:_flavin_biosynthesis_II_(archaea)	['GM']	1	78.57142857142857
+functions	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	PWY-622:_starch_biosynthesis	['GM']	1	78.57142857142857
+functions	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	PWY-7242:_D-fructuronate_degradation	['LR']	1	78.57142857142857
+functions	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	UDPNAGSYN-PWY:_UDP-N-acetyl-D-glucosamine_biosynthesis_I	['GM']	1	78.57142857142857
+functions	PWY-6167:_flavin_biosynthesis_II_(archaea)	PWY-8190:_L-glutamate_degradation_XI_(reductive_Stickland_reaction)	['GM']	1	78.57142857142857
+functions	PWY-6167:_flavin_biosynthesis_II_(archaea)	VALSYN-PWY:_L-valine_biosynthesis	['GM', 'LR']	2	78.57142857142857
+functions	PWY-6588:_pyruvate_fermentation_to_acetone	REDCITCYC:_TCA_cycle_VI_(Helicobacter)	['GM']	1	78.57142857142857
+functions	FOLSYN-PWY:_superpathway_of_tetrahydrofolate_biosynthesis_and_salvage	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	['GM']	1	71.42857142857143
+functions	GALACT-GLUCUROCAT-PWY:_superpathway_of_hexuronide_and_hexuronate_degradation	ORNDEG-PWY:_superpathway_of_ornithine_degradation	['LR']	1	71.42857142857143
+functions	GALACTUROCAT-PWY:_D-galacturonate_degradation_I	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	['LR']	1	71.42857142857143
+functions	OANTIGEN-PWY:_O-antigen_building_blocks_biosynthesis_(E._coli)	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	['GM']	1	71.42857142857143
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-622:_starch_biosynthesis	['GM']	1	71.42857142857143
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-6478:_GDP-D-glycero-&alpha;-D-manno-heptose_biosynthesis	['GM']	1	71.42857142857143
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-6607:_guanosine_nucleotides_degradation_I	['GM', 'LR']	2	71.42857142857143
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-7286:_7-(3-amino-3-carboxypropyl)-wyosine_biosynthesis	['GM']	1	71.42857142857143
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-8112:_factor_420_biosynthesis_I_(archaea)	['GM']	1	71.42857142857143
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	UDPNAGSYN-PWY:_UDP-N-acetyl-D-glucosamine_biosynthesis_I	['GM']	1	71.42857142857143
+functions	P161-PWY:_acetylene_degradation_(anaerobic)	PWY-7198:_pyrimidine_deoxyribonucleotides_de_novo_biosynthesis_IV	['GM']	1	71.42857142857143
+functions	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	PWY-5675:_nitrate_reduction_V_(assimilatory)	['GM']	1	71.42857142857143
+functions	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	PWY-6612:_superpathway_of_tetrahydrofolate_biosynthesis	['GM']	1	71.42857142857143
+functions	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	PWY-7858:_(5Z)-dodecenoate_biosynthesis_II	['GM']	1	71.42857142857143
+functions	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	PWY0-1297:_superpathway_of_purine_deoxyribonucleosides_degradation	['GM']	1	71.42857142857143
+functions	P441-PWY:_superpathway_of_N-acetylneuraminate_degradation	PWY-2941:_L-lysine_biosynthesis_II	['GM', 'LR']	2	71.42857142857143
+functions	P441-PWY:_superpathway_of_N-acetylneuraminate_degradation	PWY-6350:_archaetidylinositol_biosynthesis	['GM']	1	71.42857142857143
+functions	P441-PWY:_superpathway_of_N-acetylneuraminate_degradation	PWY-6588:_pyruvate_fermentation_to_acetone	['GM', 'LR']	2	71.42857142857143
+functions	P441-PWY:_superpathway_of_N-acetylneuraminate_degradation	PWY-8113:_3PG-factor_420_biosynthesis	['GM']	1	71.42857142857143
+functions	POLYAMINSYN3-PWY:_superpathway_of_polyamine_biosynthesis_II	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	['GM']	1	71.42857142857143
+functions	PWY-2941:_L-lysine_biosynthesis_II	PWY0-461:_L-lysine_degradation_I	['GM', 'LR']	2	71.42857142857143
+functions	PWY-5189:_tetrapyrrole_biosynthesis_II_(from_glycine)	PWY-8190:_L-glutamate_degradation_XI_(reductive_Stickland_reaction)	['GM']	1	71.42857142857143
+functions	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	PWY-6478:_GDP-D-glycero-&alpha;-D-manno-heptose_biosynthesis	['GM', 'LR']	2	71.42857142857143
+functions	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	PWY-6507:_4-deoxy-L-threo-hex-4-enopyranuronate_degradation	['LR']	1	71.42857142857143
+functions	PWY-6588:_pyruvate_fermentation_to_acetone	PWY-7117:_C4_photosynthetic_carbon_assimilation_cycle,_PEPCK_type	['GM', 'LR']	2	71.42857142857143
+functions	GLYCOL-GLYOXDEG-PWY:_superpathway_of_glycol_metabolism_and_degradation	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	['GM']	1	64.28571428571429
+functions	LACTOSECAT-PWY:_lactose_and_galactose_degradation_I	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	['GM']	1	64.28571428571429
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-6595:_superpathway_of_guanosine_nucleotides_degradation_(plants)	['GM']	1	64.28571428571429
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-6612:_superpathway_of_tetrahydrofolate_biosynthesis	['GM']	1	64.28571428571429
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-6749:_CMP-legionaminate_biosynthesis_I	['GM', 'LR']	2	64.28571428571429
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-8113:_3PG-factor_420_biosynthesis	['GM']	1	64.28571428571429
+functions	P108-PWY:_pyruvate_fermentation_to_propanoate_I	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	['GM']	1	64.28571428571429
+functions	P161-PWY:_acetylene_degradation_(anaerobic)	PWY-2941:_L-lysine_biosynthesis_II	['GM']	1	64.28571428571429
+functions	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	PWY-241:_C4_photosynthetic_carbon_assimilation_cycle,_NADP-ME_type	['GM', 'LR']	2	64.28571428571429
+functions	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	PWY-5104:_L-isoleucine_biosynthesis_IV	['GM']	1	64.28571428571429
+functions	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	PWY0-42:_2-methylcitrate_cycle_I	['GM']	1	64.28571428571429
+functions	P441-PWY:_superpathway_of_N-acetylneuraminate_degradation	PWY-7286:_7-(3-amino-3-carboxypropyl)-wyosine_biosynthesis	['GM']	1	64.28571428571429
+functions	P441-PWY:_superpathway_of_N-acetylneuraminate_degradation	PWY-8190:_L-glutamate_degradation_XI_(reductive_Stickland_reaction)	['GM', 'LR']	2	64.28571428571429
+functions	PPGPPMET-PWY:_ppGpp_metabolism	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	['GM']	1	64.28571428571429
+functions	PWY-241:_C4_photosynthetic_carbon_assimilation_cycle,_NADP-ME_type	PWY-6588:_pyruvate_fermentation_to_acetone	['GM']	1	64.28571428571429
+functions	PWY-2941:_L-lysine_biosynthesis_II	PWY-5913:_partial_TCA_cycle_(obligate_autotrophs)	['GM']	1	64.28571428571429
+functions	PWY-2941:_L-lysine_biosynthesis_II	PWY4LZ-257:_superpathway_of_fermentation_(Chlamydomonas_reinhardtii)	['GM']	1	64.28571428571429
+functions	PWY-5154:_L-arginine_biosynthesis_III_(via_N-acetyl-L-citrulline)	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	['LR']	1	64.28571428571429
+functions	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	PWY-8190:_L-glutamate_degradation_XI_(reductive_Stickland_reaction)	['GM']	1	64.28571428571429
+functions	PWY-7198:_pyrimidine_deoxyribonucleotides_de_novo_biosynthesis_IV	PWY0-42:_2-methylcitrate_cycle_I	['GM']	1	64.28571428571429
+functions	AEROBACTINSYN-PWY:_aerobactin_biosynthesis	VALSYN-PWY:_L-valine_biosynthesis	['LR']	1	57.14285714285714
+functions	GALACT-GLUCUROCAT-PWY:_superpathway_of_hexuronide_and_hexuronate_degradation	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	['LR']	1	57.14285714285714
+functions	GLUCUROCAT-PWY:_superpathway_of_&beta;-D-glucuronosides_degradation	P441-PWY:_superpathway_of_N-acetylneuraminate_degradation	['LR']	1	57.14285714285714
+functions	GLYCOL-GLYOXDEG-PWY:_superpathway_of_glycol_metabolism_and_degradation	PWY-2941:_L-lysine_biosynthesis_II	['GM']	1	57.14285714285714
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-5004:_superpathway_of_L-citrulline_metabolism	['GM']	1	57.14285714285714
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-5130:_2-oxobutanoate_degradation_I	['GM']	1	57.14285714285714
+functions	P161-PWY:_acetylene_degradation_(anaerobic)	PWY-6167:_flavin_biosynthesis_II_(archaea)	['GM']	1	57.14285714285714
+functions	P441-PWY:_superpathway_of_N-acetylneuraminate_degradation	PWY-5198:_factor_420_biosynthesis_II_(mycobacteria)	['GM']	1	57.14285714285714
+functions	PWY-5913:_partial_TCA_cycle_(obligate_autotrophs)	PWY-6588:_pyruvate_fermentation_to_acetone	['GM']	1	57.14285714285714
+functions	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	PWY-7117:_C4_photosynthetic_carbon_assimilation_cycle,_PEPCK_type	['GM']	1	57.14285714285714
+functions	PWY-5920:_superpathway_of_heme_b_biosynthesis_from_glycine	PWY-7198:_pyrimidine_deoxyribonucleotides_de_novo_biosynthesis_IV	['GM']	1	57.14285714285714
+functions	PWY-8190:_L-glutamate_degradation_XI_(reductive_Stickland_reaction)	PWY0-1297:_superpathway_of_purine_deoxyribonucleosides_degradation	['GM', 'LR']	2	57.14285714285714
+functions	NAD-BIOSYNTHESIS-II:_NAD_salvage_pathway_III_(to_nicotinamide_riboside)	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	['GM']	1	50.0
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	P42-PWY:_incomplete_reductive_TCA_cycle	['GM']	1	50.0
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-6168:_flavin_biosynthesis_III_(fungi)	['GM']	1	50.0
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-7197:_pyrimidine_deoxyribonucleotide_phosphorylation	['GM']	1	50.0
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	PWY-7234:_inosine-5'-phosphate_biosynthesis_III	['GM']	1	50.0
+functions	ORNDEG-PWY:_superpathway_of_ornithine_degradation	VALSYN-PWY:_L-valine_biosynthesis	['LR']	1	50.0
+functions	P161-PWY:_acetylene_degradation_(anaerobic)	PWY-8190:_L-glutamate_degradation_XI_(reductive_Stickland_reaction)	['LR']	1	50.0
+functions	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	PWY-6284:_superpathway_of_unsaturated_fatty_acids_biosynthesis_(E._coli)	['GM']	1	50.0
+functions	P163-PWY:_L-lysine_fermentation_to_acetate_and_butanoate	TCA:_TCA_cycle_I_(prokaryotic)	['LR']	1	50.0
+functions	P441-PWY:_superpathway_of_N-acetylneuraminate_degradation	PWY-5004:_superpathway_of_L-citrulline_metabolism	['GM', 'LR']	2	50.0
+functions	P441-PWY:_superpathway_of_N-acetylneuraminate_degradation	PWY0-162:_superpathway_of_pyrimidine_ribonucleotides_de_novo_biosynthesis	['GM']	1	50.0
+functions	PWY-5855:_ubiquinol-7_biosynthesis_(early_decarboxylation)	PWY-7198:_pyrimidine_deoxyribonucleotides_de_novo_biosynthesis_IV	['GM']	1	50.0
+functions	PWY-5913:_partial_TCA_cycle_(obligate_autotrophs)	PWY-8190:_L-glutamate_degradation_XI_(reductive_Stickland_reaction)	['GM', 'LR']	2	50.0
+functions	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	PWY-6270:_isoprene_biosynthesis_I	['GM']	1	50.0
+functions	PWY-5918:_superpathway_of_heme_b_biosynthesis_from_glutamate	PWY-6749:_CMP-legionaminate_biosynthesis_I	['GM']	1	50.0
+functions	PWY-6167:_flavin_biosynthesis_II_(archaea)	PWY-6588:_pyruvate_fermentation_to_acetone	['GM']	1	50.0
+functions	PWY-7198:_pyrimidine_deoxyribonucleotides_de_novo_biosynthesis_IV	PWY4LZ-257:_superpathway_of_fermentation_(Chlamydomonas_reinhardtii)	['GM']	1	50.0
+functions	PWY-8190:_L-glutamate_degradation_XI_(reductive_Stickland_reaction)	PWY4LZ-257:_superpathway_of_fermentation_(Chlamydomonas_reinhardtii)	['LR']	1	50.0
+taxa	Adlercreutzia_equolifaciens	Parvimonas_micra	['GM', 'LR']	2	100.0
+taxa	Allisonella_histaminiformans	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Allisonella_histaminiformans	Parvimonas_micra	['GM', 'LR']	2	100.0
+taxa	Anaerococcus_obesiensis	Dialister_pneumosintes	['GM', 'LR']	2	100.0
+taxa	Anaerococcus_obesiensis	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Anaerococcus_obesiensis	Parvimonas_micra	['GM', 'LR']	2	100.0
+taxa	Anaerococcus_obesiensis	Peptostreptococcus_stomatis	['GM', 'LR']	2	100.0
+taxa	Anaerotignum_faecicola	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Bacilli_unclassified_SGB6422	Fusobacterium_nucleatum	['LR']	1	100.0
+taxa	Bacteroides_fragilis	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Bacteroides_uniformis	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Bifidobacterium_breve	Fusobacterium_nucleatum	['LR']	1	100.0
+taxa	Bilophila_wadsworthia	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Blautia_faecis	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Blautia_wexlerae	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Butyricicoccus_SGB14985	Fusobacterium_nucleatum	['LR']	1	100.0
+taxa	Campylobacter_ureolyticus	Fusobacterium_nucleatum	['GM']	1	100.0
+taxa	Candidatus_Saccharibacteria_unclassified_SGB19850	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Clostridia_bacterium	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Clostridiaceae_bacterium	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Clostridiaceae_bacterium	Parvimonas_micra	['GM', 'LR']	2	100.0
+taxa	Clostridium_sp_AF34_10BH	Parvimonas_micra	['GM', 'LR']	2	100.0
+taxa	Dialister_pneumosintes	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Dialister_pneumosintes	Gemella_morbillorum	['GM']	1	100.0
+taxa	Dialister_pneumosintes	Parvimonas_micra	['GM']	1	100.0
+taxa	Dialister_pneumosintes	Peptostreptococcus_stomatis	['GM']	1	100.0
+taxa	Dorea_longicatena	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Dysosmobacter_welbionis	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Eikenella_corrodens	Fusobacterium_nucleatum	['GM']	1	100.0
+taxa	Eikenella_corrodens	Parvimonas_micra	['GM']	1	100.0
+taxa	Enterobacter_hormaechei	Fusobacterium_nucleatum	['LR']	1	100.0
+taxa	Enterocloster_bolteae	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Enterococcus_gallinarum	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Escherichia_coli	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Escherichia_coli	Parvimonas_micra	['GM', 'LR']	2	100.0
+taxa	Faecalibacterium_prausnitzii	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Flavonifractor_plautii	Fusobacterium_nucleatum	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_naviforme	Fusobacterium_nucleatum	['GM']	1	100.0
+taxa	Fusobacterium_nucleatum	GGB3637_SGB4930	['LR']	1	100.0
+taxa	Fusobacterium_nucleatum	GGB3746_SGB5089	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	GGB9696_SGB15212	['LR']	1	100.0
+taxa	Fusobacterium_nucleatum	Gemella_morbillorum	['GM']	1	100.0
+taxa	Fusobacterium_nucleatum	Haemophilus_parainfluenzae	['LR']	1	100.0
+taxa	Fusobacterium_nucleatum	Haemophilus_sputorum	['LR']	1	100.0
+taxa	Fusobacterium_nucleatum	Klebsiella_michiganensis	['LR']	1	100.0
+taxa	Fusobacterium_nucleatum	Lachnospiraceae_bacterium	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	Lactobacillus_crispatus	['GM']	1	100.0
+taxa	Fusobacterium_nucleatum	Lactobacillus_vaginalis	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	Lancefieldella_parvula	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	Limosilactobacillus_reuteri	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	Megasphaera_micronuciformis	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	Methanobrevibacter_smithii	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	Morganella_morganii	['GM']	1	100.0
+taxa	Fusobacterium_nucleatum	Oribacterium_parvum	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	Parabacteroides_distasonis	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	Parvimonas_micra	['GM']	1	100.0
+taxa	Fusobacterium_nucleatum	Peptostreptococcus_SGB749	['GM']	1	100.0
+taxa	Fusobacterium_nucleatum	Peptostreptococcus_anaerobius	['GM']	1	100.0
+taxa	Fusobacterium_nucleatum	Peptostreptococcus_stomatis	['GM']	1	100.0
+taxa	Fusobacterium_nucleatum	Phascolarctobacterium_succinatutens	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	Phocaeicola_vulgatus	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	Porphyromonas_SGB1980	['GM']	1	100.0
+taxa	Fusobacterium_nucleatum	Porphyromonas_asaccharolytica	['GM']	1	100.0
+taxa	Fusobacterium_nucleatum	Prevotella_bivia	['LR']	1	100.0
+taxa	Fusobacterium_nucleatum	Roseburia_faecis	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	Roseburia_hominis	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	Roseburia_intestinalis	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	Rothia_mucilaginosa	['LR']	1	100.0
+taxa	Fusobacterium_nucleatum	Ruminococcus_torques	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	Ruthenibacterium_lactatiformans	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	Streptococcus_equinus	['LR']	1	100.0
+taxa	Fusobacterium_nucleatum	Streptococcus_gallolyticus	['GM']	1	100.0
+taxa	Fusobacterium_nucleatum	Streptococcus_infantis	['LR']	1	100.0
+taxa	Fusobacterium_nucleatum	Streptococcus_mitis	['LR']	1	100.0
+taxa	Fusobacterium_nucleatum	Streptococcus_salivarius	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	Streptococcus_sp_263_SSPC	['LR']	1	100.0
+taxa	Fusobacterium_nucleatum	Streptococcus_sp_A12	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	Veillonella_atypica	['LR']	1	100.0
+taxa	Fusobacterium_nucleatum	Veillonella_dispar	['LR']	1	100.0
+taxa	Fusobacterium_nucleatum	Veillonella_parvula	['GM', 'LR']	2	100.0
+taxa	Fusobacterium_nucleatum	Veillonella_rogosae	['LR']	1	100.0
+taxa	Lachnospiraceae_bacterium	Parvimonas_micra	['GM', 'LR']	2	100.0
+taxa	Lancefieldella_parvula	Parvimonas_micra	['GM', 'LR']	2	100.0
+taxa	Mogibacterium_diversum	Parvimonas_micra	['LR']	1	100.0
+taxa	Morganella_morganii	Parvimonas_micra	['GM']	1	100.0
+taxa	Parvimonas_micra	Peptostreptococcus_anaerobius	['GM']	1	100.0
+taxa	Parvimonas_micra	Peptostreptococcus_stomatis	['GM']	1	100.0
+taxa	Parvimonas_micra	Phascolarctobacterium_succinatutens	['GM', 'LR']	2	100.0
+taxa	Parvimonas_micra	Porphyromonas_SGB1980	['GM']	1	100.0
+taxa	Parvimonas_micra	Roseburia_hominis	['GM', 'LR']	2	100.0
+taxa	Parvimonas_micra	Roseburia_intestinalis	['GM', 'LR']	2	100.0
+taxa	Parvimonas_micra	Streptococcus_gallolyticus	['GM', 'LR']	2	100.0
+taxa	Parvimonas_micra	Streptococcus_infantis	['LR']	1	100.0
+taxa	Parvimonas_micra	Streptococcus_sp_263_SSPC	['LR']	1	100.0
+taxa	Parvimonas_micra	Streptococcus_sp_A12	['LR']	1	100.0
+taxa	Abiotrophia_sp_HMSC24B09	Fusobacterium_nucleatum	['LR']	1	92.85714285714286
+taxa	Adlercreutzia_equolifaciens	Fusobacterium_nucleatum	['GM', 'LR']	2	92.85714285714286
+taxa	Alistipes_onderdonkii	Fusobacterium_nucleatum	['GM', 'LR']	2	92.85714285714286
+taxa	Candidatus_Nanosynsacchari_sp_TM7_ANC_38_39_G1_1	Fusobacterium_nucleatum	['LR']	1	92.85714285714286
+taxa	Citrobacter_freundii	Fusobacterium_nucleatum	['LR']	1	92.85714285714286
+taxa	Clostridium_sp_AF34_10BH	Fusobacterium_nucleatum	['GM', 'LR']	2	92.85714285714286
+taxa	Collinsella_aerofaciens	Fusobacterium_nucleatum	['GM', 'LR']	2	92.85714285714286
+taxa	Dialister_pneumosintes	Eikenella_corrodens	['GM']	1	92.85714285714286
+taxa	Enterocloster_citroniae	Fusobacterium_nucleatum	['GM', 'LR']	2	92.85714285714286
+taxa	Fusobacterium_nucleatum	GGB4277_SGB5832	['GM']	1	92.85714285714286
+taxa	Fusobacterium_nucleatum	GGB4603_SGB6367	['LR']	1	92.85714285714286
+taxa	Fusobacterium_nucleatum	GGB4964_SGB6927	['GM', 'LR']	2	92.85714285714286
+taxa	Fusobacterium_nucleatum	GGB9603_SGB15035	['LR']	1	92.85714285714286
+taxa	Fusobacterium_nucleatum	GGB9635_SGB15102	['GM', 'LR']	2	92.85714285714286
+taxa	Fusobacterium_nucleatum	Hungatella_hathewayi	['GM', 'LR']	2	92.85714285714286
+taxa	Fusobacterium_nucleatum	Intestinibacter_bartlettii	['GM', 'LR']	2	92.85714285714286
+taxa	Fusobacterium_nucleatum	Klebsiella_grimontii	['LR']	1	92.85714285714286
+taxa	Fusobacterium_nucleatum	Lachnospira_eligens	['GM', 'LR']	2	92.85714285714286
+taxa	Fusobacterium_nucleatum	Odoribacter_splanchnicus	['GM', 'LR']	2	92.85714285714286
+taxa	Fusobacterium_nucleatum	Phocaeicola_dorei	['GM', 'LR']	2	92.85714285714286
+taxa	Fusobacterium_nucleatum	Romboutsia_timonensis	['GM', 'LR']	2	92.85714285714286
+taxa	Fusobacterium_nucleatum	Ruminococcaceae_bacterium	['GM', 'LR']	2	92.85714285714286
+taxa	Fusobacterium_nucleatum	Streptococcus_parasanguinis	['LR']	1	92.85714285714286
+taxa	Fusobacterium_nucleatum	Streptococcus_sanguinis	['LR']	1	92.85714285714286
+taxa	GGB38171_SGB72433	Parvimonas_micra	['GM']	1	92.85714285714286
+taxa	Gemella_morbillorum	Peptostreptococcus_stomatis	['GM', 'LR']	2	92.85714285714286
+taxa	Parvimonas_micra	Roseburia_faecis	['GM', 'LR']	2	92.85714285714286
+taxa	Parvimonas_micra	Solobacterium_SGB6833	['LR']	1	92.85714285714286
+taxa	Parvimonas_micra	Streptococcus_mitis	['LR']	1	92.85714285714286
+taxa	Parvimonas_micra	Streptococcus_salivarius	['GM', 'LR']	2	92.85714285714286
+taxa	Parvimonas_micra	Streptococcus_sanguinis	['LR']	1	92.85714285714286
+taxa	Peptostreptococcus_anaerobius	Peptostreptococcus_stomatis	['GM']	1	92.85714285714286
+taxa	Actinomyces_graevenitzii	Fusobacterium_nucleatum	['LR']	1	85.71428571428571
+taxa	Anaerostipes_hadrus	Parvimonas_micra	['GM', 'LR']	2	85.71428571428571
+taxa	Bacilli_unclassified_SGB6487	Fusobacterium_nucleatum	['GM', 'LR']	2	85.71428571428571
+taxa	Bacteroides_ovatus	Fusobacterium_nucleatum	['GM', 'LR']	2	85.71428571428571
+taxa	Bacteroides_thetaiotaomicron	Fusobacterium_nucleatum	['GM', 'LR']	2	85.71428571428571
+taxa	Candidatus_Saccharibacteria_unclassified_SGB19850	Parvimonas_micra	['LR']	1	85.71428571428571
+taxa	Clostridia_unclassified_SGB14196	Fusobacterium_nucleatum	['LR']	1	85.71428571428571
+taxa	Clostridium_SGB6179	Fusobacterium_nucleatum	['LR']	1	85.71428571428571
+taxa	Clostridium_phoceensis	Fusobacterium_nucleatum	['GM', 'LR']	2	85.71428571428571
+taxa	Evtepia_gabavorous	Parvimonas_micra	['GM', 'LR']	2	85.71428571428571
+taxa	Fusicatenibacter_saccharivorans	Fusobacterium_nucleatum	['GM', 'LR']	2	85.71428571428571
+taxa	Fusobacterium_nucleatum	GGB2977_SGB3959	['LR']	1	85.71428571428571
+taxa	Fusobacterium_nucleatum	GGB38171_SGB72433	['GM']	1	85.71428571428571
+taxa	Fusobacterium_nucleatum	GGB4584_SGB6338	['LR']	1	85.71428571428571
+taxa	Fusobacterium_nucleatum	GGB4596_SGB6358	['LR']	1	85.71428571428571
+taxa	Fusobacterium_nucleatum	GGB9581_SGB14999	['GM', 'LR']	2	85.71428571428571
+taxa	Fusobacterium_nucleatum	GGB9631_SGB15086	['LR']	1	85.71428571428571
+taxa	Fusobacterium_nucleatum	GGB9637_SGB15111	['LR']	1	85.71428571428571
+taxa	Fusobacterium_nucleatum	Lachnospiraceae_bacterium_OF09_6	['LR']	1	85.71428571428571
+taxa	Fusobacterium_nucleatum	Lacrimispora_amygdalina	['GM', 'LR']	2	85.71428571428571
+taxa	Fusobacterium_nucleatum	Mogibacterium_diversum	['LR']	1	85.71428571428571
+taxa	Gemella_morbillorum	Parvimonas_micra	['GM']	1	85.71428571428571
+taxa	Lactobacillus_gasseri	Parvimonas_micra	['GM']	1	85.71428571428571
+taxa	Megasphaera_micronuciformis	Parvimonas_micra	['GM', 'LR']	2	85.71428571428571
+taxa	Parvimonas_micra	Porphyromonas_asaccharolytica	['GM']	1	85.71428571428571
+taxa	Parvimonas_micra	Ruminococcaceae_bacterium	['GM', 'LR']	2	85.71428571428571
+taxa	Peptostreptococcus_SGB749	Peptostreptococcus_stomatis	['GM', 'LR']	2	85.71428571428571
+taxa	Alistipes_putredinis	Fusobacterium_nucleatum	['GM', 'LR']	2	78.57142857142857
+taxa	Alistipes_shahii	Fusobacterium_nucleatum	['GM']	1	78.57142857142857
+taxa	Anaerostipes_hadrus	Fusobacterium_nucleatum	['GM', 'LR']	2	78.57142857142857
+taxa	Bacteroides_caccae	Fusobacterium_nucleatum	['GM', 'LR']	2	78.57142857142857
+taxa	Bifidobacterium_longum	Fusobacterium_nucleatum	['GM', 'LR']	2	78.57142857142857
+taxa	Butyricimonas_virosa	Fusobacterium_nucleatum	['GM']	1	78.57142857142857
+taxa	Campylobacter_ureolyticus	Peptostreptococcus_stomatis	['GM']	1	78.57142857142857
+taxa	Candidatus_Nanosynsacchari_sp_TM7_ANC_38_39_G1_1	Parvimonas_micra	['LR']	1	78.57142857142857
+taxa	Clostridiales_bacterium	Fusobacterium_nucleatum	['GM', 'LR']	2	78.57142857142857
+taxa	Clostridium_sp_AM49_4BH	Parvimonas_micra	['LR']	1	78.57142857142857
+taxa	Eikenella_corrodens	Peptostreptococcus_stomatis	['GM']	1	78.57142857142857
+taxa	Eubacterium_rectale	Fusobacterium_nucleatum	['GM', 'LR']	2	78.57142857142857
+taxa	Fusobacterium_nucleatum	GGB49418_SGB69331	['LR']	1	78.57142857142857
+taxa	Fusobacterium_nucleatum	GGB6648_SGB9389	['LR']	1	78.57142857142857
+taxa	Fusobacterium_nucleatum	Lactococcus_petauri	['LR']	1	78.57142857142857
+taxa	Fusobacterium_nucleatum	Ligilactobacillus_salivarius	['GM']	1	78.57142857142857
+taxa	Fusobacterium_nucleatum	Phascolarctobacterium_faecium	['GM', 'LR']	2	78.57142857142857
+taxa	Fusobacterium_nucleatum	Phocaeicola_plebeius	['GM', 'LR']	2	78.57142857142857
+taxa	Fusobacterium_nucleatum	Roseburia_inulinivorans	['GM', 'LR']	2	78.57142857142857
+taxa	Fusobacterium_nucleatum	Ruminococcus_gnavus	['GM', 'LR']	2	78.57142857142857
+taxa	GGB3746_SGB5089	Parvimonas_micra	['GM', 'LR']	2	78.57142857142857
+taxa	Ligilactobacillus_salivarius	Parvimonas_micra	['GM']	1	78.57142857142857
+taxa	Agathobaculum_butyriciproducens	Fusobacterium_nucleatum	['GM', 'LR']	2	71.42857142857143
+taxa	Alistipes_ihumii	Fusobacterium_nucleatum	['GM']	1	71.42857142857143
+taxa	Alistipes_ihumii	Parvimonas_micra	['GM']	1	71.42857142857143
+taxa	Anaerobutyricum_hallii	Fusobacterium_nucleatum	['GM', 'LR']	2	71.42857142857143
+taxa	Anaerococcus_obesiensis	Gemella_morbillorum	['GM', 'LR']	2	71.42857142857143
+taxa	Bacilli_unclassified_SGB6428	Fusobacterium_nucleatum	['LR']	1	71.42857142857143
+taxa	Blautia_wexlerae	Parvimonas_micra	['GM', 'LR']	2	71.42857142857143
+taxa	Campylobacter_ureolyticus	Parvimonas_micra	['GM']	1	71.42857142857143
+taxa	Clostridium_symbiosum	Parvimonas_micra	['GM', 'LR']	2	71.42857142857143
+taxa	Dialister_pneumosintes	Peptostreptococcus_anaerobius	['GM']	1	71.42857142857143
+taxa	Dorea_formicigenerans	Fusobacterium_nucleatum	['GM', 'LR']	2	71.42857142857143
+taxa	Escherichia_coli	Peptostreptococcus_stomatis	['GM', 'LR']	2	71.42857142857143
+taxa	Faecalicatena_contorta	Fusobacterium_nucleatum	['GM']	1	71.42857142857143
+taxa	Fusicatenibacter_saccharivorans	Parvimonas_micra	['LR']	1	71.42857142857143
+taxa	Fusobacterium_nucleatum	Fusobacterium_varium	['GM']	1	71.42857142857143
+taxa	Fusobacterium_nucleatum	GGB3189_SGB4212	['LR']	1	71.42857142857143
+taxa	Fusobacterium_nucleatum	GGB9568_SGB14980	['LR']	1	71.42857142857143
+taxa	Fusobacterium_nucleatum	Granulicatella_adiacens	['GM']	1	71.42857142857143
+taxa	Fusobacterium_nucleatum	Lachnospira_SGB5076	['LR']	1	71.42857142857143
+taxa	Fusobacterium_nucleatum	Mediterraneibacter_sp_gm002	['LR']	1	71.42857142857143
+taxa	Fusobacterium_nucleatum	Mitsuokella_multacida	['LR']	1	71.42857142857143
+taxa	Fusobacterium_nucleatum	Mogibacterium_timidum	['GM']	1	71.42857142857143
+taxa	Fusobacterium_nucleatum	Prevotella_corporis	['LR']	1	71.42857142857143
+taxa	Fusobacterium_nucleatum	Rothia_dentocariosa	['LR']	1	71.42857142857143
+taxa	Fusobacterium_nucleatum	Streptococcus_lutetiensis	['GM']	1	71.42857142857143
+taxa	Parvimonas_micra	Phocaeicola_plebeius	['GM', 'LR']	2	71.42857142857143
+taxa	Parvimonas_micra	Streptococcus_cristatus	['LR']	1	71.42857142857143
+taxa	Peptostreptococcus_stomatis	Roseburia_intestinalis	['GM', 'LR']	2	71.42857142857143
+taxa	Clostridia_bacterium_UC5_1_1D1	Fusobacterium_nucleatum	['LR']	1	64.28571428571429
+taxa	Clostridia_unclassified_SGB4121	Fusobacterium_nucleatum	['GM', 'LR']	2	64.28571428571429
+taxa	Clostridium_sp_AM33_3	Fusobacterium_nucleatum	['LR']	1	64.28571428571429
+taxa	Fusobacterium_nucleatum	GGB4588_SGB6347	['LR']	1	64.28571428571429
+taxa	Fusobacterium_nucleatum	GGB9595_SGB15019	['LR']	1	64.28571428571429
+taxa	Fusobacterium_nucleatum	Gemella_haemolysans	['LR']	1	64.28571428571429
+taxa	Fusobacterium_nucleatum	Klebsiella_oxytoca	['GM', 'LR']	2	64.28571428571429
+taxa	Fusobacterium_nucleatum	Lactobacillus_gasseri	['GM']	1	64.28571428571429
+taxa	Fusobacterium_nucleatum	Prevotella_sp_885	['GM']	1	64.28571428571429
+taxa	Lachnospira_sp_NSJ_43	Parvimonas_micra	['LR']	1	64.28571428571429
+taxa	Lactobacillus_crispatus	Parvimonas_micra	['GM']	1	64.28571428571429
+taxa	Lactobacillus_vaginalis	Parvimonas_micra	['GM']	1	64.28571428571429
+taxa	Lancefieldella_parvula	Peptostreptococcus_stomatis	['GM', 'LR']	2	64.28571428571429
+taxa	Peptostreptococcus_stomatis	Porphyromonas_asaccharolytica	['GM']	1	64.28571428571429
+taxa	Peptostreptococcus_stomatis	Solobacterium_SGB6833	['GM', 'LR']	2	64.28571428571429
+taxa	Peptostreptococcus_stomatis	Streptococcus_mitis	['LR']	1	64.28571428571429
+taxa	Peptostreptococcus_stomatis	Streptococcus_sp_263_SSPC	['LR']	1	64.28571428571429
+taxa	Akkermansia_muciniphila	Fusobacterium_nucleatum	['GM']	1	57.14285714285714
+taxa	Bacteroides_cellulosilyticus	Fusobacterium_nucleatum	['LR']	1	57.14285714285714
+taxa	Bilophila_SGB15450	Fusobacterium_nucleatum	['LR']	1	57.14285714285714
+taxa	Bilophila_wadsworthia	Parvimonas_micra	['GM', 'LR']	2	57.14285714285714
+taxa	Blautia_faecis	Parvimonas_micra	['GM', 'LR']	2	57.14285714285714
+taxa	Clostridium_sp_AF32_12BH	Fusobacterium_nucleatum	['LR']	1	57.14285714285714
+taxa	Clostridium_sp_AF34_13	Parvimonas_micra	['LR']	1	57.14285714285714
+taxa	Clostridium_symbiosum	Fusobacterium_nucleatum	['GM']	1	57.14285714285714
+taxa	Eisenbergiella_tayi	Fusobacterium_nucleatum	['GM']	1	57.14285714285714
+taxa	Fusobacterium_nucleatum	GGB3303_SGB4364	['LR']	1	57.14285714285714
+taxa	Fusobacterium_nucleatum	GGB9701_SGB15218	['LR']	1	57.14285714285714
+taxa	Fusobacterium_nucleatum	Lachnospiraceae_bacterium_WCA3_601_WT_6H	['LR']	1	57.14285714285714
+taxa	Fusobacterium_nucleatum	Megasphaera_elsdenii	['GM']	1	57.14285714285714
+taxa	Fusobacterium_nucleatum	Parabacteroides_merdae	['GM', 'LR']	2	57.14285714285714
+taxa	Fusobacterium_nucleatum	Streptococcus_cristatus	['LR']	1	57.14285714285714
+taxa	Fusobacterium_nucleatum	Sutterella_wadsworthensis	['GM']	1	57.14285714285714
+taxa	Lachnospira_eligens	Parvimonas_micra	['LR']	1	57.14285714285714
+taxa	Lactobacillus_gasseri	Peptostreptococcus_stomatis	['GM']	1	57.14285714285714
+taxa	Parvimonas_micra	Sutterella_wadsworthensis	['GM']	1	57.14285714285714
+taxa	Peptostreptococcus_stomatis	Porphyromonas_SGB1980	['GM']	1	57.14285714285714
+taxa	Actinomyces_sp_S6_Spd3	Fusobacterium_nucleatum	['LR']	1	50.0
+taxa	Anaerotruncus_colihominis	Fusobacterium_nucleatum	['GM']	1	50.0
+taxa	Bacilli_unclassified_SGB6540	Fusobacterium_nucleatum	['LR']	1	50.0
+taxa	Bacteroides_xylanisolvens	Fusobacterium_nucleatum	['GM', 'LR']	2	50.0
+taxa	Clostridium_sp_AF34_13	Peptostreptococcus_stomatis	['LR']	1	50.0
+taxa	Clostridium_sp_OM07_10AC	Fusobacterium_nucleatum	['LR']	1	50.0
+taxa	Desulfovibrio_piger	Parvimonas_micra	['GM']	1	50.0
+taxa	Dialister_pneumosintes	Roseburia_intestinalis	['LR']	1	50.0
+taxa	Fusobacterium_nucleatum	GGB9642_SGB15119	['GM', 'LR']	2	50.0
+taxa	Fusobacterium_nucleatum	Parasutterella_excrementihominis	['LR']	1	50.0
+taxa	GGB9642_SGB15119	Parvimonas_micra	['GM']	1	50.0
+taxa	Isoptericola_variabilis	Parvimonas_micra	['LR']	1	50.0
+taxa	Morganella_morganii	Peptostreptococcus_stomatis	['GM']	1	50.0
+taxa	Peptostreptococcus_stomatis	Roseburia_hominis	['GM', 'LR']	2	50.0
+taxa	Peptostreptococcus_stomatis	Streptococcus_sp_A12	['LR']	1	50.0

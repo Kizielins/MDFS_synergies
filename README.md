@@ -1,179 +1,62 @@
-# Metagenomic Feature Synergy Analysis
+# MDFS synergistic feature pairs in CRC and other microbiome cohorts — manuscript analysis code
 
-Identifies synergistic pairs of metagenomic features using
-**Multidimensional Feature Selection (MDFS)** information gain in 1D and 2D.
+This branch (`manuscript-analysis`) contains the exact code and result tables behind every figure,
+table and number of the manuscript *"Synergy-oriented feature selection …"* (Zielińska, Rudnicki, Łabaj;
+npj Biofilms and Microbiomes, revision). The stand-alone, single-cohort version of the method is the
+tool on the [`main`](https://github.com/Kizielins/MDFS_synergies) branch.
 
-## How MDFS 2D information gain works
+Folders are named after the manuscript sections they reproduce (`M` = Materials and Methods,
+`R` = Results, in manuscript order). Each notebook starts with a header that says which figures,
+tables and quoted numbers it produces, and every manuscript item is written to `manuscript/`.
 
-MDFS evaluates each feature's individual discriminative power (1D) and then
-tests whether pairing two features yields additional predictive information
-(2D). For a pair of features designated **base** and **contributing**:
+## Layout
 
-- **`base_IG_1D`** — the base feature's individual information gain about the
-  class label, i.e. I(X_base; Y).
-- **`IG_2D_added`** — the *additional* IG that the contributing feature brings
-  when combined with the base feature, i.e. I(X_contributing; Y | X_base).
-  This is the conditional mutual information of the contributing feature given
-  the base feature.
-- **`total_IG`** = `base_IG_1D + IG_2D_added` — the joint information gain of
-  the pair, i.e. I(X_base, X_contributing; Y).
+| Folder | Manuscript section | Code | Produces |
+|---|---|---|---|
+| `run_mdfs.R` | Methods *MDFS feature selection and information gain* | one MDFS run: 1D IG + p-values, 2D significance, Bonferroni pair threshold, synergy filter | pair table, 1D table |
+| `M1_data_preparation/` | Methods *Data preparation* | `prep_data.ipynb` | `prepared_data/X_*, y_*` (17 CRC cohorts × taxa / functions / combined; git-ignored) |
+| `M2_loco_crc_pipeline/` | Methods *Leave-one-cohort-out (LOCO) validation* | `framework.ipynb` (functions), `main_code.ipynb` (orchestration), `run_loco.py` (headless) | `results/<dt>/`: `loco_results` (AUC), `loco_accuracy`, `base_features`, `synthetic_features` (RF selection frequencies), `mdfs_ig_info` (IGs of the top-2 % pairs of every fold × run), `mdfs_1d` (1D IG + p-values of every fold × run) |
+| `R1_synergistic_pairs/` | Results *Synergy-oriented framework identifies disease-informative feature pairs* | `compare_mdfs_igs.ipynb`; `figure1b_all_pairs/` (all directed pairs, every fold × run); `seed_stability/` (20-seed stability grid) | **Figure 1b**, **Supp. Table 1**, **Supp. Table 5**, Wilcoxon test, `ig_gain_summary_<dt>.csv` |
+| `R2_classification_performance/` | Results *Synergy-derived features retain benchmark-level classification performance* | `summarize_rf_results.ipynb`; `stable_pairs.ipynb`; `effect_sizes.ipynb` | AUC summary (`loco_performance_summary.tsv`), **Supp. Figures 1–2**, stable-pair table (`final_synthetic_features_table.csv`), **Figure 3**, **Supp. Table 2**, meta-analysis tables |
+| `R3_pair_transformations/` | Results *Pair transformations reveal distinct forms of disease-associated dependence* | `transformation_preference.ipynb` | **Figure 4**, **Supp. Table 3**, LR / GM counts |
+| `R4_broader_application/` | Results *Broader application identifies conserved synergistic markers in other conditions*; Methods *Application to additional disease cohorts* | `run_mdfs_1d_2d.py` (10 MDFS runs per cohort), `load_cohort_data.py` (synergy table), `analyse_synergy_gains.ipynb` | **Figure 5**, **Table 1**, **Supp. Table 4**, `synergy_by_cohort.tsv`, emergent synergies, top markers per cohort |
+| `manuscript/` | — | — | one file per manuscript figure / table (written by the notebooks above, never by hand), `REVISION_CHANGES.md` (submitted vs revised numbers) |
+| `archive/` | — | analyses not used in the manuscript (see `archive/README.md`) | — |
+| `METHODS.md` | — | step-by-step description of the whole pipeline with all parameters | — |
 
-Each pair is reported in **both directions** (base/contributing roles are
-asymmetric: the decomposition changes, but `total_IG` remains the same).
+## Method in one paragraph
 
-The **% synergy gain** (`ig_gain_pct`) measures how much the contributing
-feature amplifies the base feature's signal:
+For every LOCO fold (14 test-eligible of 17 CRC cohorts) MDFS is run **10 times** (seeds 42–51) on the
+pooled training cohorts; in each run the pairs passing the Bonferroni pair-level χ² threshold and the
+synergy filter (`total_IG > max(1D IGs)`) are ranked by total IG and the **top 2 %** kept; a pair is a
+**consensus pair if it is in the top 2 % of ≥ 6 of the 10 runs**. Consensus pairs are encoded as
+log-ratio (LR) and geometric-mean (GM) synthetic features and one Random Forest (`random_state = 42`)
+is trained per feature configuration (raw / synthetic / raw + synthetic) and evaluated on the held-out
+cohort. The validation arm applies the same MDFS filters to each non-CRC cohort (10 runs, seeds 12–21,
+pair kept if it passes in ≥ 6 of 10 runs). Details and all parameters: `METHODS.md`.
 
-```
-ig_gain_pct = IG_2D_added / base_IG_1D × 100
-```
-
-A value of 100% means the pair's joint IG is double the base feature's
-individual IG; values above 100% indicate that the contributing feature adds
-more information than the base carried alone.
-
-### Statistical thresholds
-
-Two filters ensure that reported pairs represent genuine synergies:
-
-1. **Bonferroni-corrected pair-level threshold** — `ComputeInterestingTuples`
-   in R uses an IG cutoff derived from a chi-squared quantile corrected for the
-   total number of feature pairs tested (~1.5 million for 1,738 features).
-   Only pairs exceeding this threshold are retained.
-
-2. **True-synergy filter** — the pair's `total_IG` must exceed the larger of
-   the two individual 1D IGs (`total_IG > max(base_IG_1D, contributing_IG_1D)`).
-   This removes artifacts where a strong feature is paired with noise.
-
-MDFS is run **3 times** with different random seeds per cohort; IGs are
-averaged across runs for robustness.
-
----
-
-## Requirements
-
-| Dependency | Version |
-|---|---|
-| R | >= 4.0 |
-| R package `MDFS` | >= 1.5 |
-| R package `data.table` | any recent |
-| Python | >= 3.8 |
-| Python package `pandas` | any recent |
-
-### Install R packages
-
-```r
-install.packages("data.table")
-install.packages("MDFS")
-```
-
----
-
-## Repository structure
-
-```
-MDFS_synergies/
-├── run_mdfs.R                  # R script: 1D and 2D MDFS, Bonferroni threshold,
-│                               #   synergy filter, ComputeInterestingTuples
-├── compute_synergies.py        # Python: orchestrates runs, computes synergy metrics
-├── run_taxa_analysis.py        # Python: CRC taxa-only analysis pipeline
-├── test_files/
-│   ├── X_test.tsv              # 40-sample × 12-feature synthetic dataset
-│   └── y_test.tsv              # Labels (0 = disease, 1 = control)
-├── apply_framework/            # Apply the framework to non-CRC cohorts
-│   ├── run_mdfs_1d_2d.py       # Run MDFS 1D+2D per cohort (3 runs, mean aggregation)
-│   ├── load_cohort_data.py     # Load cohort data, build synergy table
-│   ├── analyse_synergy_gains.ipynb  # Analysis notebook: figures, tables, markers
-│   └── results/                # Per-cohort MDFS outputs
-├── results_combined/           # CRC pipeline results (taxa + functions combined)
-├── results_functions/          # CRC pipeline results (functions only)
-└── results_taxa/               # CRC pipeline results (taxa only)
-```
-
----
-
-## Usage
-
-### Quick start (test data)
+## Reproducing everything
 
 ```bash
-python compute_synergies.py \
-    --X test_files/X_test.tsv \
-    --y test_files/y_test.tsv \
-    --out test_files/results.txt
+bash run_all.sh            # all steps in manuscript order; or e.g.  bash run_all.sh R1 R2 R3 R4
 ```
 
-### Apply framework to new cohorts
+Steps: `M1` data preparation (needs the benchmark profiles in `../data/`), `M2` LOCO pipeline
+(≈ 2–3 h, the three data types run in parallel), `R1`–`R4` the result notebooks (minutes each, except
+`R2` effect sizes ≈ 1 h). Notebooks are executed in place with `jupyter nbconvert --execute`, so the
+stored outputs are those of the last full run. The all-pairs input of Figure 1b
+(`R1_synergistic_pairs/figure1b_all_pairs/run_all_directed.py`, several hours) is not part of
+`run_all.sh`; its aggregated per-fold tables are deposited with the data (below).
 
-See [`apply_framework/README.md`](apply_framework/README.md) for full details.
+## Data and large files (not in git)
 
-```bash
-cd apply_framework
+- `M1_data_preparation/prepared_data/` and `R4_broader_application/data/`: input profiles
+  (CRC benchmark of Piccinno et al. 2025 and curatedMetagenomicData) — see Data Availability in the paper.
+- Per-run MDFS tables (`mdfs_ig_info_*`, `mdfs_1d_*`, `figure1b_all_pairs/directed/`): 15–95 MB each,
+  regenerated by `M2`/`R4` or available from the data deposit. All summary tables and figures are in git.
 
-# Run MDFS for all cohorts
-python run_mdfs_1d_2d.py --data-dir data --all-cohorts --out-dir results
+## Software
 
-# Build synergy table
-python load_cohort_data.py --data-dir data --mdfs-results-dir results --out-table synergy_by_cohort.tsv
-```
-
----
-
-## Input format
-
-**Feature matrix (`--X`)**
-
-Tab-separated, first column is the sample ID:
-
-```
-sample_id   Fusobacterium_nucleatum   Peptostreptococcus_anaerobius   ...
-S001        0.28310452                0.11203471                      ...
-S002        0.01823940                0.03941200                      ...
-```
-
-**Labels (`--y`)**
-
-Tab-separated, two columns:
-
-```
-sample_id   label
-S001        0
-S002        0
-S021        1
-```
-
-`0` = disease / case, `1` = control / healthy.
-
----
-
-## Output format
-
-The per-cohort output (`ig_gain_summary_<cohort>.tsv`) is a tab-separated table
-with one row per (base, contributing) pair, averaged across 3 MDFS runs:
-
-| Column | Description |
-|---|---|
-| `base` | Base feature in the pair |
-| `contributing` | Contributing feature in the pair |
-| `base_IG_1D_mean` | Mean 1D IG of the base feature across runs |
-| `contributing_IG_1D_mean` | Mean 1D IG of the contributing feature across runs |
-| `IG_2D_added_mean` | Mean additional IG from the contributing feature (conditional on base) |
-| `IG_2D_added_std` | Std dev of `IG_2D_added` across runs |
-| `total_IG_mean` | Mean joint IG of the pair (`base_IG_1D + IG_2D_added`) |
-| `n_runs` | Number of runs in which this pair was significant |
-| `ig_gain` | Same as `IG_2D_added_mean` |
-| `ig_gain_pct` | `IG_2D_added_mean / base_IG_1D_mean × 100` |
-
----
-
-## Test data
-
-`test_files/X_test.tsv` and `test_files/y_test.tsv` contain a synthetic CRC-like
-microbiome dataset (40 samples, 12 bacterial features). The data is designed so
-that **Parvimonas_micra** and **Gemella_morbillorum** form a synergistic pair:
-in disease samples, one or the other is elevated (never both), while in controls
-both are low — so neither bacterium alone is strongly discriminative but the pair
-jointly is.
-
-Expected: `Parvimonas_micra / Gemella_morbillorum` appears near the top with the
-highest % synergy gain.
+R 4.5 with `MDFS` 1.5.5 and `data.table`; Python 3.9+ with `pandas`, `numpy`, `scikit-learn`, `scipy`,
+`statsmodels`, `matplotlib`, `seaborn`, `jupyter` (`nbconvert`, `ipykernel`). Versions used for the
+manuscript are listed in `METHODS.md` §7.

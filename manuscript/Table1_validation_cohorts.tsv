@@ -1,0 +1,59 @@
+cohort	conditions	disease	control	unlabelled	status	n_synergistic_pairs	n_pairs_gain_ge_50pct
+QinN_2014	cirrhosis; control	123	114	0	analysed	50495	50494
+HallAB_2017	IBD; control	185	74	0	analysed	14916	11757
+JieZ_2017	ACVD; control	214	171	0	analysed	10023	10023
+MetaCardis_2020_a	CAD; HF; IGT; T2D; control	1189	642	0	analysed	3729	1717
+RubelMA_2020	STH; control	89	86	0	analysed	447	447
+NielsenHB_2014	IBD; control	148	248	0	analysed	313	313
+ZhuF_2020	control; schizophrenia	90	81	0	analysed	1	1
+HMP_2019_ibdmdb	IBD; control	1201	426	0	analysed	0	0
+HMP_2019_t2d	IGT; T2D; control	250	46	0	analysed	0	0
+KarlssonFH_2013	IGT; T2D; control	102	43	0	analysed	0	0
+LiJ_2017	control; hypertension; pre-hypertension	155	41	0	analysed	0	0
+NagySzakalD_2017	ME/CFS; control	50	50	0	analysed	0	0
+QinJ_2012	T2D; control	170	174	19	analysed	0	0
+FengQ_2015	CRC; adenoma; control	93	61	0	excluded (CRC cohort of the discovery arm)	0	0
+GuptaA_2019	CRC; control	30	30	0	excluded (CRC cohort of the discovery arm)	0	0
+VogtmannE_2016	CRC; control	52	52	6	excluded (CRC cohort of the discovery arm)	0	0
+WirbelJ_2018	CRC; control	60	65	0	excluded (CRC cohort of the discovery arm)	0	0
+YachidaS_2019	CRC; adenoma; carcinoma_surgery_history; control	365	251	0	excluded (CRC cohort of the discovery arm)	0	0
+YuJ_2015	CRC; control	74	54	0	excluded (CRC cohort of the discovery arm)	0	0
+ZellerG_2014	CRC; adenoma; control	95	61	0	excluded (CRC cohort of the discovery arm)	0	0
+AsnicarF_2021	control	0	1098	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+BackhedF_2015	control	0	400	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+Bengtsson-PalmeJ_2015	control	0	70	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+BritoIL_2016	control	0	312	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+CosteaPI_2017	control	0	279	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+DeFilippisF_2019	control	0	97	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+DhakanDB_2019	control	0	110	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+FerrettiP_2018	control	0	214	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+HMP_2012	control	0	748	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+HansenLBS_2018	control	0	207	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+KaurK_2020	control	0	31	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+KeohaneDM_2020	control	0	117	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+KosticAD_2015	T1D; control	31	89	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+LeChatelierE_2013	control	0	292	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+LiJ_2014	IBD; T1D; T2D; control	250	10	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+LifeLinesDeep_2016	control	0	1135	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+LiuW_2016	control	0	110	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+LokmerA_2019	control	0	57	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+LouisS_2016	control	0	92	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+MehtaRS_2018	control	0	928	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+Obregon-TitoAJ_2015	control	0	58	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+OhJ_2014	control	0	291	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+PasolliE_2019	control	0	112	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+PehrssonE_2016	control	0	191	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+RaymondF_2016	cephalosporins; control	36	36	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+SankaranarayananK_2015	T2D; control	19	18	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+SchirmerM_2016	control	0	471	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+ShaoY_2019	control	0	1644	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+SmitsSA_2017	control	0	40	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+TettAJ_2019_a	control	0	68	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+TettAJ_2019_b	control	0	44	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+ThomasAM_2019_c	CRC; control	40	40	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+VatanenT_2016	bronchitis; control; cough; cystitis; fever; infectiousgastroenteritis; otitis; pneumonia; pyelonefritis; pyelonephritis; respiratoryinf; salmonellosis; sepsis; skininf; stomatitis; suspinf; tonsillitis	170	615	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+VincentC_2016	CDI; control	33	196	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+YassourM_2016	control	0	36	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+YassourM_2018	control	0	271	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+YeZ_2018	BD; control	20	45	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
+ZeeviD_2015	control	0	900	0	not analysed (no profiles, < 10 samples or a single label class)	0	0
