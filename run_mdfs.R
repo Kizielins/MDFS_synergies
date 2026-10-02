@@ -37,8 +37,14 @@ if (ncol(y_dt) >= 2) {
 X_matrix <- as.matrix(X)
 feature_names <- colnames(X)
 
+# === Shared discretisation ===
+# MDFS bins every feature at a random cut point. The 1D step, the 2D significance step and
+# ComputeInterestingTuples all use the same seed and the 2D cut range, so a feature is binned
+# identically in every step and total_IG = base_IG_1D + IG_2D_added is the joint IG of the pair.
+range_2d <- GetRange(n = nrow(X_matrix), dimensions = 2)
+
 # === STEP 3: MDFS 1D — significance + IGs ===
-result_1d <- MDFS(X_matrix, y, dimensions = 1)
+result_1d <- MDFS(X_matrix, y, dimensions = 1, seed = seed, range = range_2d)
 
 ig_1d <- result_1d$statistic  # one IG per variable (baseline)
 names(ig_1d) <- feature_names
@@ -56,7 +62,7 @@ relevant_1d_features <- feature_names[result_1d$relevant.variables]
 cat("1D significant features:", length(relevant_1d_features), "\n")
 
 # === STEP 4: MDFS 2D — significance ===
-result_2d <- MDFS(X_matrix, y, dimensions = 2)
+result_2d <- MDFS(X_matrix, y, dimensions = 2, seed = seed, range = range_2d)
 
 sig_2d_vars <- result_2d$relevant.variables
 relevant_2d_features <- feature_names[sig_2d_vars]
@@ -95,6 +101,8 @@ if (length(sig_2d_vars) > 0) {
   tuples <- ComputeInterestingTuples(
     X_matrix, y,
     dimensions = 2,
+    seed = seed,
+    range = range_2d,
     interesting.vars = sig_2d_vars,
     I.lower = ig_1d,
     ig.thr = ig_thr_pair

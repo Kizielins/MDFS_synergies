@@ -16,3 +16,5 @@ M2_loco_crc_pipeline/work_*/
 R4_broader_application/results/mdfs_ig_info_*.tsv
 R1_synergistic_pairs/figure1b_all_pairs/directed/
 R1_synergistic_pairs/seed_stability/selection_frequency.tsv
+M2_loco_crc_pipeline/results_sensitivity/*/mdfs_ig_info_*.csv
+M2_loco_crc_pipeline/results_sensitivity/*/mdfs_1d_*.csv
