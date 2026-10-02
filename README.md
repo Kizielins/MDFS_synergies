@@ -20,9 +20,17 @@ tables and quoted numbers it produces, and every manuscript item is written to `
 | `R2_classification_performance/` | Results *Synergy-derived features retain benchmark-level classification performance* | `summarize_rf_results.ipynb`; `stable_pairs.ipynb`; `effect_sizes.ipynb` | AUC summary (`loco_performance_summary.tsv`), **Supp. Figures 1–2**, stable-pair table (`final_synthetic_features_table.csv`), **Figure 3**, **Supp. Table 2**, meta-analysis tables |
 | `R3_pair_transformations/` | Results *Pair transformations reveal distinct forms of disease-associated dependence* | `transformation_preference.ipynb` | **Figure 4**, **Supp. Table 3**, LR / GM counts |
 | `R4_broader_application/` | Results *Broader application identifies conserved synergistic markers in other conditions*; Methods *Application to additional disease cohorts* | `run_mdfs_1d_2d.py` (10 MDFS runs per cohort), `load_cohort_data.py` (synergy table), `analyse_synergy_gains.ipynb` | **Figure 5**, **Table 1**, **Supp. Table 4**, `synergy_by_cohort.tsv`, emergent synergies, top markers per cohort |
+| `R5_reviewer_checks/` | Reviewer comments 1.5, 1.7, 1.9, 1.10, 2.2, 2.5 | `run_negative_controls.py`, `run_discretisation_sensitivity.py`, `run_runtime.py`; `additivity_and_collinearity.ipynb`, `sensitivity_training_cohorts.ipynb`, `reviewer_checks_summary.ipynb` | label-permutation and within-class-shuffle controls, discretisation sensitivity, runtime/memory, interaction information and cohort-adjusted likelihood-ratio tests of the stable pairs, collinearity, LOCO rerun without the single-class / training-only cohorts (`M2_loco_crc_pipeline/results_sensitivity/`) |
 | `manuscript/` | — | — | one file per manuscript figure / table (written by the notebooks above, never by hand), `REVISION_CHANGES.md` (submitted vs revised numbers) |
 | `archive/` | — | analyses not used in the manuscript (see `archive/README.md`) | — |
 | `METHODS.md` | — | step-by-step description of the whole pipeline with all parameters | — |
+
+## Discretisation
+
+MDFS bins every feature at a random cut point. `run_mdfs.R` uses **one seed and one cut range
+(`GetRange(n, dimensions = 2)`) for the 1D, 2D and pair steps**, so a feature is binned identically in
+every step and `total_IG = base_IG_1D + IG_2D_added` is the joint IG of the pair under one binning.
+(The submitted version drew separate cuts for the 1D and 2D steps; see `manuscript/REVISION_CHANGES.md`.)
 
 ## Method in one paragraph
 
@@ -42,8 +50,9 @@ bash run_all.sh            # all steps in manuscript order; or e.g.  bash run_al
 ```
 
 Steps: `M1` data preparation (needs the benchmark profiles in `../data/`), `M2` LOCO pipeline
-(≈ 2–3 h, the three data types run in parallel), `R1`–`R4` the result notebooks (minutes each, except
-`R2` effect sizes ≈ 1 h). Notebooks are executed in place with `jupyter nbconvert --execute`, so the
+(≈ 3–5 h, the three data types run in parallel; add `python3 M2_loco_crc_pipeline/run_loco.py <dt> --exclude-training-only`
+for the sensitivity run), `R1`–`R4` the result notebooks (minutes each, except `R2` effect sizes ≈ 10–60 min), `R5` the
+reviewer checks (scripts first, then notebooks). Notebooks are executed in place with `jupyter nbconvert --execute`, so the
 stored outputs are those of the last full run. The all-pairs input of Figure 1b
 (`R1_synergistic_pairs/figure1b_all_pairs/run_all_directed.py`, several hours) is not part of
 `run_all.sh`; its aggregated per-fold tables are deposited with the data (below).

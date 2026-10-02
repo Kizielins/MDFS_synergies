@@ -412,3 +412,20 @@ Putting §2 and §3 together, a pair survives all the way through to the final R
 Conditions (1)–(2) are statistical significance; (3) ensures the pair carries genuinely synergistic information; (4)–(5) bound the volume so the RF stage is tractable and keep only pairs that are reproducible across MDFS runs.
 
 In the validation arm conditions (1)–(3) must hold in at least 6 of 10 runs; there is no top-2 % cutoff.
+
+---
+
+## 9. Reviewer checks (`R5_reviewer_checks/`)
+
+Analyses added in the revision in response to the reviewers; every output is a TSV in the folder and the numbers are listed in `manuscript/RESULTS_NUMBERS.md` (section "R5 reviewer checks").
+
+| Script / notebook | Reviewer comment | What it does | Output |
+|---|---|---|---|
+| `run_negative_controls.py` | R1.7 | LOCO fold-0 training set of each data type: `run_mdfs.R` with real labels, with labels permuted (5×), and with every feature shuffled independently within each class (5×; keeps univariate signal, destroys pair dependence) | `negative_controls.tsv` (Supp. Table 6) |
+| `run_discretisation_sensitivity.py` | R1.10 | fold-0 taxa: default vs seed 43, wider (1D) cut range, half range, three bins (divisions = 2); overlap of pair sets with the default | `discretisation_sensitivity.tsv` (Supp. Table 7) |
+| `run_runtime.py` | R1.9 | wall-clock time and peak memory of one MDFS run per data type (fold-0 training set) | `runtime.tsv` |
+| `additivity_and_collinearity.ipynb` | R2.2, R2.5, R1.5 | interaction information `total_IG − base_IG_1D − contributing_IG_1D` of every per-run top-2 % pair and of the consensus pairs; cohort-adjusted logistic regression with likelihood-ratio tests (cohort-only vs additive vs interaction) for the stable pairs; Spearman correlation of each stable synthetic feature with its constituents | `interaction_information.tsv`, `stable_pairs_lrt.tsv` (Supp. Table 9), `collinearity.tsv` |
+| `sensitivity_training_cohorts.ipynb` | R1.5 | compares the main LOCO run with `run_loco.py --exclude-training-only` (AtezoTRIBE, COLOBIOME and NSHII removed from every training set; results in `M2_loco_crc_pipeline/results_sensitivity/`): AUCs and stable pairs | `sensitivity_auc.tsv` (Supp. Table 8), `sensitivity_shared_stable_pairs.tsv` |
+| `reviewer_checks_summary.ipynb` | — | tabulates the three script outputs | `r5_numbers_scripts.tsv` |
+
+The 1D significance of the hub species (Results §2) is taken from the Holm-adjusted 1D MDFS p-values saved for every fold and run (`M2_loco_crc_pipeline/results/<dt>/mdfs_1d_<dt>.csv`, summarised by `R2_classification_performance/hub_1d_significance.py`).

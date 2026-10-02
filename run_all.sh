@@ -6,7 +6,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 NB() { python3 -m jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.kernel_name=python3 "$1"; }
-steps=("$@"); [ ${#steps[@]} -eq 0 ] && steps=(M1 M2 R1 R2 R3 R4)
+steps=("$@"); [ ${#steps[@]} -eq 0 ] && steps=(M1 M2 R1 R2 R3 R4 R5)
 has() { for s in "${steps[@]}"; do [ "$s" = "$1" ] && return 0; done; return 1; }
 
 if has M1; then   # Methods: data preparation  (needs ../data/, the CRC benchmark profiles)
@@ -37,5 +37,10 @@ if has R4; then   # Results 4: other diseases (Figure 5, Table 1, Supp Table 4)
     python3 run_mdfs_1d_2d.py --data-dir data --all-cohorts --out-dir results > validation_mdfs.log 2>&1
     python3 load_cohort_data.py --data-dir data --mdfs-results-dir results --out-table synergy_by_cohort.tsv )
   NB R4_broader_application/analyse_synergy_gains.ipynb
+fi
+if has R5; then  # reviewer checks (scripts: negative controls, discretisation sensitivity, runtime; then notebooks)
+  ( cd R5_reviewer_checks && for s in run_negative_controls.py run_discretisation_sensitivity.py run_runtime.py; do python3 $s > ${s%.py}.log 2>&1; done )
+  for nb in R5_reviewer_checks/*.ipynb; do NB "$nb"; done
+  python3 manuscript/collect_numbers.py
 fi
 echo "run_all.sh finished: ${steps[*]}"
