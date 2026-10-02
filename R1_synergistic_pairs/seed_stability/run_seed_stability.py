@@ -25,7 +25,7 @@ OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "pairs")
 DATA_TYPES = ["taxa", "functions", "combined"]
 SEEDS = list(range(42, 62))      # 20 seeds; 42..51 = the seeds used by main_code.ipynb
 KEEP_FRACTION = 0.05
-N_WORKERS = 6
+N_WORKERS = 12
 
 ALL_COHORT_STEMS = [
     'Public_study__FengQ_2015', 'Public_study__GuptaA_2019', 'Public_study__LiuNN_2022',
