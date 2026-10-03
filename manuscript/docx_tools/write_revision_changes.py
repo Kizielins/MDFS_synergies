@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+"""manuscript/REVISION_CHANGES.md: submitted version vs this revision, from the final output files."""
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import ms_numbers
+from ms_numbers import sp, fmt
+N = ms_numbers.load(); r5 = N["r5"]
+def g(prefix):
+    for k, v in r5.items():
+        if k.startswith(prefix): return v
+    return "n/a"
+L = []
+L.append("# Revision: submitted version vs this revision\n")
+L.append("Generated from the final output files (`manuscript/collect_numbers.py` values). The submitted numbers are those of the manuscript sent to npj Biofilms and Microbiomes; 'September rerun' is the intermediate 10-run rerun whose numbers were used in `MS_final_reviewed.docx`.\n")
+L.append("## What changed in the method\n")
+L.append("| | Submitted | This revision |\n|---|---|---|")
+L.append("| MDFS runs per LOCO fold | 2, seed not passed to MDFS (runs identical) | 10 independent runs, seeds 42-51 |")
+L.append("| Pairs kept per run / consensus | top 1 %, in both runs | top 2 %, in >= 6 of 10 runs (seed-stability analysis, Supp. Table 5) |")
+L.append("| Discretisation | 1D and 2D steps used different random cut points | one seed and one cut range (GetRange(n, 2)) for the 1D, 2D and pair steps |")
+L.append("| Per-run diagnostic RF | trained, output unused | removed; one RF per fold and configuration (random_state 42) |")
+L.append("| Validation arm | 3 seeds, pair kept if found in any run; ordered (directed) pair counts | 10 seeds (12-21), kept if in >= 6 of 10 runs; unordered pairs, orientation recorded |")
+L.append("| 1D p-values | not saved | saved for every fold and run (`mdfs_1d_<dt>.csv`) |")
+L.append("| New analyses | - | negative controls, discretisation sensitivity, runtime, interaction information, cohort-adjusted LRT, collinearity, training-composition sensitivity (R5_reviewer_checks/) |\n")
+L.append("## CRC discovery arm\n")
+L.append("| Claim | Submitted | This revision |\n|---|---|---|")
+L.append(f"| Mean AUC taxa (raw / synthetic / both) | 0.849 / 0.837 / 0.837 | {N['auc_taxa_raw']:.3f} / {N['auc_taxa_syn']:.3f} / {N['auc_taxa_both']:.3f} |")
+L.append(f"| Mean AUC functions | 0.679 / 0.673 / 0.675 | {N['auc_functions_raw']:.3f} / {N['auc_functions_syn']:.3f} / {N['auc_functions_both']:.3f} |")
+L.append(f"| Mean AUC combined | 0.821 / 0.833 / 0.831 | {N['auc_combined_raw']:.3f} / {N['auc_combined_syn']:.3f} / {N['auc_combined_both']:.3f} |")
+L.append(f"| Stable pairs (combined / taxa / functions) | 62 (58 / - / -) | {N['n_stable']} ({N['n_stable_by_dt'].get('combined', 0)} / {N['n_stable_by_dt'].get('taxa', 0)} / {N['n_stable_by_dt'].get('functions', 0)}) |")
+L.append(f"| >= 1 constituent at 0 % individual frequency | 55 | {N['n_stable_zero']} |")
+L.append(f"| P. micra stable combined pairs (as base) | 33 (23) | {N['pm_stable_combined']} ({N['pm_as_base']}) |")
+L.append(f"| F. nucleatum stable combined pairs (as contributor) | 16-17 | {N['fn_stable_combined']} ({N['fn_as_contrib']}) |")
+L.append(f"| Pairs meta-significant / consistent direction >= 14/15 | 62/62 / 60 | {N['n_meta_sig']}/{N['n_meta']} / {N['dir14']} |")
+L.append(f"| Cohort-pair tests significant | 80.3 % | {N['cohort_tests_pct']:.1f} % |")
+L.append(f"| GM-based stable pairs (GM only + both) | 41/62 (66 %) | {N['gm_based']}/{N['n_stable']} ({N['gm_based_pct']:.0f} %) |")
+cons = "; ".join(f"{dt}: " + ", ".join(f"{sp(a)} + {sp(b)} ({v}/140)" for (a, b), v in N['consistency'][dt][:2]) for dt in ("taxa", "combined"))
+L.append(f"| Most consistent pairs | P. micra + D. pneumosintes 'only pair at 28/28' (incorrect) | {cons} |")
+L.append(f"| Seed stability (Jaccard, 10 runs >= 6 vs 2 runs) | - | taxa {N['jac']['taxa'][0]:.2f} vs {N['jac']['taxa'][1]:.2f}; combined {N['jac']['combined'][0]:.2f} vs {N['jac']['combined'][1]:.2f}; functions {N['jac']['functions'][0]:.2f} vs {N['jac']['functions'][1]:.2f} |")
+L.append(f"| P. micra 1D-significant (combined / taxa folds) | 'all folds' | {N['pm_1d_folds_combined']}/14 / {N['pm_1d_folds_taxa']}/14 |")
+L.append(f"| Interaction information > 0 (consensus pairs) | - | taxa {g('taxa: consensus pairs with positive')}; combined {g('combined: consensus pairs with positive')} |")
+L.append(f"| Cohort-adjusted LRT (stable pairs beyond cohort / interaction term) | - | {g('Stable pairs informative beyond cohort')} / {g('Stable pairs with a significant multiplicative')} |")
+L.append(f"| Sensitivity run (no single-class / training-only cohorts): taxa AUC | - | {g('taxa mean AUC (sensitivity)')} (main {g('taxa mean AUC (main)')}); stable pairs shared: {g('combined: stable pairs main / sensitivity')} |")
+L.append(f"| Negative controls (max pairs: label permutation / within-class shuffle) | - | {g('taxa: synergistic pairs with real labels vs label_perm')}; {g('taxa: synergistic pairs with real labels vs within_class')} |\n")
+L.append("## Validation arm (non-CRC cohorts)\n")
+L.append("| Claim | Submitted | This revision |\n|---|---|---|")
+L.append(f"| Cohorts analysed / with pairs | '13' / 9 | {N['n_analysed']} / {N['n_with_pairs']} |")
+L.append(f"| Unique pairs | 133,747 | {fmt(N['n_pairs_total'])} |")
+L.append(f"| >= 100 % gain in >= 1 cohort | 112,888 (84.4 %) | {fmt(N['n_pairs_100'])} ({N['pct_pairs_100']:.1f} %) |")
+L.append(f"| Pairs per cohort | QinN 72,385; HallAB 40,934 | " + "; ".join(f"{c['cohort']} {fmt(c['n_synergistic_pairs'])}" for c in N['cohorts_with_pairs']) + " |")
+L.append(f"| Emergent pairs | 28,254 in 3 cohorts | {fmt(N['n_emergent'])} in {len(N['emergent_cohorts'])} ({', '.join(N['emergent_cohorts'])}) |")
+L.append(f"| E. ramulus + R. torques (HallAB) | 0.58 -> 55.6 (95-fold) | {N['eramulus']['base1d']:.2f} -> {N['eramulus']['total']:.1f} ({N['eramulus']['total']/N['eramulus']['base1d']:.0f}-fold, {N['eramulus']['runs']}/10 runs) |" if N['eramulus'] else "| E. ramulus + R. torques (HallAB) | 0.58 -> 55.6 | not retained |")
+L.append(f"| C. amalonaticus + S. anginosus (QinN) | 0.23 -> 88.6 | {N['camalon']['base1d']:.2f} -> {N['camalon']['total']:.1f} ({N['camalon']['runs']}/10 runs) |" if N['camalon'] else "| C. amalonaticus + S. anginosus (QinN) | 0.23 -> 88.6 | not retained |")
+L.append(f"| MetaCardis top pair | E. coli + L-Asp/L-Asn biosynthesis (61.4) | {N['metacardis_top'][0][0]} ({N['metacardis_top'][0][1]:.1f}) |")
+L.append(f"| Gemmiger formicilis + PWY-6609 | 5 cohorts | {N['gemmiger_cohorts']} cohort(s) |")
+L.append(f"| Max cohorts sharing a pair | 5 | {N['max_cohorts']} ({N['n_pairs_maxco']} pairs; {N['maxco_strep_share']:.0f} % with Streptococcus) |")
+L.append(f"| Conserved IBD pairs | 176 (124 + 52) | {N['n_conserved']} ({N['conserved_taxa_taxa']} + {N['conserved_taxa_fun']}); same orientation in both cohorts: {N['conserved_same_orient']} |")
+L.append(f"| Table 1 | disease / control columns swapped | corrected (manuscript/Table1_validation_cohorts.tsv) |\n")
+L.append("## Where everything is\n")
+L.append("See `README.md` (section -> folder -> file) and `manuscript/RESULTS_NUMBERS.md` (every quoted number with its source). The AI-edited manuscript and reviewer-response drafts are outside the repository (NPJ_review/*AI_revision*.docx).\n")
+open(os.path.join(ms_numbers.MS, "REVISION_CHANGES.md"), "w").write("\n".join(L))
+print("\n".join(L[:12]))

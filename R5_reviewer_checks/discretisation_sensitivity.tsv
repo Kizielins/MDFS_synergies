@@ -1,0 +1,6 @@
+config	seed	divisions	range	features_2D_significant	pair_IG_threshold_bits	unordered_pairs_passing	top2pct_pairs	jaccard_all_vs_default	jaccard_top2pct_vs_default	spearman_total_IG_shared_pairs	n_shared_pairs
+default	42	1	default	237	21.09027	31751	635	1.0	1.0	1.0	31751
+default_seed43	43	1	default	228	21.09027	29838	596	0.778	0.137	0.897	26953
+range_1D	42	1	range_1D	235	21.09027	31306	626	0.962	0.964	0.99	30923
+range_half	42	1	range_half	251	21.09027	31724	634	0.902	0.171	0.952	30099
+divisions_2	42	2	default	262	28.88072	24797	495	0.655	0.264	0.92	22372

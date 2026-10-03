@@ -1,0 +1,11 @@
+section	claim	value	source
+R5	taxa: stable pairs main / sensitivity run / shared (Jaccard)	40 / 52 / 1 (0.01)	R5 sensitivity_training_cohorts.ipynb
+R5	functions: stable pairs main / sensitivity run / shared (Jaccard)	26 / 43 / 2 (0.03)	R5 sensitivity_training_cohorts.ipynb
+R5	combined: stable pairs main / sensitivity run / shared (Jaccard)	169 / 135 / 61 (0.25)	R5 sensitivity_training_cohorts.ipynb
+R5	taxa mean AUC (main): raw / synthetic / raw+synthetic	0.847 / 0.839 / 0.837	../M2_loco_crc_pipeline/results/taxa/loco_results_taxa.csv
+R5	taxa mean AUC (sensitivity): raw / synthetic / raw+synthetic	0.845 / 0.836 / 0.831	../M2_loco_crc_pipeline/results_sensitivity/taxa/loco_results_taxa.csv
+R5	functions mean AUC (main): raw / synthetic / raw+synthetic	0.674 / 0.667 / 0.672	../M2_loco_crc_pipeline/results/functions/loco_results_functions.csv
+R5	functions mean AUC (sensitivity): raw / synthetic / raw+synthetic	0.714 / 0.709 / 0.711	../M2_loco_crc_pipeline/results_sensitivity/functions/loco_results_functions.csv
+R5	combined mean AUC (main): raw / synthetic / raw+synthetic	0.825 / 0.824 / 0.827	../M2_loco_crc_pipeline/results/combined/loco_results_combined.csv
+R5	combined mean AUC (sensitivity): raw / synthetic / raw+synthetic	0.827 / 0.826 / 0.827	../M2_loco_crc_pipeline/results_sensitivity/combined/loco_results_combined.csv
+R5	P. micra / F. nucleatum stable combined pairs, main vs sensitivity	18/125 vs 10/84	R5 sensitivity_training_cohorts.ipynb

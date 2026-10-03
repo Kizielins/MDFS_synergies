@@ -1,57 +1,57 @@
 data_type	feature	fold	test_cohort	source	n_runs	IG_min	IG_max	p_adj_max	significant_all_runs
-combined	Fusobacterium_nucleatum	0	Public_study__FengQ_2015	reconstructed from IG (chi2 df=1, Bonferroni x 918 features)	9	29.80029296875	410.904541015625	1.1913000335559729e-07	True
-combined	Fusobacterium_nucleatum	1	Public_study__GuptaA_2019	reconstructed from IG (chi2 df=1, Bonferroni x 1143 features)	9	298.260498046875	429.2783203125	7.334325645705116e-89	True
-combined	Fusobacterium_nucleatum	2	Public_study__LiuNN_2022	reconstructed from IG (chi2 df=1, Bonferroni x 925 features)	10	189.77734375	406.726318359375	3.3707268134493433e-56	True
-combined	Fusobacterium_nucleatum	3	Public_study__ThomasAM_2018b	reconstructed from IG (chi2 df=1, Bonferroni x 930 features)	9	122.842529296875	428.330322265625	5.9295400626419653e-36	True
-combined	Fusobacterium_nucleatum	4	Public_study__VogtmannE_2016	reconstructed from IG (chi2 df=1, Bonferroni x 927 features)	10	143.651611328125	426.76318359375	2.977411017037017e-42	True
-combined	Fusobacterium_nucleatum	5	Public_study__WirbelJ_2018	reconstructed from IG (chi2 df=1, Bonferroni x 920 features)	10	9.228271484375	399.22021484375	0.3200680050337164	False
-combined	Fusobacterium_nucleatum	6	Public_study__YachidaS_2019	reconstructed from IG (chi2 df=1, Bonferroni x 918 features)	8	98.42919921875	413.820922851562	1.4588987941611768e-28	True
-combined	Fusobacterium_nucleatum	7	Public_study__YangJ_2020	reconstructed from IG (chi2 df=1, Bonferroni x 924 features)	10	50.958984375	396.653076171875	3.953185283694663e-14	True
-combined	Fusobacterium_nucleatum	8	Public_study__YangY_2021	reconstructed from IG (chi2 df=1, Bonferroni x 923 features)	10	421.410400390625	421.410400390625	4.226201111221356e-126	True
-combined	Fusobacterium_nucleatum	9	Public_study__YuJ_2015	reconstructed from IG (chi2 df=1, Bonferroni x 929 features)	10	399.509765625	400.116943359375	1.7102542873561e-119	True
-combined	Fusobacterium_nucleatum	10	Public_study__ZellerG_2014	reconstructed from IG (chi2 df=1, Bonferroni x 919 features)	10	327.328125	413.8046875	1.0006916502959564e-97	True
-combined	Fusobacterium_nucleatum	11	This_study_cohort3__ONCOBIOME_IIGM_CZ	reconstructed from IG (chi2 df=1, Bonferroni x 922 features)	10	422.5634765625	422.5634765625	1.8957345391384945e-126	True
-combined	Fusobacterium_nucleatum	12	This_study_cohort4__ONCOBIOME_IIGM_IT	reconstructed from IG (chi2 df=1, Bonferroni x 923 features)	10	104.83349609375	431.47802734375	1.678798355529304e-30	True
-combined	Fusobacterium_nucleatum	13	This_study_cohort6__IIGM_TU	reconstructed from IG (chi2 df=1, Bonferroni x 925 features)	10	394.257080078125	425.708251953125	6.5353102502671075e-118	True
-combined	Parvimonas_micra	0	Public_study__FengQ_2015	reconstructed from IG (chi2 df=1, Bonferroni x 918 features)	10	193.510009765625	348.864501953125	2.4921936948432717e-57	True
-combined	Parvimonas_micra	1	Public_study__GuptaA_2019	reconstructed from IG (chi2 df=1, Bonferroni x 1143 features)	10	58.788818359375	354.53125	2.004651836157999e-16	True
-combined	Parvimonas_micra	2	Public_study__LiuNN_2022	reconstructed from IG (chi2 df=1, Bonferroni x 925 features)	10	120.03125	345.822509765625	4.1872449522659196e-35	True
-combined	Parvimonas_micra	3	Public_study__ThomasAM_2018b	reconstructed from IG (chi2 df=1, Bonferroni x 930 features)	10	206.532470703125	346.09814453125	2.937842643930003e-61	True
-combined	Parvimonas_micra	4	Public_study__VogtmannE_2016	reconstructed from IG (chi2 df=1, Bonferroni x 927 features)	10	336.951904296875	355.84716796875	1.2611101052064818e-100	True
-combined	Parvimonas_micra	5	Public_study__WirbelJ_2018	reconstructed from IG (chi2 df=1, Bonferroni x 920 features)	10	71.066650390625	330.32958984375	2.961230363352455e-20	True
-combined	Parvimonas_micra	6	Public_study__YachidaS_2019	reconstructed from IG (chi2 df=1, Bonferroni x 918 features)	10	205.2587890625	360.493530273438	7.032968613482663e-61	True
-combined	Parvimonas_micra	7	Public_study__YangJ_2020	reconstructed from IG (chi2 df=1, Bonferroni x 924 features)	10	171.341552734375	328.254638671875	1.2560200015840262e-50	True
-combined	Parvimonas_micra	8	Public_study__YangY_2021	reconstructed from IG (chi2 df=1, Bonferroni x 923 features)	10	157.0576171875	338.852783203125	2.6131145444656876e-46	True
-combined	Parvimonas_micra	9	Public_study__YuJ_2015	reconstructed from IG (chi2 df=1, Bonferroni x 929 features)	10	326.004150390625	326.004150390625	2.5376563048572865e-97	True
-combined	Parvimonas_micra	10	Public_study__ZellerG_2014	reconstructed from IG (chi2 df=1, Bonferroni x 919 features)	10	353.584228515625	384.841796875	1.2015479157121065e-105	True
-combined	Parvimonas_micra	11	This_study_cohort3__ONCOBIOME_IIGM_CZ	reconstructed from IG (chi2 df=1, Bonferroni x 922 features)	10	135.666748046875	355.6376953125	7.717323787190996e-40	True
-combined	Parvimonas_micra	12	This_study_cohort4__ONCOBIOME_IIGM_IT	reconstructed from IG (chi2 df=1, Bonferroni x 923 features)	10	45.927490234375	361.753662109375	1.3584807539702586e-12	True
-combined	Parvimonas_micra	13	This_study_cohort6__IIGM_TU	reconstructed from IG (chi2 df=1, Bonferroni x 925 features)	10	197.755126953125	350.82666015625	1.3100721254372865e-58	True
-taxa	Fusobacterium_nucleatum	0	Public_study__FengQ_2015	reconstructed from IG (chi2 df=1, Bonferroni x 473 features)	9	120.161376953125	410.904541015625	1.9554338141842905e-35	True
-taxa	Fusobacterium_nucleatum	1	Public_study__GuptaA_2019	reconstructed from IG (chi2 df=1, Bonferroni x 682 features)	10	379.641357421875	429.2783203125	1.2326859937132835e-113	True
-taxa	Fusobacterium_nucleatum	2	Public_study__LiuNN_2022	reconstructed from IG (chi2 df=1, Bonferroni x 480 features)	10	395.1494140625	406.726318359375	1.8249764999214045e-118	True
-taxa	Fusobacterium_nucleatum	3	Public_study__ThomasAM_2018b	reconstructed from IG (chi2 df=1, Bonferroni x 482 features)	9	428.330322265625	429.004150390625	1.8078673826941479e-128	True
-taxa	Fusobacterium_nucleatum	4	Public_study__VogtmannE_2016	reconstructed from IG (chi2 df=1, Bonferroni x 482 features)	10	426.76318359375	426.76318359375	5.3668022157398e-128	True
-taxa	Fusobacterium_nucleatum	5	Public_study__WirbelJ_2018	reconstructed from IG (chi2 df=1, Bonferroni x 474 features)	10	260.473876953125	399.22021484375	7.713722886119168e-78	True
-taxa	Fusobacterium_nucleatum	6	Public_study__YachidaS_2019	reconstructed from IG (chi2 df=1, Bonferroni x 473 features)	10	85.24658203125	413.820922851562	7.501644739418119e-25	True
-taxa	Fusobacterium_nucleatum	7	Public_study__YangJ_2020	reconstructed from IG (chi2 df=1, Bonferroni x 479 features)	10	152.06103515625	396.653076171875	4.3991603673720026e-45	True
-taxa	Fusobacterium_nucleatum	8	Public_study__YangY_2021	reconstructed from IG (chi2 df=1, Bonferroni x 477 features)	10	140.9111328125	421.410400390625	1.0336770951954757e-41	True
-taxa	Fusobacterium_nucleatum	9	Public_study__YuJ_2015	reconstructed from IG (chi2 df=1, Bonferroni x 484 features)	10	267.1787109375	400.116943359375	7.455655752558795e-80	True
-taxa	Fusobacterium_nucleatum	10	Public_study__ZellerG_2014	reconstructed from IG (chi2 df=1, Bonferroni x 474 features)	10	354.22021484375	413.8046875	3.9844126428022835e-106	True
-taxa	Fusobacterium_nucleatum	11	This_study_cohort3__ONCOBIOME_IIGM_CZ	reconstructed from IG (chi2 df=1, Bonferroni x 477 features)	10	169.8515625	422.5634765625	1.8291763716564536e-50	True
-taxa	Fusobacterium_nucleatum	12	This_study_cohort4__ONCOBIOME_IIGM_IT	reconstructed from IG (chi2 df=1, Bonferroni x 478 features)	9	254.921630859375	426.8115234375	3.6894286176463514e-76	True
-taxa	Fusobacterium_nucleatum	13	This_study_cohort6__IIGM_TU	reconstructed from IG (chi2 df=1, Bonferroni x 477 features)	9	392.088623046875	425.708251953125	1.5191712819017535e-117	True
-taxa	Parvimonas_micra	0	Public_study__FengQ_2015	reconstructed from IG (chi2 df=1, Bonferroni x 473 features)	10	122.75390625	349.95947265625	3.207984937030307e-36	True
-taxa	Parvimonas_micra	1	Public_study__GuptaA_2019	reconstructed from IG (chi2 df=1, Bonferroni x 682 features)	10	340.420166015625	352.225830078125	8.340508456893357e-102	True
-taxa	Parvimonas_micra	2	Public_study__LiuNN_2022	reconstructed from IG (chi2 df=1, Bonferroni x 480 features)	10	305.940673828125	353.477294921875	1.4828500343610418e-91	True
-taxa	Parvimonas_micra	3	Public_study__ThomasAM_2018b	reconstructed from IG (chi2 df=1, Bonferroni x 482 features)	10	213.22705078125	346.761962890625	1.4469151153272511e-63	True
-taxa	Parvimonas_micra	4	Public_study__VogtmannE_2016	reconstructed from IG (chi2 df=1, Bonferroni x 482 features)	10	333.926513671875	362.670166015625	5.362950742887218e-100	True
-taxa	Parvimonas_micra	5	Public_study__WirbelJ_2018	reconstructed from IG (chi2 df=1, Bonferroni x 474 features)	10	330.32958984375	330.32958984375	6.415916189459214e-99	True
-taxa	Parvimonas_micra	6	Public_study__YachidaS_2019	reconstructed from IG (chi2 df=1, Bonferroni x 473 features)	10	8.156494140625	356.792846679688	0.365169617408396	False
-taxa	Parvimonas_micra	7	Public_study__YangJ_2020	reconstructed from IG (chi2 df=1, Bonferroni x 479 features)	10	171.328857421875	328.254638671875	6.568976747434645e-51	True
-taxa	Parvimonas_micra	8	Public_study__YangY_2021	reconstructed from IG (chi2 df=1, Bonferroni x 477 features)	10	322.22509765625	338.852783203125	1.7991378110885782e-96	True
-taxa	Parvimonas_micra	9	Public_study__YuJ_2015	reconstructed from IG (chi2 df=1, Bonferroni x 484 features)	10	318.622802734375	326.004150390625	2.2295674904484753e-95	True
-taxa	Parvimonas_micra	10	Public_study__ZellerG_2014	reconstructed from IG (chi2 df=1, Bonferroni x 474 features)	10	372.9326171875	384.841796875	9.041392898344408e-112	True
-taxa	Parvimonas_micra	11	This_study_cohort3__ONCOBIOME_IIGM_CZ	reconstructed from IG (chi2 df=1, Bonferroni x 477 features)	10	292.6884765625	353.911376953125	1.4697830747187808e-87	True
-taxa	Parvimonas_micra	12	This_study_cohort4__ONCOBIOME_IIGM_IT	reconstructed from IG (chi2 df=1, Bonferroni x 478 features)	10	301.0107421875	364.47802734375	4.537871864639833e-90	True
-taxa	Parvimonas_micra	13	This_study_cohort6__IIGM_TU	reconstructed from IG (chi2 df=1, Bonferroni x 477 features)	10	340.961181640625	352.46044921875	4.006094743168356e-102	True
+combined	Fusobacterium_nucleatum	0	Public_study__FengQ_2015	mdfs_1d (MDFS Holm-adjusted p)	10	139.372802734375	410.904541015625	5.77803933873557e-41	True
+combined	Fusobacterium_nucleatum	1	Public_study__GuptaA_2019	mdfs_1d (MDFS Holm-adjusted p)	10	352.1162109375	429.2783203125	4.13912734478362e-105	True
+combined	Fusobacterium_nucleatum	2	Public_study__LiuNN_2022	mdfs_1d (MDFS Holm-adjusted p)	10	357.809814453125	406.726318359375	6.42643140623344e-107	True
+combined	Fusobacterium_nucleatum	3	Public_study__ThomasAM_2018b	mdfs_1d (MDFS Holm-adjusted p)	10	308.6728515625	435.9775390625	4.29088256093151e-92	True
+combined	Fusobacterium_nucleatum	4	Public_study__VogtmannE_2016	mdfs_1d (MDFS Holm-adjusted p)	10	149.900146484375	426.76318359375	3.81361141155891e-44	True
+combined	Fusobacterium_nucleatum	5	Public_study__WirbelJ_2018	mdfs_1d (MDFS Holm-adjusted p)	10	319.334228515625	399.22021484375	2.5797362119534e-95	True
+combined	Fusobacterium_nucleatum	6	Public_study__YachidaS_2019	mdfs_1d (MDFS Holm-adjusted p)	10	137.863525390625	413.820922851562	1.6537070678694596e-40	True
+combined	Fusobacterium_nucleatum	7	Public_study__YangJ_2020	mdfs_1d (MDFS Holm-adjusted p)	10	154.19384765625	396.653076171875	1.91122822690028e-45	True
+combined	Fusobacterium_nucleatum	8	Public_study__YangY_2021	mdfs_1d (MDFS Holm-adjusted p)	10	331.142578125	421.410400390625	7.10258945639096e-99	True
+combined	Fusobacterium_nucleatum	9	Public_study__YuJ_2015	mdfs_1d (MDFS Holm-adjusted p)	10	400.116943359375	400.116943359375	1.12189802906787e-119	True
+combined	Fusobacterium_nucleatum	10	Public_study__ZellerG_2014	mdfs_1d (MDFS Holm-adjusted p)	10	136.251708984375	413.8046875	5.0894001358141686e-40	True
+combined	Fusobacterium_nucleatum	11	This_study_cohort3__ONCOBIOME_IIGM_CZ	mdfs_1d (MDFS Holm-adjusted p)	10	151.847900390625	422.5634765625	9.76934224198152e-45	True
+combined	Fusobacterium_nucleatum	12	This_study_cohort4__ONCOBIOME_IIGM_IT	mdfs_1d (MDFS Holm-adjusted p)	10	155.513916015625	426.8115234375	7.614217878656731e-46	True
+combined	Fusobacterium_nucleatum	13	This_study_cohort6__IIGM_TU	mdfs_1d (MDFS Holm-adjusted p)	10	326.0263671875	425.708251953125	2.48265363420378e-97	True
+combined	Parvimonas_micra	0	Public_study__FengQ_2015	mdfs_1d (MDFS Holm-adjusted p)	10	315.1767578125	348.864501953125	4.62869100925275e-94	True
+combined	Parvimonas_micra	1	Public_study__GuptaA_2019	mdfs_1d (MDFS Holm-adjusted p)	10	352.225830078125	356.400634765625	3.83904275277681e-105	True
+combined	Parvimonas_micra	2	Public_study__LiuNN_2022	mdfs_1d (MDFS Holm-adjusted p)	10	345.822509765625	350.7021484375	2.65098851203552e-103	True
+combined	Parvimonas_micra	3	Public_study__ThomasAM_2018b	mdfs_1d (MDFS Holm-adjusted p)	10	119.751708984375	356.167236328125	5.08837354347636e-35	True
+combined	Parvimonas_micra	4	Public_study__VogtmannE_2016	mdfs_1d (MDFS Holm-adjusted p)	10	157.8388671875	355.84716796875	1.51509603515398e-46	True
+combined	Parvimonas_micra	5	Public_study__WirbelJ_2018	mdfs_1d (MDFS Holm-adjusted p)	10	113.053466796875	330.32958984375	5.37747849633859e-33	True
+combined	Parvimonas_micra	6	Public_study__YachidaS_2019	mdfs_1d (MDFS Holm-adjusted p)	10	313.824462890625	356.792846679688	1.18431978503057e-93	True
+combined	Parvimonas_micra	7	Public_study__YangJ_2020	mdfs_1d (MDFS Holm-adjusted p)	10	328.184326171875	328.254638671875	5.54471775650953e-98	True
+combined	Parvimonas_micra	8	Public_study__YangY_2021	mdfs_1d (MDFS Holm-adjusted p)	10	119.404296875	352.91259765625	6.4340568019397e-35	True
+combined	Parvimonas_micra	9	Public_study__YuJ_2015	mdfs_1d (MDFS Holm-adjusted p)	10	206.075439453125	326.004150390625	4.0155512773973905e-61	True
+combined	Parvimonas_micra	10	Public_study__ZellerG_2014	mdfs_1d (MDFS Holm-adjusted p)	10	328.479248046875	384.841796875	4.493097989888381e-98	True
+combined	Parvimonas_micra	11	This_study_cohort3__ONCOBIOME_IIGM_CZ	mdfs_1d (MDFS Holm-adjusted p)	10	115.318115234375	353.911376953125	1.11056955761151e-33	True
+combined	Parvimonas_micra	12	This_study_cohort4__ONCOBIOME_IIGM_IT	mdfs_1d (MDFS Holm-adjusted p)	10	117.609130859375	365.542236328125	2.2497501313688893e-34	True
+combined	Parvimonas_micra	13	This_study_cohort6__IIGM_TU	mdfs_1d (MDFS Holm-adjusted p)	10	346.105712890625	347.608154296875	2.17995711768939e-103	True
+taxa	Fusobacterium_nucleatum	0	Public_study__FengQ_2015	mdfs_1d (MDFS Holm-adjusted p)	10	227.56787109375	410.904541015625	6.56914070363514e-68	True
+taxa	Fusobacterium_nucleatum	1	Public_study__GuptaA_2019	mdfs_1d (MDFS Holm-adjusted p)	10	250.959228515625	429.2783203125	8.23352060257929e-75	True
+taxa	Fusobacterium_nucleatum	2	Public_study__LiuNN_2022	mdfs_1d (MDFS Holm-adjusted p)	10	209.60791015625	413.31591796875	1.7707825151587e-62	True
+taxa	Fusobacterium_nucleatum	3	Public_study__ThomasAM_2018b	mdfs_1d (MDFS Holm-adjusted p)	10	341.584228515625	428.330322265625	2.62057948751148e-102	True
+taxa	Fusobacterium_nucleatum	4	Public_study__VogtmannE_2016	mdfs_1d (MDFS Holm-adjusted p)	10	393.523193359375	426.76318359375	5.66887063116373e-118	True
+taxa	Fusobacterium_nucleatum	5	Public_study__WirbelJ_2018	mdfs_1d (MDFS Holm-adjusted p)	10	171.06884765625	399.22021484375	7.72427771270109e-51	True
+taxa	Fusobacterium_nucleatum	6	Public_study__YachidaS_2019	mdfs_1d (MDFS Holm-adjusted p)	10	217.50537109375	413.820922851562	7.184237765476641e-65	True
+taxa	Fusobacterium_nucleatum	7	Public_study__YangJ_2020	mdfs_1d (MDFS Holm-adjusted p)	10	375.598876953125	396.653076171875	1.43425805187152e-112	True
+taxa	Fusobacterium_nucleatum	8	Public_study__YangY_2021	mdfs_1d (MDFS Holm-adjusted p)	10	174.968505859375	421.410400390625	5.1505378570468e-52	True
+taxa	Fusobacterium_nucleatum	9	Public_study__YuJ_2015	mdfs_1d (MDFS Holm-adjusted p)	10	116.74658203125	400.116943359375	2.14219756123757e-34	True
+taxa	Fusobacterium_nucleatum	10	Public_study__ZellerG_2014	mdfs_1d (MDFS Holm-adjusted p)	10	227.683349609375	413.8046875	6.07521436892415e-68	True
+taxa	Fusobacterium_nucleatum	11	This_study_cohort3__ONCOBIOME_IIGM_CZ	mdfs_1d (MDFS Holm-adjusted p)	10	397.014404296875	422.5634765625	4.96703986837374e-119	True
+taxa	Fusobacterium_nucleatum	12	This_study_cohort4__ONCOBIOME_IIGM_IT	mdfs_1d (MDFS Holm-adjusted p)	10	397.21240234375	426.8115234375	4.3380637905417297e-119	True
+taxa	Fusobacterium_nucleatum	13	This_study_cohort6__IIGM_TU	mdfs_1d (MDFS Holm-adjusted p)	10	177.783447265625	425.708251953125	7.26160884004319e-53	True
+taxa	Parvimonas_micra	0	Public_study__FengQ_2015	mdfs_1d (MDFS Holm-adjusted p)	10	339.68212890625	356.212890625	9.638085408063028e-102	True
+taxa	Parvimonas_micra	1	Public_study__GuptaA_2019	mdfs_1d (MDFS Holm-adjusted p)	10	137.91650390625	352.225830078125	1.1818048623186396e-40	True
+taxa	Parvimonas_micra	2	Public_study__LiuNN_2022	mdfs_1d (MDFS Holm-adjusted p)	10	331.000732421875	349.56005859375	4.06764431860788e-99	True
+taxa	Parvimonas_micra	3	Public_study__ThomasAM_2018b	mdfs_1d (MDFS Holm-adjusted p)	10	346.09814453125	346.09814453125	1.14192160061752e-103	True
+taxa	Parvimonas_micra	4	Public_study__VogtmannE_2016	mdfs_1d (MDFS Holm-adjusted p)	10	347.58544921875	355.84716796875	4.05586674545998e-104	True
+taxa	Parvimonas_micra	5	Public_study__WirbelJ_2018	mdfs_1d (MDFS Holm-adjusted p)	10	295.117919921875	330.32958984375	2.68877996915509e-88	True
+taxa	Parvimonas_micra	6	Public_study__YachidaS_2019	mdfs_1d (MDFS Holm-adjusted p)	10	338.25439453125	356.792846679688	2.59831868707892e-101	True
+taxa	Parvimonas_micra	7	Public_study__YangJ_2020	mdfs_1d (MDFS Holm-adjusted p)	10	176.805419921875	328.254638671875	1.44035387918153e-52	True
+taxa	Parvimonas_micra	8	Public_study__YangY_2021	mdfs_1d (MDFS Holm-adjusted p)	10	338.852783203125	351.242431640625	1.73282087617312e-101	True
+taxa	Parvimonas_micra	9	Public_study__YuJ_2015	mdfs_1d (MDFS Holm-adjusted p)	10	326.004150390625	326.385009765625	1.32209435043156e-97	True
+taxa	Parvimonas_micra	10	Public_study__ZellerG_2014	mdfs_1d (MDFS Holm-adjusted p)	10	355.08935546875	384.841796875	2.17410090727248e-106	True
+taxa	Parvimonas_micra	11	This_study_cohort3__ONCOBIOME_IIGM_CZ	mdfs_1d (MDFS Holm-adjusted p)	10	351.41455078125	353.911376953125	2.80867683361734e-105	True
+taxa	Parvimonas_micra	12	This_study_cohort4__ONCOBIOME_IIGM_IT	mdfs_1d (MDFS Holm-adjusted p)	10	361.753662109375	364.11572265625	2.1417027135827997e-108	True
+taxa	Parvimonas_micra	13	This_study_cohort6__IIGM_TU	mdfs_1d (MDFS Holm-adjusted p)	10	339.81494140625	346.105712890625	8.86320203429417e-102	True

@@ -2,7 +2,7 @@
 """
 Summarise run_seed_stability.py output.
 
-Per run: top-1% pair set (rank <= max(1, int(0.01 * n_unique_pairs))); the 2% grid is derived the same way.
+Per run: top-2% pair set (rank <= max(1, int(0.02 * n_unique_pairs))), as in main_code.ipynb.
 Consensus(N, k): pairs in >= k of N runs.
 Reproducibility: Jaccard between consensus sets built from two disjoint seed blocks
 (seeds 42.. and 52..), averaged over folds.
@@ -17,6 +17,7 @@ import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.join(HERE, "..", "..")
+TOP_FRACTION = 0.02   # per-run cutoff used by main_code.ipynb (TOP_PAIR_FRACTION)
 BLOCK_A = list(range(42, 52))
 BLOCK_B = list(range(52, 62))
 GRID = {2: [1, 2], 3: [2, 3], 5: [3, 4, 5], 10: [5, 6, 7, 8, 10]}
@@ -24,7 +25,7 @@ GRID = {2: [1, 2], 3: [2, 3], 5: [3, 4, 5], 10: [5, 6, 7, 8, 10]}
 
 def top1(path):
     d = pd.read_csv(path, sep="\t")
-    n = max(1, int(d["n_unique_pairs"].iloc[0] * 0.01))
+    n = max(1, int(d["n_unique_pairs"].iloc[0] * TOP_FRACTION))
     return set(zip(d["feature_1"][:n], d["feature_2"][:n]))
 
 

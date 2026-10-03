@@ -1,0 +1,4 @@
+data_type	n_samples	n_features	candidate_pairs	pairs_passing_filters	wall_clock_s	peak_RSS_GB	machine
+taxa	2834	473	111628	31751	2.7	0.26	Apple M4 Pro, 14 cores, 26 GB RAM, macOS-26.6.2-arm64-arm-64bit; R version 4.5.1 (2025-06-13) MDFS 1.5.5
+functions	2834	445	98790	63538	2.3	0.25	Apple M4 Pro, 14 cores, 26 GB RAM, macOS-26.6.2-arm64-arm-64bit; R version 4.5.1 (2025-06-13) MDFS 1.5.5
+combined	2834	918	420903	183176	9.2	0.42	Apple M4 Pro, 14 cores, 26 GB RAM, macOS-26.6.2-arm64-arm-64bit; R version 4.5.1 (2025-06-13) MDFS 1.5.5

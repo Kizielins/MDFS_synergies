@@ -96,7 +96,7 @@ def main():
     tasks = []
     for dt in DATA_TYPES:
         # Same folds / test cohorts as the saved LOCO results
-        folds = pd.read_csv(os.path.join(REPO, f"results_{dt}", f"mdfs_ig_info_{dt}.csv"),
+        folds = pd.read_csv(os.path.join(REPO, "M2_loco_crc_pipeline", "results", dt, f"mdfs_ig_info_{dt}.csv"),
                             usecols=["fold", "test_cohort"]).drop_duplicates().sort_values("fold")
         tasks += [(dt, int(f), c) for f, c in zip(folds["fold"], folds["test_cohort"])]
     print(f"{len(tasks)} fold tasks x {len(SEEDS)} seeds", flush=True)
