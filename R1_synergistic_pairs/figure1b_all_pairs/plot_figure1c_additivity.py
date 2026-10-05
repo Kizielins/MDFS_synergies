@@ -49,32 +49,36 @@ for alt in (False, True):
     lim = max(max(d.sum1d.max(), d.tot.max()) for d, _ in data.values()) * 1.03
     for ax, (dt, (d, thr)) in zip(axes, data.items()):
         yv = (lambda q: q.II) if alt else (lambda q: q.tot)
-        for cat, col, lab, al, sz in (("none", "#B0B0B0", "never synergistic", 0.35, 3), ("syn", "#3B7DD8", "synergistic (total IG above either feature)", 0.45, 3),
-                                      ("super", "#C0392B", "super-additive (above chance threshold)", 0.8, 5)):
+        for cat, col, lab, al, sz in (("none", "#B0B0B0", "never synergistic", 0.35, 3), ("syn", "#3B7DD8", "synergistic (significant gain over the base feature)", 0.45, 3),
+                                      ("super", "#C0392B", "super-additive (more than the two features together)", 0.8, 5)):
             q = d[d.cat == cat]
             ax.scatter(q.sum1d, yv(q), s=sz, c=col, alpha=al, linewidths=0, rasterized=True, label=f"{lab} (n={len(q):,})")
         if alt:
             ax.axhline(0, color="k", ls="--", lw=1, label="additive (total = sum)"); ax.axhline(thr, color="k", ls=":", lw=1, label=f"chance threshold (+{thr:.1f} bits)")
-            ax.set_yscale("symlog", linthresh=10); ax.set_xlim(0, lim)
+            ax.set_yscale("symlog", linthresh=10); ax.set_xlim(0, lim); ax.set_ylim(-400, 90)
+            ax.set_yticks([-300, -100, -30, -10, 0, 10, 30]); ax.set_yticklabels(["-300", "-100", "-30", "-10", "0", "10", "30"])
+            ax.text(0.985, 0.965, "SUPER-ADDITIVE\npair tells more than the two features together", transform=ax.transAxes, ha="right", va="top", fontsize=9, color="#C0392B", fontweight="bold")
+            ax.text(0.985, 0.60, "ADDITIVE\nthe partner adds its full own information", transform=ax.transAxes, ha="right", va="center", fontsize=9, color="#333333", fontweight="bold")
+            ax.text(0.985, 0.30, "OVERLAPPING\npart of the partner's information\nis already in the base feature", transform=ax.transAxes, ha="right", va="center", fontsize=9, color="#2B5FA8", fontweight="bold")
         else:
             ax.plot([0, lim], [0, lim], "k--", lw=1, label="additive (total = sum)"); ax.plot([0, lim], [thr, lim + thr], "k:", lw=1, label=f"chance threshold (+{thr:.1f} bits)")
             ax.set_xlim(0, lim); ax.set_ylim(0, lim * 0.75)
         for a, b in LABELS:
             q = d[(d.base == min(a, b)) & (d.contributing == max(a, b))]
             if len(q):
-                ax.annotate(f"{SHORT.get(a, a)} + {SHORT.get(b, b)}", (q.sum1d.iloc[0], yv(q).iloc[0]), xytext=(-14, 14 if "micra" not in (a + b).lower() or "Dialister" in a else -16), textcoords="offset points",
+                ax.annotate(f"{SHORT.get(a, a)} + {SHORT.get(b, b)}", (q.sum1d.iloc[0], yv(q).iloc[0]), xytext=((-30, 22) if "Fusobacterium" in a else (-60, 4) if "Dialister" in a else (-40, -14) if "Parvimonas" in a else (-14, 14)), textcoords="offset points",
                             fontsize=8, ha="right", arrowprops=dict(arrowstyle="-", lw=0.6))
         ax.set_title(f"{dt.upper()}  ({len(d):,} feature pairs)", fontsize=14, fontweight="bold"); ax.grid(alpha=0.3)
-        ax.set_xlabel("Sum of the two individual (1D) IGs", fontsize=12); ax.legend(fontsize=8, loc="lower right" if not alt else "lower left", markerscale=3)
+        ax.set_xlabel("Sum of the two individual (1D) IGs", fontsize=12); ax.legend(fontsize=8, loc="upper center", bbox_to_anchor=(0.5, -0.11), ncol=1, markerscale=3, frameon=False)
         if not alt:
             vc = d.cat.value_counts(); syn = d[d.psyn >= 50]
             rows.append({"data_type": dt, "pairs": len(d), "never_synergistic": int(vc.get("none", 0)), "synergistic": int(vc.get("syn", 0)), "super_additive": int(vc.get("super", 0)),
                          "chance_threshold_bits": round(thr, 2), "pairs_synergistic_in_ge_50pct_fold_runs": len(syn),
                          "share_of_those_super_additive": round((syn.II > thr).mean(), 4), "share_of_those_below_minus_threshold": round((syn.II < -thr).mean(), 4)})
-    axes[0].set_ylabel("Total IG minus sum of individual IGs (interaction information)" if alt else "Total IG of the pair", fontsize=12)
+    axes[0].set_ylabel("Total IG of the pair minus the sum of the two individual IGs" if alt else "Total IG of the pair", fontsize=12)
     fig.tight_layout()
-    if alt:
-        fig.savefig(os.path.join(HERE, "figure1c_alt_excess.png"), dpi=200, bbox_inches="tight")
+    if not alt:
+        fig.savefig(os.path.join(HERE, "figure1c_alt_total_vs_sum.png"), dpi=200, bbox_inches="tight")
     else:
         for ext in ("png", "pdf"):
             fig.savefig(os.path.join(HERE, f"figure1c_additivity.{ext}"), dpi=200, bbox_inches="tight")
