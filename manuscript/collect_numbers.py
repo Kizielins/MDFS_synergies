@@ -37,12 +37,12 @@ for dt in ("taxa", "functions", "combined"):
         sel = g[((g.base_feature == a) & (g.contributing_feature == b)) | ((g.base_feature == b) & (g.contributing_feature == a))]
         if len(sel):
             add("R1", f"{a} + {b}, {dt}: fold-runs in top 2 % (max over the two directions)", f"{sel['n_obs'].max()}/140", f"ig_gain_summary_{dt}.csv")
-s5 = pd.read_csv(os.path.join(HERE, "SuppTable5_seed_stability.tsv"), sep="\t")
+s5 = pd.read_csv(os.path.join(HERE, "SuppTable1_seed_stability.tsv"), sep="\t")
 for dt in ("taxa", "functions", "combined"):
     r = s5[(s5.data_type == dt) & (s5.N == 10) & (s5.k == 6)].iloc[0]
     r2 = s5[(s5.data_type == dt) & (s5.N == 2) & (s5.k == 2)].iloc[0]
     add("R1/Methods", f"Seed stability {dt}: Jaccard of consensus sets from two disjoint seed blocks",
-        f"10 runs, >= 6: {r.jaccard_mean:.2f} (min {r.jaccard_min:.2f}); 2 runs, both: {r2.jaccard_mean:.2f}", "SuppTable5_seed_stability.tsv")
+        f"10 runs, >= 6: {r.jaccard_mean:.2f} (min {r.jaccard_min:.2f}); 2 runs, both: {r2.jaccard_mean:.2f}", "SuppTable1_seed_stability.tsv")
 
 # ---------------- Results 2: classification ----------------
 perf = pd.read_csv(os.path.join(R2, "loco_performance_summary.tsv"), sep="\t")
@@ -76,20 +76,20 @@ if os.path.exists(ct):
     add("R2", "Cohort-pair tests significant (BH within pair, q < 0.05)", f"{(c.p_value_fdr < 0.05).sum()}/{len(c)} ({100 * (c.p_value_fdr < 0.05).mean():.1f} %)", "R2_classification_performance/cohort_level_tests.csv")
 
 # ---------------- Results 3: transformations ----------------
-s3 = pd.read_csv(os.path.join(HERE, "SuppTable3_transformation_preference.tsv"), sep="\t")
+s3 = pd.read_csv(os.path.join(HERE, "SuppTable6_transformation_preference.tsv"), sep="\t")
 s3["types"] = s3["Types_Present"].astype(str)
 LR_ONLY, GM_ONLY = "['LR']", "['GM']"
-add("R3", "Pairs selected in >= 50 % of folds (Supp Table 3): LR only / GM only / both",
-    f"{len(s3)}: {(s3.types == LR_ONLY).sum()} / {(s3.types == GM_ONLY).sum()} / {(s3.Num_Types == 2).sum()}", "SuppTable3_transformation_preference.tsv")
+add("R3", "Pairs selected in >= 50 % of folds (Supp Table 6): LR only / GM only / both",
+    f"{len(s3)}: {(s3.types == LR_ONLY).sum()} / {(s3.types == GM_ONLY).sum()} / {(s3.Num_Types == 2).sum()}", "SuppTable6_transformation_preference.tsv")
 m = fin.merge(s3, on=["Data Type", "Feature1", "Feature2"], how="left")
 m2 = fin.merge(s3.rename(columns={"Feature1": "Feature2", "Feature2": "Feature1"}), on=["Data Type", "Feature1", "Feature2"], how="left")
 m["types"] = m["types"].fillna(m2["types"]); m["Num_Types"] = m["Num_Types"].fillna(m2["Num_Types"])
 lr, gm, both = (m.types == LR_ONLY).sum(), (m.types == GM_ONLY).sum(), (m.Num_Types == 2).sum()
 add("R3", f"Stable pairs ({len(fin)}): LR only / GM only / both (>= 50 % per transformation); GM-based = GM only + both",
-    f"{lr} / {gm} / {both}; GM-based {gm + both}/{len(fin)} ({100 * (gm + both) / len(fin):.0f} %)", "final_synthetic_features_table.csv x SuppTable3")
+    f"{lr} / {gm} / {both}; GM-based {gm + both}/{len(fin)} ({100 * (gm + both) / len(fin):.0f} %)", "final_synthetic_features_table.csv x SuppTable6")
 for a, b in (("Blautia_wexlerae", "Parvimonas_micra"), ("Eikenella_corrodens", "Parvimonas_micra")):
     r = m[(m.Feature1 == a) & (m.Feature2 == b) | (m.Feature1 == b) & (m.Feature2 == a)]
-    add("R3", f"{a} + {b}: stable? transformations at >= 50 %", f"{'yes' if len(r) else 'NOT stable'}; {r.types.iloc[0] if len(r) else s3[(s3.Feature1 == a) & (s3.Feature2 == b)].types.tolist()}", "final table / SuppTable3")
+    add("R3", f"{a} + {b}: stable? transformations at >= 50 %", f"{'yes' if len(r) else 'NOT stable'}; {r.types.iloc[0] if len(r) else s3[(s3.Feature1 == a) & (s3.Feature2 == b)].types.tolist()}", "final table / SuppTable6")
 
 # ---------------- Results 4: broader application ----------------
 t1 = pd.read_csv(os.path.join(HERE, "Table1_validation_cohorts.tsv"), sep="\t")
@@ -122,8 +122,8 @@ gem = syn[syn.pair_key.str.contains("Gemmiger_formicilis") & syn.pair_key.str.co
 add("R4", "Gemmiger formicilis + adenine/adenosine salvage III (PWY-6609): cohorts (>= 6/10 runs)", f"{gem.cohort.nunique()} ({', '.join(sorted(gem.cohort.unique()))})", "synergy_by_cohort.tsv")
 nco = syn.groupby("pair_key").cohort.nunique()
 add("R4", "Max number of cohorts sharing a pair; pairs in >= 2 / >= 3 cohorts", f"{nco.max()}; {(nco >= 2).sum():,} / {(nco >= 3).sum():,}", "synergy_by_cohort.tsv (unordered)")
-s4 = pd.read_csv(os.path.join(HERE, "SuppTable4_conserved_pairs.tsv"), sep="\t")
-add("R4", "Conserved pairs, >= 2 cohorts with the same disease label (Supp Table 4)", f"{len(s4)} (" + ", ".join(f"{k} {v}" for k, v in s4.groupby('disease').size().items()) + ")", "SuppTable4_conserved_pairs.tsv")
+s4 = pd.read_csv(os.path.join(HERE, "SuppTable7_conserved_pairs.tsv"), sep="\t")
+add("R4", "Conserved pairs, >= 2 cohorts with the same disease label (Supp Table 7)", f"{len(s4)} (" + ", ".join(f"{k} {v}" for k, v in s4.groupby('disease').size().items()) + ")", "SuppTable7_conserved_pairs.tsv")
 
 # ---------------- R5: reviewer checks (if run) ----------------
 for f in sorted(glob.glob(os.path.join(REPO, "R5_reviewer_checks", "r5_numbers*.tsv"))):

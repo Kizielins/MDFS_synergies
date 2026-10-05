@@ -10,3 +10,8 @@ session where they ran (the docx skill scripts and a scratch directory).
 - `write_revision_changes.py` – generates `manuscript/REVISION_CHANGES.md`.
 - `finalize.sh` – numbers index → supplementary files → both docx drafts (validated against the originals).
 - `overnight_rerun.sh` – the driver of the 2026-10-02/03 rerun (phases A–D).
+
+Note (2026-10-05): the supplementary tables were renumbered by order of first citation after these scripts
+were run (old -> new: 5->1, 1->2, 8->3, 2->4, 9->5, 3->6, 4->7, 6->8, 7->9). The scripts here and
+`manuscript/TEXT_EDITS.md` still use the old numbers; the repository files, notebooks, METHODS.md and the
+supplementary workbook use the new ones.

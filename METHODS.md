@@ -309,7 +309,7 @@ Reads the synergy table and reduces it to **one row per cohort and unordered pai
 - `manuscript/Figure5.{pdf,png}` — Figure 5.
 - `manuscript/Table1_validation_cohorts.tsv` — Table 1: every cohort of the metadata with sample counts, whether it was analysed and how many unordered pairs it yielded.
 - `top_markers_per_cohort.txt` — top 20 pairs per cohort by total_IG.
-- `manuscript/SuppTable4_conserved_pairs.tsv` (= `universal_disease_markers.txt`) — unordered pairs found in ≥ 2 cohorts with the same disease label (Supp. Table 4).
+- `manuscript/SuppTable7_conserved_pairs.tsv` (= `universal_disease_markers.txt`) — unordered pairs found in ≥ 2 cohorts with the same disease label (Supp. Table 7).
 - `emergent_synergies_table.tsv` — pairs in which one feature has zero 1D IG (quoted in Results §4).
 
 ---
@@ -320,7 +320,7 @@ Each notebook reads the final result folders directly and is executed in place (
 
 ### 5.1 `R1_synergistic_pairs/compare_mdfs_igs.ipynb`
 
-Cross-data-type comparison of the LOCO IG outputs. Reads `M2_loco_crc_pipeline/results/<dt>/mdfs_ig_info_<dt>.csv` for taxa, functions, combined; aggregates per (base, contributing) with mean `base_IG_1D`, `total_IG` and their difference (= `IG_2D_added`); tests 2D vs 1D IG with a Wilcoxon signed-rank test; writes `R1_synergistic_pairs/ig_gain_summary_<dt>.csv` and `manuscript/SuppTable1_top30_synergistic_pairs.tsv`, and plots `base_IG_1D` vs `total_IG` of the consensus pairs (`figure1b_consensus_pairs_only.png`). The manuscript Figure 1b shows *all* directed pairs of every fold and run (significant or not, synergistic or not) and is produced by `R1_synergistic_pairs/figure1b_all_pairs/` (`run_all_directed.py` → `directed/<dt>_fold<NN>.tsv.gz`, `plot_figure1b_all_directed.py` → `manuscript/Figure1b.{png,pdf}`).
+Cross-data-type comparison of the LOCO IG outputs. Reads `M2_loco_crc_pipeline/results/<dt>/mdfs_ig_info_<dt>.csv` for taxa, functions, combined; aggregates per (base, contributing) with mean `base_IG_1D`, `total_IG` and their difference (= `IG_2D_added`); tests 2D vs 1D IG with a Wilcoxon signed-rank test; writes `R1_synergistic_pairs/ig_gain_summary_<dt>.csv` and `manuscript/SuppTable2_top30_synergistic_pairs.tsv`, and plots `base_IG_1D` vs `total_IG` of the consensus pairs (`figure1b_consensus_pairs_only.png`). The manuscript Figure 1b shows *all* directed pairs of every fold and run (significant or not, synergistic or not) and is produced by `R1_synergistic_pairs/figure1b_all_pairs/` (`run_all_directed.py` → `directed/<dt>_fold<NN>.tsv.gz`, `plot_figure1b_all_directed.py` → `manuscript/Figure1b.{png,pdf}`).
 
 The `pair_ig_count` column of `ig_gain_summary_<dt>.csv` reports in how many fold–run combinations the (base, contributing) direction was among the per-run top 2 %, out of **140 = 14 LOCO folds × 10 MDFS runs per fold** (§3.3). A value of `140/140` therefore means the pair was in the top 2 % in every fold under every seed — the maximum possible consistency, not a cohort count.
 
@@ -337,7 +337,7 @@ Reads `M2_loco_crc_pipeline/results/<dt>/{base_features,synthetic_features}_<dt>
 1. it was selected in ≥ 80 % of the 14 LOCO folds (`SYNTHETIC_THRESHOLD = 80`, i.e. ≥ 12 folds). The LR_ and GM_ features of a pair count as one pair, using the more frequently selected of the two (the first row after the input table's sort by selection count), and
 2. its selection % is higher than that of each of its two component features as base features (which also makes the "selection % gain", pair % − mean of the two component %, positive).
 
-Writes `R2_classification_performance/final_synthetic_features_table.csv`: **211 stable pairs** (combined 160, taxa 34, functions 17). It also writes Supplementary Table 3 (`supplementary_table_3_transformation_preference.tsv`: which transformation, LR or GM, reached ≥ 50 % selection; 746 pairs) and Figure 4 (`figure4_lr_vs_gm.{pdf,png}`).
+Writes `R2_classification_performance/final_synthetic_features_table.csv`: **211 stable pairs** (combined 160, taxa 34, functions 17). It also writes Supplementary Table 6 (`supplementary_table_3_transformation_preference.tsv`: which transformation, LR or GM, reached ≥ 50 % selection; 746 pairs) and Figure 4 (`figure4_lr_vs_gm.{pdf,png}`).
 
 ### 5.4 `consistent_mdfs_markers_downstream.ipynb`
 
@@ -421,11 +421,11 @@ Analyses added in the revision in response to the reviewers; every output is a T
 
 | Script / notebook | Reviewer comment | What it does | Output |
 |---|---|---|---|
-| `run_negative_controls.py` | R1.7 | LOCO fold-0 training set of each data type: `run_mdfs.R` with real labels, with labels permuted (5×), and with every feature shuffled independently within each class (5×; keeps univariate signal, destroys pair dependence) | `negative_controls.tsv` (Supp. Table 6) |
-| `run_discretisation_sensitivity.py` | R1.10 | fold-0 taxa: default vs seed 43, wider (1D) cut range, half range, three bins (divisions = 2); overlap of pair sets with the default | `discretisation_sensitivity.tsv` (Supp. Table 7) |
+| `run_negative_controls.py` | R1.7 | LOCO fold-0 training set of each data type: `run_mdfs.R` with real labels, with labels permuted (5×), and with every feature shuffled independently within each class (5×; keeps univariate signal, destroys pair dependence) | `negative_controls.tsv` (Supp. Table 8) |
+| `run_discretisation_sensitivity.py` | R1.10 | fold-0 taxa: default vs seed 43, wider (1D) cut range, half range, three bins (divisions = 2); overlap of pair sets with the default | `discretisation_sensitivity.tsv` (Supp. Table 9) |
 | `run_runtime.py` | R1.9 | wall-clock time and peak memory of one MDFS run per data type (fold-0 training set) | `runtime.tsv` |
-| `additivity_and_collinearity.ipynb` | R2.2, R2.5, R1.5 | interaction information `total_IG − base_IG_1D − contributing_IG_1D` of every per-run top-2 % pair and of the consensus pairs; cohort-adjusted logistic regression with likelihood-ratio tests (cohort-only vs additive vs interaction) for the stable pairs; Spearman correlation of each stable synthetic feature with its constituents | `interaction_information.tsv`, `stable_pairs_lrt.tsv` (Supp. Table 9), `collinearity.tsv` |
-| `sensitivity_training_cohorts.ipynb` | R1.5 | compares the main LOCO run with `run_loco.py --exclude-training-only` (AtezoTRIBE, COLOBIOME and NSHII removed from every training set; results in `M2_loco_crc_pipeline/results_sensitivity/`): AUCs and stable pairs | `sensitivity_auc.tsv` (Supp. Table 8), `sensitivity_shared_stable_pairs.tsv` |
+| `additivity_and_collinearity.ipynb` | R2.2, R2.5, R1.5 | interaction information `total_IG − base_IG_1D − contributing_IG_1D` of every per-run top-2 % pair and of the consensus pairs; cohort-adjusted logistic regression with likelihood-ratio tests (cohort-only vs additive vs interaction) for the stable pairs; Spearman correlation of each stable synthetic feature with its constituents | `interaction_information.tsv`, `stable_pairs_lrt.tsv` (Supp. Table 5), `collinearity.tsv` |
+| `sensitivity_training_cohorts.ipynb` | R1.5 | compares the main LOCO run with `run_loco.py --exclude-training-only` (AtezoTRIBE, COLOBIOME and NSHII removed from every training set; results in `M2_loco_crc_pipeline/results_sensitivity/`): AUCs and stable pairs | `sensitivity_auc.tsv` (Supp. Table 3), `sensitivity_shared_stable_pairs.tsv` |
 | `reviewer_checks_summary.ipynb` | — | tabulates the three script outputs | `r5_numbers_scripts.tsv` |
 
 The 1D significance of the hub species (Results §2) is taken from the Holm-adjusted 1D MDFS p-values saved for every fold and run (`M2_loco_crc_pipeline/results/<dt>/mdfs_1d_<dt>.csv`, summarised by `R2_classification_performance/hub_1d_significance.py`).

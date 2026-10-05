@@ -7,7 +7,7 @@ Generated from the final output files (`manuscript/collect_numbers.py` values). 
 | | Submitted | This revision |
 |---|---|---|
 | MDFS runs per LOCO fold | 2, seed not passed to MDFS (runs identical) | 10 independent runs, seeds 42-51 |
-| Pairs kept per run / consensus | top 1 %, in both runs | top 2 %, in >= 6 of 10 runs (seed-stability analysis, Supp. Table 5) |
+| Pairs kept per run / consensus | top 1 %, in both runs | top 2 %, in >= 6 of 10 runs (seed-stability analysis, Supp. Table 1) |
 | Discretisation | 1D and 2D steps used different random cut points | one seed and one cut range (GetRange(n, 2)) for the 1D, 2D and pair steps |
 | Per-run diagnostic RF | trained, output unused | removed; one RF per fold and configuration (random_state 42) |
 | Validation arm | 3 seeds, pair kept if found in any run; ordered (directed) pair counts | 10 seeds (12-21), kept if in >= 6 of 10 runs; unordered pairs, orientation recorded |

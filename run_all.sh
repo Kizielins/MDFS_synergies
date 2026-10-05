@@ -17,22 +17,22 @@ if has M2; then   # Methods: LOCO validation  (10 MDFS runs per fold, one RF per
     python3 M2_loco_crc_pipeline/run_loco.py $dt > M2_loco_crc_pipeline/loco_$dt.log 2>&1 &
   done; wait
 fi
-if has R1; then   # Results 1: synergistic pairs (Figure 1b, Supp Tables 1 and 5)
+if has R1; then   # Results 1: synergistic pairs (Figure 1b, Supp Tables 1 and 2)
   NB R1_synergistic_pairs/compare_mdfs_igs.ipynb
-  python3 R1_synergistic_pairs/seed_stability/make_supp_table5.py
+  python3 R1_synergistic_pairs/seed_stability/make_seed_stability_table.py
   # Figure 1b with all pairs needs the per-run MDFS tables of every directed pair:
   #   python3 R1_synergistic_pairs/figure1b_all_pairs/run_all_directed.py   (hours; writes directed/*.tsv.gz)
   python3 R1_synergistic_pairs/figure1b_all_pairs/plot_figure1b_all_directed.py
 fi
-if has R2; then   # Results 2: RF performance, stable pairs, effect sizes (Supp Figs 1-2, Figure 3, Supp Table 2)
+if has R2; then   # Results 2: RF performance, stable pairs, effect sizes (Supp Figs 1-2, Figure 3, Supp Table 4)
   NB R2_classification_performance/summarize_rf_results.ipynb
   NB R2_classification_performance/stable_pairs.ipynb
   NB R2_classification_performance/effect_sizes.ipynb
 fi
-if has R3; then   # Results 3: LR vs GM (Figure 4, Supp Table 3)
+if has R3; then   # Results 3: LR vs GM (Figure 4, Supp Table 6)
   NB R3_pair_transformations/transformation_preference.ipynb
 fi
-if has R4; then   # Results 4: other diseases (Figure 5, Table 1, Supp Table 4)
+if has R4; then   # Results 4: other diseases (Figure 5, Table 1, Supp Table 7)
   ( cd R4_broader_application
     python3 run_mdfs_1d_2d.py --data-dir data --all-cohorts --out-dir results > validation_mdfs.log 2>&1
     python3 load_cohort_data.py --data-dir data --mdfs-results-dir results --out-table synergy_by_cohort.tsv )
