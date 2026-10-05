@@ -1,31 +1,31 @@
-data_type	base_feature	contributing_feature	base_IG_1D_mean	total_IG_2D_mean	ig_difference_raw	ig_difference_pct	pair_ig_count
-combined	Peptostreptococcus_stomatis	Fusobacterium_nucleatum	323.67	527.221	203.551	62.89	140/140
-combined	Fusobacterium_nucleatum	Peptostreptococcus_stomatis	397.197	527.221	130.023	32.74	140/140
-taxa	Peptostreptococcus_stomatis	Fusobacterium_nucleatum	330.192	526.355	196.163	59.41	140/140
-taxa	Fusobacterium_nucleatum	Peptostreptococcus_stomatis	388.969	526.355	137.387	35.32	140/140
-combined	Fusobacterium_nucleatum	Parvimonas_micra	397.197	520.325	123.128	31.0	140/140
-combined	Parvimonas_micra	Fusobacterium_nucleatum	337.187	520.325	183.138	54.31	140/140
-taxa	Fusobacterium_nucleatum	Parvimonas_micra	388.969	519.453	130.484	33.55	140/140
-taxa	Parvimonas_micra	Fusobacterium_nucleatum	344.516	519.453	174.936	50.78	140/140
-combined	Fusobacterium_nucleatum	Dialister_pneumosintes	397.197	509.794	112.596	28.35	140/140
-combined	Dialister_pneumosintes	Fusobacterium_nucleatum	309.101	509.794	200.693	64.93	140/140
-taxa	Fusobacterium_nucleatum	Dialister_pneumosintes	388.969	502.702	113.733	29.24	140/140
-taxa	Dialister_pneumosintes	Fusobacterium_nucleatum	303.51	502.702	199.192	65.63	140/140
-taxa	Fusobacterium_nucleatum	Anaerococcus_obesiensis	398.342	487.9	89.557	22.48	134/140
-taxa	Anaerococcus_obesiensis	Fusobacterium_nucleatum	166.379	487.9	321.521	193.25	134/140
-combined	Fusobacterium_nucleatum	Anaerococcus_obesiensis	397.197	486.728	89.531	22.54	140/140
-combined	Anaerococcus_obesiensis	Fusobacterium_nucleatum	166.306	486.728	320.422	192.67	140/140
-taxa	Dialister_pneumosintes	Parvimonas_micra	305.18	471.011	165.83	54.34	138/140
-taxa	Parvimonas_micra	Dialister_pneumosintes	346.089	471.011	124.921	36.1	138/140
-taxa	Fusobacterium_nucleatum	Finegoldia_magna	423.628	470.134	46.506	10.98	9/140
-taxa	Finegoldia_magna	Fusobacterium_nucleatum	79.352	470.134	390.782	492.46	9/140
-combined	Finegoldia_magna	Fusobacterium_nucleatum	79.345	468.627	389.283	490.62	10/140
-combined	Fusobacterium_nucleatum	Finegoldia_magna	421.358	468.627	47.269	11.22	10/140
-combined	Parvimonas_micra	Dialister_pneumosintes	337.187	468.559	131.372	38.96	140/140
-combined	Dialister_pneumosintes	Parvimonas_micra	309.101	468.559	159.458	51.59	140/140
-taxa	Fusobacterium_nucleatum	Gemella_morbillorum	397.095	464.883	67.788	17.07	134/140
-taxa	Gemella_morbillorum	Fusobacterium_nucleatum	234.291	464.883	230.592	98.42	134/140
-taxa	Fusobacterium_nucleatum	GGB3433_SGB4573	423.628	464.296	40.668	9.6	9/140
-taxa	GGB3433_SGB4573	Fusobacterium_nucleatum	55.07	464.296	409.226	743.1	9/140
-combined	Fusobacterium_nucleatum	Gemella_morbillorum	397.197	463.949	66.751	16.81	140/140
-combined	Gemella_morbillorum	Fusobacterium_nucleatum	232.352	463.949	231.597	99.67	140/140
+data_type	base_feature	contributing_feature	base_IG_1D_mean	total_IG_2D_mean	ig_difference_raw	ig_difference_pct	pair_ig_count	interaction_information_mean	pct_fold_runs_super_additive	super_additive
+combined	Peptostreptococcus_stomatis	Fusobacterium_nucleatum	323.67	527.221	203.551	62.89	140/140	-193.65	0.0	False
+combined	Fusobacterium_nucleatum	Peptostreptococcus_stomatis	397.197	527.221	130.023	32.74	140/140	-193.65	0.0	False
+taxa	Peptostreptococcus_stomatis	Fusobacterium_nucleatum	330.192	526.355	196.163	59.41	140/140	-192.81	0.0	False
+taxa	Fusobacterium_nucleatum	Peptostreptococcus_stomatis	388.969	526.355	137.387	35.32	140/140	-192.81	0.0	False
+combined	Fusobacterium_nucleatum	Parvimonas_micra	397.197	520.325	123.128	31.0	140/140	-214.06	0.0	False
+combined	Parvimonas_micra	Fusobacterium_nucleatum	337.187	520.325	183.138	54.31	140/140	-214.06	0.0	False
+taxa	Fusobacterium_nucleatum	Parvimonas_micra	388.969	519.453	130.484	33.55	140/140	-214.03	0.0	False
+taxa	Parvimonas_micra	Fusobacterium_nucleatum	344.516	519.453	174.936	50.78	140/140	-214.03	0.0	False
+combined	Fusobacterium_nucleatum	Dialister_pneumosintes	397.197	509.794	112.596	28.35	140/140	-196.5	0.0	False
+combined	Dialister_pneumosintes	Fusobacterium_nucleatum	309.101	509.794	200.693	64.93	140/140	-196.5	0.0	False
+taxa	Fusobacterium_nucleatum	Dialister_pneumosintes	388.969	502.702	113.733	29.24	140/140	-189.78	0.0	False
+taxa	Dialister_pneumosintes	Fusobacterium_nucleatum	303.51	502.702	199.192	65.63	140/140	-189.78	0.0	False
+taxa	Fusobacterium_nucleatum	Anaerococcus_obesiensis	398.342	487.9	89.557	22.48	134/140	-76.82	0.0	False
+taxa	Anaerococcus_obesiensis	Fusobacterium_nucleatum	166.379	487.9	321.521	193.25	134/140	-76.82	0.0	False
+combined	Fusobacterium_nucleatum	Anaerococcus_obesiensis	397.197	486.728	89.531	22.54	140/140	-76.77	0.0	False
+combined	Anaerococcus_obesiensis	Fusobacterium_nucleatum	166.306	486.728	320.422	192.67	140/140	-76.77	0.0	False
+taxa	Dialister_pneumosintes	Parvimonas_micra	305.18	471.011	165.83	54.34	138/140	-180.26	0.0	False
+taxa	Parvimonas_micra	Dialister_pneumosintes	346.089	471.011	124.921	36.1	138/140	-180.26	0.0	False
+taxa	Fusobacterium_nucleatum	Finegoldia_magna	423.628	470.134	46.506	10.98	9/140	-32.85	0.0	False
+taxa	Finegoldia_magna	Fusobacterium_nucleatum	79.352	470.134	390.782	492.46	9/140	-32.85	0.0	False
+combined	Finegoldia_magna	Fusobacterium_nucleatum	79.345	468.627	389.283	490.62	10/140	-32.08	0.0	False
+combined	Fusobacterium_nucleatum	Finegoldia_magna	421.358	468.627	47.269	11.22	10/140	-32.08	0.0	False
+combined	Parvimonas_micra	Dialister_pneumosintes	337.187	468.559	131.372	38.96	140/140	-177.73	0.0	False
+combined	Dialister_pneumosintes	Parvimonas_micra	309.101	468.559	159.458	51.59	140/140	-177.73	0.0	False
+taxa	Fusobacterium_nucleatum	Gemella_morbillorum	397.095	464.883	67.788	17.07	134/140	-166.5	0.0	False
+taxa	Gemella_morbillorum	Fusobacterium_nucleatum	234.291	464.883	230.592	98.42	134/140	-166.5	0.0	False
+taxa	Fusobacterium_nucleatum	GGB3433_SGB4573	423.628	464.296	40.668	9.6	9/140	-14.4	0.0	False
+taxa	GGB3433_SGB4573	Fusobacterium_nucleatum	55.07	464.296	409.226	743.1	9/140	-14.4	0.0	False
+combined	Fusobacterium_nucleatum	Gemella_morbillorum	397.197	463.949	66.751	16.81	140/140	-165.6	0.0	False
+combined	Gemella_morbillorum	Fusobacterium_nucleatum	232.352	463.949	231.597	99.67	140/140	-165.6	0.0	False

@@ -1,0 +1,10 @@
+section	claim	value	source
+R5	taxa: consensus pairs that are super-additive (interaction information above the within-class null 99th percentile in >= 6 of 10 runs)	14.8 % of 8,974 pair-fold entries (null threshold median 5.2 bits; under the null 69 % of pairs have II > 0)	R5 interaction_calibrated_summary.tsv
+R5	functions: consensus pairs that are super-additive (interaction information above the within-class null 99th percentile in >= 6 of 10 runs)	10.0 % of 10,577 pair-fold entries (null threshold median 5.0 bits; under the null 64 % of pairs have II > 0)	R5 interaction_calibrated_summary.tsv
+R5	combined: consensus pairs that are super-additive (interaction information above the within-class null 99th percentile in >= 6 of 10 runs)	8.1 % of 53,690 pair-fold entries (null threshold median 5.1 bits; under the null 68 % of pairs have II > 0)	R5 interaction_calibrated_summary.tsv
+R5	Stable pairs that are super-additive (>= 50 % of their fold-runs above the null threshold)	42/235 (combined 19/169, functions 10/26, taxa 13/40)	R5 stable_pairs_interaction.tsv
+R5	Parvimonas_micra + Peptostreptococcus_stomatis (taxa): mean interaction information; % fold-runs super-additive	-231 bits; 0 %	R5 pair_interaction_taxa.tsv
+R5	Fusobacterium_nucleatum + Peptostreptococcus_stomatis (taxa): mean interaction information; % fold-runs super-additive	-193 bits; 0 %	R5 pair_interaction_taxa.tsv
+R5	Dialister_pneumosintes + Parvimonas_micra (taxa): mean interaction information; % fold-runs super-additive	-180 bits; 0 %	R5 pair_interaction_taxa.tsv
+R5	Fusobacterium_nucleatum + Parvimonas_micra (taxa): mean interaction information; % fold-runs super-additive	-214 bits; 0 %	R5 pair_interaction_taxa.tsv
+R5	Taxa pairs with the highest mean interaction information (observed in >= 84 of 140 fold-runs)	Parvimonas_micra + Streptococcus_infantis (35 bits, 99 %); Peptostreptococcus_stomatis + Streptococcus_sp_263_SSPC (30 bits, 100 %); Peptostreptococcus_stomatis + Streptococcus_infantis (29 bits, 100 %); Peptostreptococcus_stomatis + Streptococcus_mitis (26 bits, 100 %); Fusobacterium_nucleatum + Streptococcus_infantis (25 bits, 99 %)	R5 pair_interaction_taxa.tsv

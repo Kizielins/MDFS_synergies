@@ -1,0 +1,4 @@
+data_type	pairs	never_synergistic	synergistic	super_additive	chance_threshold_bits	pairs_synergistic_in_ge_50pct_fold_runs	share_of_those_super_additive	share_of_those_below_minus_threshold
+taxa	261265	162387	92586	6292	5.15	65022	0.0968	0.0226
+functions	109596	12699	91577	5320	5.01	69794	0.0762	0.2784
+combined	716236	295349	398610	22277	5.06	293551	0.0759	0.0835
