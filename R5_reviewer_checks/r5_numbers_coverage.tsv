@@ -1,0 +1,10 @@
+section	claim	value	source
+R5	taxa: share of each method's features also found by MDFS-2D (MDFS-1D / t-test / U-test / LASSO / ReliefF)	99 % / 93 % / 96 % / 69 % / 66 %	R5 method_coverage_taxa.tsv
+R5	taxa: share of MDFS-2D features also found by each other method (MDFS-1D / t-test / U-test / LASSO / ReliefF)	53 % / 59 % / 61 % / 41 % / 66 %	R5 method_coverage_taxa.tsv
+R5	taxa: mean number of features per fold (MDFS-2D / MDFS-1D / t-test / U-test / LASSO / ReliefF); MDFS-2D features found by no univariate method; by no other method	237 / 128 / 149 / 150 / 143 / 237; 83.1; 23.1	R5 method_coverage_sizes.tsv
+R5	functions: share of each method's features also found by MDFS-2D (MDFS-1D / t-test / U-test / LASSO / ReliefF)	100 % / 98 % / 99 % / 83 % / 88 %	R5 method_coverage_functions.tsv
+R5	functions: share of MDFS-2D features also found by each other method (MDFS-1D / t-test / U-test / LASSO / ReliefF)	75 % / 79 % / 84 % / 41 % / 88 %	R5 method_coverage_functions.tsv
+R5	functions: mean number of features per fold (MDFS-2D / MDFS-1D / t-test / U-test / LASSO / ReliefF); MDFS-2D features found by no univariate method; by no other method	389 / 293 / 311 / 328 / 190 / 389; 58.6; 4.0	R5 method_coverage_sizes.tsv
+R5	combined: share of each method's features also found by MDFS-2D (MDFS-1D / t-test / U-test / LASSO / ReliefF)	100 % / 96 % / 98 % / 71 % / 69 %	R5 method_coverage_combined.tsv
+R5	combined: share of MDFS-2D features also found by each other method (MDFS-1D / t-test / U-test / LASSO / ReliefF)	64 % / 69 % / 73 % / 20 % / 69 %	R5 method_coverage_combined.tsv
+R5	combined: mean number of features per fold (MDFS-2D / MDFS-1D / t-test / U-test / LASSO / ReliefF); MDFS-2D features found by no univariate method; by no other method	613 / 395 / 442 / 460 / 178 / 613; 147.1; 27.1	R5 method_coverage_sizes.tsv
