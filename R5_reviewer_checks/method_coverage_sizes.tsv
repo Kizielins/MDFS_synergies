@@ -1,4 +1,4 @@
-data_type	n_MDFS-2D	n_MDFS-1D	n_t-test	n_U-test	n_LASSO	n_ReliefF	MDFS-2D_only_vs_univariate	MDFS-2D_only_vs_all	missed_by_MDFS-2D_MDFS-1D	missed_by_MDFS-2D_t-test	missed_by_MDFS-2D_U-test	missed_by_MDFS-2D_LASSO	missed_by_MDFS-2D_ReliefF
-taxa	237.4	127.6	149.0	149.9	142.7	237.4	83.1	23.1	1.0	9.9	5.6	44.9	80.9
-functions	388.7	292.8	310.8	328.1	190.4	388.7	58.6	4.0	0.3	5.1	2.9	31.6	48.0
-combined	612.9	395.1	442.1	459.9	178.1	612.9	147.1	27.1	1.1	16.7	9.9	53.4	187.7
+data_type	n_MDFS-2D	n_MDFS-1D	n_t-test	n_U-test	n_LASSO	n_ReliefF	n_1D top-N	MDFS-2D_only_vs_univariate	MDFS-2D_only_vs_all	MDFS-2D_only_vs_1D_topN	overlap_MDFS-2D_vs_1D_topN	missed_by_MDFS-2D_MDFS-1D	missed_by_MDFS-2D_t-test	missed_by_MDFS-2D_U-test	missed_by_MDFS-2D_LASSO	missed_by_MDFS-2D_ReliefF
+taxa	237.4	127.6	149.0	149.9	142.7	237.4	237.4	83.1	23.1	46.1	0.8	1.0	9.9	5.6	44.9	80.9
+functions	388.7	292.8	310.8	328.1	190.4	388.7	388.7	58.6	4.0	23.6	0.9	0.3	5.1	2.9	31.6	48.0
+combined	612.9	395.1	442.1	459.9	178.1	612.9	612.9	147.1	27.1	75.1	0.9	1.1	16.7	9.9	53.4	187.7

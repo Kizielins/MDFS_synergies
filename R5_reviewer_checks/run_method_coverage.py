@@ -7,6 +7,8 @@ For every LOCO fold (pooled training cohorts) and feature space, the set of rele
   U-test             Mann-Whitney U test, Holm 0.05
   LASSO              L1 logistic regression on standardised log10(x + 1e-6); penalty from 9 values (1e-3..10) by 5-fold CV (AUC),
                      liblinear, max 300 iterations; non-zero coefficients
+  1D top-N           size-matched univariate reference: the N features with the highest 1D IG (mean over the 10 MDFS runs),
+                     N = number of MDFS-2D features of the fold (no significance test)
   ReliefF            k = 10 nearest hits / misses, Manhattan distance on min-max scaled log10(x + 1e-6); it has no
                      significance test, so the top-N features are taken with N = number of MDFS-2D features
 Coverage[A, B] = share of the features selected by A that B also selects, averaged over the 14 folds.
@@ -31,7 +33,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import training_set, HERE, REPO  # noqa: E402
 
 SEEDS = list(range(42, 52)); MIN_RUNS = 6
-METHODS = ["MDFS-2D", "MDFS-1D", "t-test", "U-test", "LASSO", "ReliefF"]
+METHODS = ["MDFS-2D", "MDFS-1D", "t-test", "U-test", "LASSO", "ReliefF", "1D top-N"]
+BASE_METHODS = METHODS[:6]   # the six selectors; "1D top-N" = the N features with the highest mean 1D IG, N = MDFS-2D size (size-matched reference)
 RSCRIPT = r'''
 suppressMessages({library(data.table); library(MDFS)})
 a <- commandArgs(trailingOnly = TRUE); X <- fread(a[1], sep = "\t"); X <- as.matrix(X[, -1, with = FALSE]); y <- fread(a[2], sep = "\t")[[2]]
@@ -100,11 +103,12 @@ def main():
     with ProcessPoolExecutor(7) as ex:
         futs = [ex.submit(one_fold, *t) for t in tasks]
         for i, fu in enumerate(as_completed(futs), 1):
-            dt, fold, sel, ig = fu.result(); res[(dt, fold)] = (sel, ig)
+            dt, fold, sel, ig = fu.result()
+            n2 = max(1, len(sel["MDFS-2D"])); sel["1D top-N"] = set(sorted(ig, key=lambda f: -ig[f])[:n2]); res[(dt, fold)] = (sel, ig)
             print(f"[{i}/{len(tasks)}] {dt} fold {fold}: " + ", ".join(f"{k} {len(v)}" for k, v in sel.items()), flush=True)
     import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
     sizes, numbers = [], []
-    fig, axes = plt.subplots(1, 3, figsize=(19, 6.2))
+    fig, axes = plt.subplots(1, 3, figsize=(21, 6.8))
     for ax, dt in zip(axes, ("taxa", "functions", "combined")):
         folds = sorted(f for d, f in res if d == dt)
         C = np.zeros((len(METHODS), len(METHODS)))
@@ -116,11 +120,13 @@ def main():
         C /= len(folds)
         pd.DataFrame(C, index=METHODS, columns=METHODS).round(3).to_csv(os.path.join(HERE, f"method_coverage_{dt}.tsv"), sep="\t")
         n = {M: np.mean([len(res[(dt, f)][0][M]) for f in folds]) for M in METHODS}
-        others = [M for M in METHODS if M != "MDFS-2D"]; uni = ["MDFS-1D", "t-test", "U-test"]
+        others = [M for M in BASE_METHODS if M != "MDFS-2D"]; uni = ["MDFS-1D", "t-test", "U-test"]
         only_all = [len(res[(dt, f)][0]["MDFS-2D"] - set().union(*[res[(dt, f)][0][M] for M in others])) for f in folds]
         only_uni = [len(res[(dt, f)][0]["MDFS-2D"] - set().union(*[res[(dt, f)][0][M] for M in uni])) for f in folds]
         miss = {M: np.mean([len(res[(dt, f)][0][M] - res[(dt, f)][0]["MDFS-2D"]) for f in folds]) for M in others}
+        only_topn = [len(res[(dt, f)][0]["MDFS-2D"] - res[(dt, f)][0]["1D top-N"]) for f in folds]
         sizes.append({"data_type": dt, **{f"n_{M}": round(n[M], 1) for M in METHODS}, "MDFS-2D_only_vs_univariate": np.mean(only_uni), "MDFS-2D_only_vs_all": np.mean(only_all),
+                      "MDFS-2D_only_vs_1D_topN": np.mean(only_topn), "overlap_MDFS-2D_vs_1D_topN": np.mean([1 - o / len(res[(dt, f)][0]["MDFS-2D"]) for o, f in zip(only_topn, folds)]),
                       **{f"missed_by_MDFS-2D_{M}": round(miss[M], 1) for M in others}})
         cnt, igs = {}, {}
         for f in folds:
@@ -134,6 +140,8 @@ def main():
                         "value": " / ".join(f"{100 * C[METHODS.index(M), b2]:.0f} %" for M in others), "source": f"R5 method_coverage_{dt}.tsv"})
         numbers.append({"section": "R5", "claim": f"{dt}: share of MDFS-2D features also found by each other method (" + " / ".join(others) + ")",
                         "value": " / ".join(f"{100 * C[b2, METHODS.index(M)]:.0f} %" for M in others), "source": f"R5 method_coverage_{dt}.tsv"})
+        numbers.append({"section": "R5", "claim": f"{dt}: size-matched reference: overlap of the MDFS-2D set with the N highest-1D-IG features (N = MDFS-2D size); MDFS-2D features outside it per fold",
+                        "value": f"{100 * np.mean([1 - o / len(res[(dt, f)][0]['MDFS-2D']) for o, f in zip(only_topn, folds)]):.0f} %; {np.mean(only_topn):.1f}", "source": "R5 method_coverage_sizes.tsv"})
         numbers.append({"section": "R5", "claim": f"{dt}: mean number of features per fold (" + " / ".join(METHODS) + "); MDFS-2D features found by no univariate method; by no other method",
                         "value": " / ".join(f"{n[M]:.0f}" for M in METHODS) + f"; {np.mean(only_uni):.1f}; {np.mean(only_all):.1f}", "source": "R5 method_coverage_sizes.tsv"})
         im = ax.imshow(C, vmin=0, vmax=1, cmap="viridis")

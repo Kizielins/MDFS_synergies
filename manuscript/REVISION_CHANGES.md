@@ -60,3 +60,5 @@ Generated from the final output files (`manuscript/collect_numbers.py` values). 
 ## Where everything is
 
 See `README.md` (section -> folder -> file) and `manuscript/RESULTS_NUMBERS.md` (every quoted number with its source). The AI-edited manuscript and reviewer-response drafts are outside the repository (NPJ_review/*AI_revision*.docx).
+
+Size-matched reference added 2026-10-06 (`1D top-N`: the N features with the highest 1D IG, N = MDFS-2D size): overlap with MDFS-2D 81 / 94 / 88 % (taxa / functions / combined); MDFS-2D features outside it 46 / 24 / 75 per fold (`method_coverage_sizes.tsv`). Supplementary Table 3 now also lists the 64 stable pairs shared by the main and the sensitivity run; Supplementary Table 5 now includes the Spearman correlations (`collinearity.tsv`).
