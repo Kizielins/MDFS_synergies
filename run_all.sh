@@ -39,7 +39,7 @@ if has R4; then   # Results 4: other diseases (Figure 5, Table 1, Supp Table 7)
   NB R4_broader_application/analyse_synergy_gains.ipynb
 fi
 if has R5; then  # reviewer checks (scripts: negative controls, discretisation sensitivity, runtime; then notebooks)
-  ( cd R5_reviewer_checks && for s in run_negative_controls.py run_discretisation_sensitivity.py run_runtime.py run_interaction_calibration.py; do python3 $s > ${s%.py}.log 2>&1; done )
+  ( cd R5_reviewer_checks && for s in run_negative_controls.py run_discretisation_sensitivity.py run_runtime.py run_interaction_calibration.py run_method_coverage.py; do python3 $s > ${s%.py}.log 2>&1; done )
   for nb in R5_reviewer_checks/*.ipynb; do NB "$nb"; done
   python3 R1_synergistic_pairs/figure1b_all_pairs/plot_figure1c_additivity.py   # Figure 1c (needs the calibration thresholds)
   python3 manuscript/make_figure1.py && python3 manuscript/build_supplementary_files.py

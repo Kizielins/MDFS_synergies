@@ -53,6 +53,10 @@ Generated from the final output files (`manuscript/collect_numbers.py` values). 
 | Conserved IBD pairs | 176 (124 + 52) | 14 (10 + 4); same orientation in both cohorts: 0 |
 | Table 1 | disease / control columns swapped | corrected (manuscript/Table1_validation_cohorts.tsv) |
 
+## Method coverage (added 2026-10-06; Reviewer 1 comment 2, Reviewer 2 comment 1)
+
+`R5_reviewer_checks/run_method_coverage.py`: per LOCO fold and feature space, the features selected by MDFS-2D, MDFS-1D, Welch t-test, Mann–Whitney U test, LASSO and ReliefF. Share of each method's features also selected by MDFS-2D (taxa / functions / combined): MDFS-1D 99 / 100 / 100 %, t-test 93 / 98 / 96 %, U-test 96 / 99 / 98 %, LASSO 69 / 83 / 71 %, ReliefF 66 / 88 / 69 %; the univariate methods cover 53–84 % of the MDFS-2D features. MDFS-2D features per fold selected by none of the three univariate tests: 83 / 59 / 147; by no other method: 23 / 4 / 27. Heatmap: `manuscript/SuppFigure3_method_coverage.png` (Supplementary Figure 3, appended to the Supplementary Figures file by `build_supplementary_files.py`).
+
 ## Where everything is
 
 See `README.md` (section -> folder -> file) and `manuscript/RESULTS_NUMBERS.md` (every quoted number with its source). The AI-edited manuscript and reviewer-response drafts are outside the repository (NPJ_review/*AI_revision*.docx).

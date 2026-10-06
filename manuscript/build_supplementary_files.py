@@ -3,7 +3,8 @@
 
   Supplementary_tables.xlsx   one sheet per Supplementary Table (1-5), caption in row 1, data from the TSVs
   Supplementary_Figures.docx  copy of NPJ_review/Supplementary_Figures.docx with the two images replaced by
-                              SuppFigure1_*.png and SuppFigure2_*.png (extent rescaled to the new aspect ratio)
+                              SuppFigure1_*.png and SuppFigure2_*.png (extent rescaled to the new aspect ratio) and
+                              Supplementary Figure 3 (SuppFigure3_method_coverage.png + legend) appended
 Nothing is written into NPJ_review/; outputs go to manuscript/supplementary/.
 """
 import os
@@ -87,3 +88,44 @@ with zipfile.ZipFile(dst, "w", zipfile.ZIP_DEFLATED) as zout:
         else:
             zout.writestr(item, zin.read(item.filename))
 print("wrote Supplementary_Figures.docx (images replaced)")
+
+
+# ---- append Supplementary Figure 3 (method coverage) after Figure 2 ----
+FIG3 = os.path.join(HERE, "SuppFigure3_method_coverage.png")
+LEGEND3 = ("Supplementary Figure 3. Coverage of feature-selection methods by one another on the LOCO training sets. For each of the 14 LOCO folds "
+           "and each feature space (taxa, functions, combined), the relevant features were determined with MDFS-2D, MDFS-1D, Welch's t-test, the "
+           "Mann\u2013Whitney U test, LASSO logistic regression and ReliefF (Methods). Cell (row A, column B) gives the percentage of the features "
+           "selected by method A that method B also selected, averaged over the folds; n is the mean number of features selected per fold (ReliefF "
+           "is given the same number as MDFS-2D).")
+if os.path.exists(FIG3):
+    import copy
+    from lxml import etree
+    W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"; WP = "{http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing}"
+    A = "{http://schemas.openxmlformats.org/drawingml/2006/main}"; RR = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}"
+    zin = zipfile.ZipFile(dst); root = etree.fromstring(zin.read("word/document.xml")); rels = zin.read("word/_rels/document.xml.rels").decode("utf8")
+    r2 = rid["media/image2.png"]; new_rid = "rId%d" % (max(int(x) for x in re.findall(r'Id="rId(\d+)"', rels)) + 1)
+    rels = rels.replace("</Relationships>", f'<Relationship Id="{new_rid}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/image3.png"/></Relationships>')
+    body = root.find(W + "body"); paras = body.findall(W + "p")
+    text = lambda p: "".join(t.text or "" for t in p.iter(W + "t"))
+    fig_p = next(p for p in paras if any(b.get(RR + "embed") == r2 for b in p.iter(A + "blip")))
+    cap_p = next(p for p in paras if text(p).startswith("Supplementary Figure 2"))
+    w, h = png_size(FIG3); new_fig = copy.deepcopy(fig_p)
+    for b in new_fig.iter(A + "blip"): b.set(RR + "embed", new_rid)
+    ext = next(new_fig.iter(WP + "extent")); cx = int(ext.get("cx")); cy = int(round(cx * h / w)); ext.set("cy", str(cy))
+    for e in new_fig.iter(A + "ext"):
+        if e.get("cx"): e.set("cx", str(cx)); e.set("cy", str(cy))
+    for dp in new_fig.iter(WP + "docPr"): dp.set("id", "903"); dp.set("name", "Supplementary Figure 3")
+    new_cap = copy.deepcopy(cap_p); runs = new_cap.findall(W + "r")
+    for r in runs[1:]: new_cap.remove(r)
+    for t in runs[0].findall(W + "t")[1:]: runs[0].remove(t)
+    t = runs[0].find(W + "t"); t.text = LEGEND3; t.set("{http://www.w3.org/XML/1998/namespace}space", "preserve")
+    empty = etree.SubElement(body, W + "p"); body.remove(empty)
+    cap_p.addnext(empty); empty.addnext(new_fig); new_fig.addnext(new_cap)
+    tmp = dst + ".tmp"
+    with zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) as zout:
+        for item in zin.infolist():
+            if item.filename == "word/document.xml": zout.writestr(item, etree.tostring(root, xml_declaration=True, encoding="UTF-8", standalone=True))
+            elif item.filename == "word/_rels/document.xml.rels": zout.writestr(item, rels.encode("utf8"))
+            else: zout.writestr(item, zin.read(item.filename))
+        zout.write(FIG3, "word/media/image3.png")
+    zin.close(); shutil.move(tmp, dst); print("appended Supplementary Figure 3")
