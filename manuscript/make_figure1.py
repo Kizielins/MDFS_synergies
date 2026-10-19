@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Assemble Figure 1 from its panels: a) schematic, b) Figure1b.png (all directed pairs), c) Figure1c.png (additivity).
+"""Assemble Figure 1 from its panels: a) schematic, b) Figure1b.png (all directed pairs).
 The schematic is taken from Figure1a_schematic.png if present (export the slide from Figure1a_schematic.pptx at high
 resolution); otherwise from the panel-a area of the previously embedded figure (low resolution, draft quality)."""
 import os, sys
@@ -11,7 +11,7 @@ a = Image.open(src).convert("RGB") if os.path.exists(src) else None
 if a is None:
     prev = sys.argv[1] if len(sys.argv) > 1 else None
     im = Image.open(prev).convert("RGB"); a = im.crop((0, 0, im.width, round(im.height * 0.615)))
-panels = [fit(a)] + [fit(Image.open(os.path.join(HERE, f)).convert("RGB")) for f in ("Figure1b.png", "Figure1c.png")]
+panels = [fit(a)] + [fit(Image.open(os.path.join(HERE, f)).convert("RGB")) for f in ("Figure1b.png",)]
 gap = 90; H = sum(p.height for p in panels) + gap * 2
 out = Image.new("RGB", (WIDTH, H), "white"); d = ImageDraw.Draw(out)
 try: font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 64)

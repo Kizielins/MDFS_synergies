@@ -1,5 +1,7 @@
 # Tooling used to produce the AI-edited manuscript drafts (2026-10-03)
 
+**Note (2026-10 revision):** these scripts predate the decision to remove Figure 1c, the "super-additive" / interaction-information calibration and the within-class negative control from the paper; they still contain that wording and do not reproduce the current drafts. They are kept only for traceability of the earlier drafts.
+
 Not part of the analysis. Kept for traceability of how `NPJ_review/MS_final_reviewed_AI_revision_2026-10-03.docx`
 and `Reviewer_comments_AI_responses_2026-10-03.docx` were produced; paths inside are specific to the machine and
 session where they ran (the docx skill scripts and a scratch directory).

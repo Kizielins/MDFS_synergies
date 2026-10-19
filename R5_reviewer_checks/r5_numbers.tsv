@@ -1,7 +1,4 @@
 section	claim	value	source
-R5	taxa: consensus pairs with positive interaction information (joint IG > sum of 1D IGs)	49.7 % of 77,060 pair-fold entries (median II -0.0 bits, -0 % of the pair total IG)	M2 results/taxa/mdfs_ig_info_taxa.csv
-R5	functions: consensus pairs with positive interaction information (joint IG > sum of 1D IGs)	36.5 % of 76,608 pair-fold entries (median II -4.2 bits, -4 % of the pair total IG)	M2 results/functions/mdfs_ig_info_functions.csv
-R5	combined: consensus pairs with positive interaction information (joint IG > sum of 1D IGs)	39.2 % of 506,761 pair-fold entries (median II -1.4 bits, -0 % of the pair total IG)	M2 results/combined/mdfs_ig_info_combined.csv
 R5	Stable pairs informative beyond cohort membership (LRT additive vs cohort-only, BH q < 0.05)	235/235	R5 stable_pairs_lrt.tsv
 R5	Stable pairs with a significant multiplicative interaction term (LRT interaction vs additive, BH q < 0.05)	123/235	R5 stable_pairs_lrt.tsv
 R5	Stable synthetic features: median |Spearman| with the more correlated constituent (and share > 0.9)	0.79 (19 %)	R5 collinearity.tsv

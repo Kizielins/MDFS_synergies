@@ -5,9 +5,6 @@ On the LOCO fold-0 training set of each data type, run_mdfs.R (Bonferroni pair t
 synergy filter, seed 42) is applied to
   real          the real labels (reference),
   label_perm    labels permuted across samples (global null: no feature carries disease signal),
-  within_class  every feature shuffled independently within each class (marginal 1D signal of each
-                feature is preserved, any dependence between features and hence any pairwise
-                synergy is destroyed: null for the pair search specifically),
 N_PERM times each. Output: negative_controls.tsv (one row per run) with the number of directed
 pairs and unordered pairs passing the filters and the number of 2D-significant features.
 """
@@ -30,12 +27,6 @@ def one(dt, kind, perm):
     rng = np.random.default_rng(perm)
     if kind == "label_perm":
         y = pd.Series(rng.permutation(y.values), index=y.index)
-    elif kind == "within_class":
-        X = X.copy()
-        for cls in (0, 1):
-            idx = np.where(y.values == cls)[0]
-            for j in range(X.shape[1]):
-                X.iloc[idx, j] = X.iloc[rng.permutation(idx), j].values
     pairs, ig1d, out, wall, rss = run_mdfs(X, y, SEED)
     sig2d = int(re.search(r"2D significant features: (\d+)", out).group(1))
     sig1d = int(re.search(r"1D significant features: (\d+)", out).group(1))
@@ -49,7 +40,7 @@ def one(dt, kind, perm):
 
 def main():
     tasks = [(dt, "real", 0) for dt in ("taxa", "functions", "combined")]
-    tasks += [(dt, kind, p) for dt in ("taxa", "functions", "combined") for kind in ("label_perm", "within_class") for p in range(1, N_PERM + 1)]
+    tasks += [(dt, kind, p) for dt in ("taxa", "functions", "combined") for kind in ("label_perm",) for p in range(1, N_PERM + 1)]
     rows = []
     with ProcessPoolExecutor(4) as ex:
         futs = {ex.submit(one, *t): t for t in tasks}

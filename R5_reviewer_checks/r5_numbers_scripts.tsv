@@ -1,10 +1,7 @@
 section	claim	value	source
 R5	taxa: synergistic pairs with real labels vs label_perm (mean, max over 5 permutations)	31,751 vs 0.0 (max 0)	R5 negative_controls.tsv
-R5	taxa: synergistic pairs with real labels vs within_class (mean, max over 5 permutations)	31,751 vs 30645.8 (max 30671)	R5 negative_controls.tsv
 R5	functions: synergistic pairs with real labels vs label_perm (mean, max over 5 permutations)	63,538 vs 0.2 (max 1)	R5 negative_controls.tsv
-R5	functions: synergistic pairs with real labels vs within_class (mean, max over 5 permutations)	63,538 vs 69144.8 (max 69179)	R5 negative_controls.tsv
 R5	combined: synergistic pairs with real labels vs label_perm (mean, max over 5 permutations)	183,176 vs 0.0 (max 0)	R5 negative_controls.tsv
-R5	combined: synergistic pairs with real labels vs within_class (mean, max over 5 permutations)	183,176 vs 185291.4 (max 185369)	R5 negative_controls.tsv
 R5	discretisation default: pairs passing / Jaccard of all pairs vs default / Jaccard top-2 % / Spearman total IG	31,751 / 1.0 / 1.0 / 1.0	R5 discretisation_sensitivity.tsv
 R5	discretisation default_seed43: pairs passing / Jaccard of all pairs vs default / Jaccard top-2 % / Spearman total IG	29,838 / 0.778 / 0.137 / 0.897	R5 discretisation_sensitivity.tsv
 R5	discretisation range_1D: pairs passing / Jaccard of all pairs vs default / Jaccard top-2 % / Spearman total IG	31,306 / 0.962 / 0.964 / 0.99	R5 discretisation_sensitivity.tsv

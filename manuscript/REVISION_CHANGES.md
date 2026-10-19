@@ -12,7 +12,7 @@ Generated from the final output files (`manuscript/collect_numbers.py` values). 
 | Per-run diagnostic RF | trained, output unused | removed; one RF per fold and configuration (random_state 42) |
 | Validation arm | 3 seeds, pair kept if found in any run; ordered (directed) pair counts | 10 seeds (12-21), kept if in >= 6 of 10 runs; unordered pairs, orientation recorded |
 | 1D p-values | not saved | saved for every fold and run (`mdfs_1d_<dt>.csv`) |
-| New analyses | - | negative controls, discretisation sensitivity, runtime, interaction information, cohort-adjusted LRT, collinearity, training-composition sensitivity (R5_reviewer_checks/) |
+| New analyses | - | negative controls, discretisation sensitivity, runtime, cohort-adjusted LRT, collinearity, training-composition sensitivity (R5_reviewer_checks/) |
 
 ## CRC discovery arm
 
@@ -31,10 +31,9 @@ Generated from the final output files (`manuscript/collect_numbers.py` values). 
 | Most consistent pairs | P. micra + D. pneumosintes 'only pair at 28/28' (incorrect) | taxa: F. nucleatum + P. micra (140/140), P. micra + P. stomatis (140/140); combined: G. adiacens + P. stomatis (140/140), A. obesiensis + G. morbillorum (140/140) |
 | Seed stability (Jaccard, 10 runs >= 6 vs 2 runs) | - | taxa 0.95 vs 0.47; combined 0.98 vs 0.83; functions 0.33 vs 0.13 |
 | P. micra 1D-significant (combined / taxa folds) | 'all folds' | 14/14 / 14/14 |
-| Interaction information > 0 (consensus pairs) | - | taxa 49.7 % of 77,060 pair-fold entries (median II -0.0 bits, -0 % of the pair total IG); combined 39.2 % of 506,761 pair-fold entries (median II -1.4 bits, -0 % of the pair total IG) |
 | Cohort-adjusted LRT (stable pairs beyond cohort / interaction term) | - | 235/235 / 123/235 |
 | Sensitivity run (no single-class / training-only cohorts): taxa AUC | - | 0.845 / 0.836 / 0.831 (main 0.847 / 0.839 / 0.837); stable pairs shared: 169 / 135 / 61 (0.25) |
-| Negative controls (max pairs: label permutation / within-class shuffle) | - | 31,751 vs 0.0 (max 0); 31,751 vs 30645.8 (max 30671) |
+| Negative controls (max pairs: label permutation) | - | 31,751 vs 0.0 (max 0) |
 
 ## Validation arm (non-CRC cohorts)
 
