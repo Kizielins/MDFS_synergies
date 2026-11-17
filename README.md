@@ -7,6 +7,12 @@ synthetic features, and tests whether they improve a Random Forest classifier.
 The tool analyses a **single cohort**: one feature matrix and one set of
 binary labels (disease vs control).
 
+The multi-cohort analysis behind the accompanying manuscript (leave-one-cohort-out
+validation on 17 CRC cohorts, the validation cohorts, reviewer checks, and the code
+and tables behind every figure) is on the
+[`manuscript-revision`](https://github.com/Kizielins/MDFS_synergies/tree/manuscript-revision)
+branch.
+
 ```bash
 python run_analysis.py                                   # bundled test data
 python run_analysis.py --X my_features.tsv --y my_labels.tsv --out-dir my_results
