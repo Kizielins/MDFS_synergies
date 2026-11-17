@@ -70,6 +70,12 @@ for f, cap in sorted(CAPTIONS.values(), key=lambda fc: int(re.search(r"Supplemen
             ws.cell(i, 1, row[0]); ws.cell(i, 2, row[1])
 wb.save(os.path.join(OUT, "Supplementary_tables.xlsx")); print("wrote Supplementary_tables.xlsx")
 
+# the figures file is built on the manuscript's Word template, which is not part of the repository
+if not os.path.exists(os.path.join(NPJ, "Supplementary_Figures.docx")):
+    print(f"skipped Supplementary_Figures.docx: no template in {NPJ} (set NPJ_REVIEW_DIR); "
+          "the submitted file is manuscript/final/Supplementary_Information.pdf")
+    raise SystemExit(0)
+
 
 def png_size(path):
     with open(path, "rb") as fh:
