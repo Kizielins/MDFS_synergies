@@ -24,15 +24,15 @@ if has R1; then   # Results 1: synergistic pairs (Figure 1b, Supp Tables 1 and 2
   #   python3 R1_synergistic_pairs/figure1b_all_pairs/run_all_directed.py   (hours; writes directed/*.tsv.gz)
   python3 R1_synergistic_pairs/figure1b_all_pairs/plot_figure1b_all_directed.py
 fi
-if has R2; then   # Results 2: RF performance, stable pairs, effect sizes (Supp Figs 1-2, Figure 3, Supp Table 4)
+if has R2; then   # Results 2: RF performance, stable pairs, effect sizes (Figure 2, Supp Figs 2-3, Supp Table 4)
   NB R2_classification_performance/summarize_rf_results.ipynb
   NB R2_classification_performance/stable_pairs.ipynb
   NB R2_classification_performance/effect_sizes.ipynb
 fi
-if has R3; then   # Results 3: LR vs GM (Figure 4, Supp Table 6)
+if has R3; then   # Results 3: LR vs GM (Figure 3, Supp Table 6)
   NB R3_pair_transformations/transformation_preference.ipynb
 fi
-if has R4; then   # Results 4: other diseases (Figure 5, Table 1, Supp Table 7)
+if has R4; then   # Results 4: other diseases (Figure 4, Table 2, Supp Table 7)
   ( cd R4_broader_application
     python3 run_mdfs_1d_2d.py --data-dir data --all-cohorts --out-dir results > validation_mdfs.log 2>&1
     python3 load_cohort_data.py --data-dir data --mdfs-results-dir results --out-table synergy_by_cohort.tsv )

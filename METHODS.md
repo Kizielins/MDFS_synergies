@@ -306,8 +306,8 @@ python R4_broader_application/load_cohort_data.py --data-dir R4_broader_applicat
 
 Reads the synergy table and reduces it to **one row per cohort and unordered pair** (MDFS reports each pair in both orientations; the orientation with the larger `total_IG_mean` is kept and `pair_key` identifies the pair — all counts in Results §4 are unique pairs), plots base 1D IG vs total IG colored by `ig_gain_pct`, filters to `ig_gain_pct ≥ 50` for downstream, and writes:
 
-- `manuscript/Figure5.{pdf,png}` — Figure 5.
-- `manuscript/Table1_validation_cohorts.tsv` — Table 1: every cohort of the metadata with sample counts, whether it was analysed and how many unordered pairs it yielded.
+- `manuscript/Figure5.{pdf,png}` — Figure 4 (Figure 5 before renumbering).
+- `manuscript/Table1_validation_cohorts.tsv` — Table 2 (Table 1 before renumbering): every cohort of the metadata with sample counts, whether it was analysed and how many unordered pairs it yielded.
 - `top_markers_per_cohort.txt` — top 20 pairs per cohort by total_IG.
 - `manuscript/SuppTable7_conserved_pairs.tsv` (= `universal_disease_markers.txt`) — unordered pairs found in ≥ 2 cohorts with the same disease label (Supp. Table 7).
 - `emergent_synergies_table.tsv` — pairs in which one feature has zero 1D IG (quoted in Results §4).
@@ -337,7 +337,7 @@ Reads `M2_loco_crc_pipeline/results/<dt>/{base_features,synthetic_features}_<dt>
 1. it was selected in ≥ 80 % of the 14 LOCO folds (`SYNTHETIC_THRESHOLD = 80`, i.e. ≥ 12 folds). The LR_ and GM_ features of a pair count as one pair, using the more frequently selected of the two (the first row after the input table's sort by selection count), and
 2. its selection % is higher than that of each of its two component features as base features (which also makes the "selection % gain", pair % − mean of the two component %, positive).
 
-Writes `R2_classification_performance/final_synthetic_features_table.csv`: **211 stable pairs** (combined 160, taxa 34, functions 17). It also writes Supplementary Table 6 (`supplementary_table_3_transformation_preference.tsv`: which transformation, LR or GM, reached ≥ 50 % selection; 746 pairs) and Figure 4 (`figure4_lr_vs_gm.{pdf,png}`).
+Writes `R2_classification_performance/final_synthetic_features_table.csv`: **211 stable pairs** (combined 160, taxa 34, functions 17). It also writes Supplementary Table 6 (`supplementary_table_3_transformation_preference.tsv`: which transformation, LR or GM, reached ≥ 50 % selection; 746 pairs) and Figure 3 (`figure4_lr_vs_gm.{pdf,png}`; Figure 4 before renumbering).
 
 ### 5.4 `consistent_mdfs_markers_downstream.ipynb`
 
@@ -359,7 +359,7 @@ This is confirmed by `R2_classification_performance/meta_results_all_pairs.csv`,
 
 **Directional consistency.** Across the 211 pairs the observed direction splits are `+15/-0` (107 pairs), `+14/-1` (79), `+0/-15` (11), `+1/-14` (4), `+13/-2` (7), `+2/-13` (2) and `+12/-3` (1). So **201 of 211** pairs agree in direction in at least 14 of 15 cohorts (118 in all 15); 9 agree in 13 of 15 and 1 in 12 of 15. A blanket claim of "at least 14 of 15" applies to those 201 pairs only — state it as "at least 12 of 15 cohorts (14 or 15 for 201 of the 211 pairs)" if the claim is made over the full set.
 
-Writes `meta_results_all_pairs.csv` and `meta_significant_pairs_fdr_lt_0.05.csv` (both contain the same 211 pairs — every pair tested passes FDR < 0.05), and Figure 3 (`figure3_hub_representative_pairs.png`). The overview figure with one panel per stable pair (`figure_synthetic_barplots.png`, cell 6) is not produced for the revision: with 211 pairs the image exceeds matplotlib's size limit.
+Writes `meta_results_all_pairs.csv` and `meta_significant_pairs_fdr_lt_0.05.csv` (both contain the same 211 pairs — every pair tested passes FDR < 0.05), and the earlier Figure 3 (`figure3_hub_representative_pairs.png`; replaced in the revised paper by Figure 2, `make_figure2.py`). The overview figure with one panel per stable pair (`figure_synthetic_barplots.png`, cell 6) is not produced for the revision: with 211 pairs the image exceeds matplotlib's size limit.
 
 ---
 
@@ -421,12 +421,12 @@ Analyses added in the revision in response to the reviewers; every output is a T
 
 | Script / notebook | Reviewer comment | What it does | Output |
 |---|---|---|---|
-| `run_negative_controls.py` | R1.7 | LOCO fold-0 training set of each data type: `run_mdfs.R` with real labels and with labels permuted (5×) | `negative_controls.tsv` (Supp. Table 8) |
-| `run_discretisation_sensitivity.py` | R1.10 | fold-0 taxa: default vs seed 43, wider (1D) cut range, half range, three bins (divisions = 2); overlap of pair sets with the default | `discretisation_sensitivity.tsv` (Supp. Table 9) |
+| `run_negative_controls.py` | R1.7 | LOCO fold-0 training set of each data type: `run_mdfs.R` with real labels and with labels permuted (5×) | `negative_controls.tsv` (Supp. Table 9) |
+| `run_discretisation_sensitivity.py` | R1.10 | fold-0 taxa: default vs seed 43, wider (1D) cut range, half range, three bins (divisions = 2); overlap of pair sets with the default | `discretisation_sensitivity.tsv` (Supp. Table 8) |
 | `run_runtime.py` | R1.9 | wall-clock time and peak memory of one MDFS run per data type (fold-0 training set) | `runtime.tsv` |
 | `additivity_and_collinearity.ipynb` | R2.2, R2.5, R1.5 | cohort-adjusted logistic regression with likelihood-ratio tests (cohort-only vs additive vs interaction) for the stable pairs; Spearman correlation of each stable synthetic feature with its constituents | `stable_pairs_lrt.tsv` (Supp. Table 5), `collinearity.tsv` |
 | `sensitivity_training_cohorts.ipynb` | R1.5 | compares the main LOCO run with `run_loco.py --exclude-training-only` (AtezoTRIBE, COLOBIOME and NSHII removed from every training set; results in `M2_loco_crc_pipeline/results_sensitivity/`): AUCs and stable pairs | `sensitivity_auc.tsv` (Supp. Table 3), `sensitivity_shared_stable_pairs.tsv` |
-| `run_method_coverage.py` | R1.2, R2.1 | per LOCO fold and feature space, the relevant features of six selectors (MDFS-1D/2D in ≥ 6 of 10 runs, Welch t-test, Mann–Whitney U, LASSO logistic regression, ReliefF with as many features as MDFS-2D); coverage matrix = share of A's features also selected by B, mean over folds; per-fold JSON cache in `method_coverage_cache/` (≈ 1–2 h without it) | `method_coverage_<dt>.tsv`, `method_coverage_sizes.tsv`, `mdfs2d_only_features_<dt>.tsv`, `r5_numbers_coverage.tsv`, `../manuscript/SuppFigure3_method_coverage.png` (Supp. Figure 3) |
+| `run_method_coverage.py` | R1.2, R2.1 | per LOCO fold and feature space, the relevant features of six selectors (MDFS-1D/2D in ≥ 6 of 10 runs, Welch t-test, Mann–Whitney U, LASSO logistic regression, ReliefF with as many features as MDFS-2D); coverage matrix = share of A's features also selected by B, mean over folds; per-fold JSON cache in `method_coverage_cache/` (≈ 1–2 h without it) | `method_coverage_<dt>.tsv`, `method_coverage_sizes.tsv`, `mdfs2d_only_features_<dt>.tsv`, `r5_numbers_coverage.tsv`, `../manuscript/SuppFigure3_method_coverage.png` (Supp. Figure 1) |
 | `reviewer_checks_summary.ipynb` | — | tabulates the three script outputs | `r5_numbers_scripts.tsv` |
 
 The 1D significance of the hub species (Results §2) is taken from the Holm-adjusted 1D MDFS p-values saved for every fold and run (`M2_loco_crc_pipeline/results/<dt>/mdfs_1d_<dt>.csv`, summarised by `R2_classification_performance/hub_1d_significance.py`).

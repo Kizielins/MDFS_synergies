@@ -1,6 +1,6 @@
 # MDFS synergistic feature pairs in CRC and other microbiome cohorts — manuscript analysis code
 
-This branch (`manuscript-analysis`) contains the exact code and result tables behind every figure,
+This branch (`manuscript-revision`) contains the exact code and result tables behind every figure,
 table and number of the manuscript *"Synergy-oriented feature selection …"* (Zielińska, Rudnicki, Łabaj;
 npj Biofilms and Microbiomes, revision). The stand-alone, single-cohort version of the method is the
 tool on the [`main`](https://github.com/Kizielins/MDFS_synergies) branch.
@@ -8,6 +8,39 @@ tool on the [`main`](https://github.com/Kizielins/MDFS_synergies) branch.
 Folders are named after the manuscript sections they reproduce (`M` = Materials and Methods,
 `R` = Results, in manuscript order). Each notebook starts with a header that says which figures,
 tables and quoted numbers it produces, and every manuscript item is written to `manuscript/`.
+
+## Where each item of the revised paper comes from
+
+Figures and tables were renumbered late in the revision. The working file names in `manuscript/`
+keep the earlier numbering, so use this table to go from the paper to the code. The files exactly as
+submitted are in `manuscript/final/`.
+
+| Paper | Submitted file (`manuscript/final/`) | Produced by | Working output |
+|---|---|---|---|
+| Figure 1 (a schematic, b all directed pairs) | `Figure_1.{pdf,png}` | `make_all_figures.py` ← `R1_synergistic_pairs/figure1_combined/make_figure1.py`, `figure1b_all_pairs/` | `R1_synergistic_pairs/figure1_combined/figure1_combined.png` |
+| Figure 2 (hub-pair selection frequency, per-cohort effect sizes) | `Figure_2.{pdf,png}` | `make_all_figures.py` ← `R2_classification_performance/make_figure2.py` (`effect_sizes.ipynb`, `stable_pairs.ipynb`) | `R2_classification_performance/figure2.png` |
+| Figure 3 (LR vs GM encodings) | `Figure_3.{pdf,png}` | `make_all_figures.py` ← `R3_pair_transformations/transformation_preference.ipynb` (`figure4_candidates.tsv`; per-cohort effects cached in `figure3_effects.csv`) | `manuscript/Figure4.png` |
+| Figure 4 (non-CRC cohorts) | `Figure_4.{pdf,png}` | `make_all_figures.py` ← `R4_broader_application/analyse_synergy_gains.ipynb` (`synergy_by_cohort.tsv`) | `manuscript/Figure5.png` (without the two arrows of panel a) |
+| Table 1 (17 CRC cohorts, sample counts) | manuscript text | `M1_data_preparation/prep_data.ipynb` (class counts per cohort) | — |
+| Table 2 (non-CRC cohorts) | manuscript text | `R4_broader_application/analyse_synergy_gains.ipynb` | `manuscript/Table1_validation_cohorts.tsv` |
+| Supp. Figure 1 (method coverage) | `Supplementary_Information.pdf` | `R5_reviewer_checks/run_method_coverage.py` | `manuscript/SuppFigure3_method_coverage.png` |
+| Supp. Figure 2 (feature-only vs synthetic) | `Supplementary_Information.pdf` | `R2_classification_performance/summarize_rf_results.ipynb` | `manuscript/SuppFigure1_feature_only_vs_synthetic.png` |
+| Supp. Figure 3 (AUC per test cohort) | `Supplementary_Information.pdf` | `R2_classification_performance/summarize_rf_results.ipynb` | `manuscript/SuppFigure2_auc_per_cohort.png` |
+| Supp. Tables 1–9 | `Supplementary_Tables.xlsx` | `manuscript/build_supplementary_files.py` (sheet per table, from the TSVs listed in its `CAPTIONS`) | `manuscript/supplementary/Supplementary_tables.xlsx` (identical cell contents) |
+
+`manuscript/Figure1.png`, `Figure1b.*` and `Figure3.*` are earlier versions that are not in the revised paper.
+The submitted figures are rebuilt in the journal style with
+
+```bash
+cd manuscript/final
+python make_all_figures.py --out . \
+    --fig1-data ../../R1_synergistic_pairs/figure1b_all_pairs/directed \
+    --fig2-data ../../R2_classification_performance \
+    --fig3-candidates ../../R3_pair_transformations/figure4_candidates.tsv --fig3-cache figure3_effects.csv \
+    --fig4-data ../../R4_broader_application/synergy_by_cohort.tsv
+```
+
+(`figure1b_all_pairs/directed/` holds the large per-fold tables; see *Data and large files* below.)
 
 ## Layout
 
@@ -17,11 +50,11 @@ tables and quoted numbers it produces, and every manuscript item is written to `
 | `M1_data_preparation/` | Methods *Data preparation* | `prep_data.ipynb` | `prepared_data/X_*, y_*` (17 CRC cohorts × taxa / functions / combined; git-ignored) |
 | `M2_loco_crc_pipeline/` | Methods *Leave-one-cohort-out (LOCO) validation* | `framework.ipynb` (functions), `main_code.ipynb` (orchestration), `run_loco.py` (headless) | `results/<dt>/`: `loco_results` (AUC), `loco_accuracy`, `base_features`, `synthetic_features` (RF selection frequencies), `mdfs_ig_info` (IGs of the top-2 % pairs of every fold × run), `mdfs_1d` (1D IG + p-values of every fold × run) |
 | `R1_synergistic_pairs/` | Results *Synergy-oriented framework identifies disease-informative feature pairs* | `compare_mdfs_igs.ipynb`; `figure1b_all_pairs/` (all directed pairs, every fold × run); `seed_stability/` (20-seed stability grid) | **Figure 1b** (all directed pairs), **Supp. Table 2**, **Supp. Table 1**, Wilcoxon test, `ig_gain_summary_<dt>.csv` |
-| `R2_classification_performance/` | Results *Synergy-derived features retain benchmark-level classification performance* | `summarize_rf_results.ipynb`; `stable_pairs.ipynb`; `effect_sizes.ipynb` | AUC summary (`loco_performance_summary.tsv`), **Supp. Figures 1–2**, stable-pair table (`final_synthetic_features_table.csv`), **Figure 3**, **Supp. Table 4**, meta-analysis tables |
-| `R3_pair_transformations/` | Results *Pair transformations reveal distinct forms of disease-associated dependence* | `transformation_preference.ipynb` | **Figure 4**, **Supp. Table 6**, LR / GM counts |
-| `R4_broader_application/` | Results *Broader application identifies conserved synergistic markers in other conditions*; Methods *Application to additional disease cohorts* | `run_mdfs_1d_2d.py` (10 MDFS runs per cohort), `load_cohort_data.py` (synergy table), `analyse_synergy_gains.ipynb` | **Figure 5**, **Table 1**, **Supp. Table 7**, `synergy_by_cohort.tsv`, emergent synergies, top markers per cohort |
-| `R5_reviewer_checks/` | Reviewer comments 1.2, 1.5, 1.7, 1.9, 1.10, 2.1, 2.2, 2.5 | `run_negative_controls.py`, `run_discretisation_sensitivity.py`, `run_runtime.py`, `run_method_coverage.py`; `additivity_and_collinearity.ipynb`, `sensitivity_training_cohorts.ipynb`, `reviewer_checks_summary.ipynb` | label-permutation control, discretisation sensitivity, runtime/memory, cohort-adjusted likelihood-ratio tests of the stable pairs, collinearity, LOCO rerun without the single-class / training-only cohorts (`M2_loco_crc_pipeline/results_sensitivity/`), feature-level coverage of MDFS-2D versus MDFS-1D / t-test / U-test / LASSO / ReliefF (Supp. Figure 3) |
-| `manuscript/` | — | — | one file per manuscript figure / table (written by the notebooks above, never by hand), `REVISION_CHANGES.md` (submitted vs revised numbers) |
+| `R2_classification_performance/` | Results *Synergy-derived features retain benchmark-level classification performance* | `summarize_rf_results.ipynb`; `stable_pairs.ipynb`; `effect_sizes.ipynb` | AUC summary (`loco_performance_summary.tsv`), **Supp. Figures 2–3**, stable-pair table (`final_synthetic_features_table.csv`), **Figure 2**, **Supp. Table 4**, meta-analysis tables |
+| `R3_pair_transformations/` | Results *Pair transformations reveal distinct forms of disease-associated dependence* | `transformation_preference.ipynb` | **Figure 3**, **Supp. Table 6**, LR / GM counts |
+| `R4_broader_application/` | Results *Broader application identifies conserved synergistic markers in other conditions*; Methods *Application to additional disease cohorts* | `run_mdfs_1d_2d.py` (10 MDFS runs per cohort), `load_cohort_data.py` (synergy table), `analyse_synergy_gains.ipynb` | **Figure 4**, **Table 2**, **Supp. Table 7**, `synergy_by_cohort.tsv`, emergent synergies, top markers per cohort |
+| `R5_reviewer_checks/` | Reviewer comments 1.2, 1.5, 1.7, 1.9, 1.10, 2.1, 2.2, 2.5 | `run_negative_controls.py`, `run_discretisation_sensitivity.py`, `run_runtime.py`, `run_method_coverage.py`; `additivity_and_collinearity.ipynb`, `sensitivity_training_cohorts.ipynb`, `reviewer_checks_summary.ipynb` | label-permutation control, discretisation sensitivity, runtime/memory, cohort-adjusted likelihood-ratio tests of the stable pairs, collinearity, LOCO rerun without the single-class / training-only cohorts (`M2_loco_crc_pipeline/results_sensitivity/`), feature-level coverage of MDFS-2D versus MDFS-1D / t-test / U-test / LASSO / ReliefF (Supp. Figure 1), Supp. Tables 3, 5, 8, 9 |
+| `manuscript/` | — | — | one file per manuscript figure / table (written by the notebooks above, never by hand; working names, see the table above), `REVISION_CHANGES.md` (submitted vs revised numbers); `final/`: the files as submitted and `make_all_figures.py` |
 | `archive/` | — | analyses not used in the manuscript (see `archive/README.md`) | — |
 | `METHODS.md` | — | step-by-step description of the whole pipeline with all parameters | — |
 
