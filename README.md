@@ -88,7 +88,7 @@ for the sensitivity run), `R1`–`R4` the result notebooks (minutes each, except
 reviewer checks (scripts first, then notebooks). Notebooks are executed in place with `jupyter nbconvert --execute`, so the
 stored outputs are those of the last full run. The all-pairs input of Figure 1b
 (`R1_synergistic_pairs/figure1b_all_pairs/run_all_directed.py`, several hours) is not part of
-`run_all.sh`; its aggregated per-fold tables are deposited with the data (below).
+`run_all.sh`; its per-fold tables are git-ignored (below).
 
 ## Data and large files (not in git)
 
@@ -104,6 +104,8 @@ Everything else is produced by the pipeline. The large intermediate tables are g
 `M1_data_preparation/prepared_data/` (from `M1`), the per-run MDFS tables `mdfs_ig_info_*` / `mdfs_1d_*` of
 `M2` and `R4` (15–95 MB each), `R1_synergistic_pairs/figure1b_all_pairs/directed/` and
 `R1_synergistic_pairs/seed_stability/pairs/`. All summary tables and figures derived from them are in git.
+An archive of the input profiles and of these intermediate tables from the run reported in the paper is
+available from the authors on request.
 
 **What runs from a fresh clone without the input data:** the supplementary tables
 (`python manuscript/build_supplementary_files.py`; identical to the submitted file), Figures 2–4

@@ -22,8 +22,8 @@ from openpyxl.styles import Font, Alignment
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "supplementary")
 os.makedirs(OUT, exist_ok=True)
-# manuscript folder (sibling of the analysis tree); override with NPJ_REVIEW_DIR
-NPJ = os.environ.get("NPJ_REVIEW_DIR", os.path.normpath(os.path.join(HERE, "..", "..", "..", "..", "NPJ_review")))
+# manuscript folder (sibling of the repository); override with NPJ_REVIEW_DIR
+NPJ = os.environ.get("NPJ_REVIEW_DIR", os.path.normpath(os.path.join(HERE, "..", "..", "NPJ_review")))
 
 CAPTIONS = {
  1: ("SuppTable2_top30_synergistic_pairs.tsv", "Supplementary Table 2. The 30 directed synergistic feature pairs with the highest mean total 2D information gain (IG) across the taxa-only, functions-only and combined analyses. base_IG_1D_mean: 1D IG of the base feature; total_IG_2D_mean: joint IG of the pair (base 1D IG + IG added by the contributing feature); ig_difference_raw / ig_difference_pct: absolute and relative gain over the base feature; pair_ig_count: number of fold-run combinations (of 140 = 14 LOCO folds x 10 MDFS runs) in which the pair was among the top 2 % of pairs (pairs selected in fewer than 84 of the 140 fold-runs are included when their mean total IG over those fold-runs ranks among the 30 highest)."),
